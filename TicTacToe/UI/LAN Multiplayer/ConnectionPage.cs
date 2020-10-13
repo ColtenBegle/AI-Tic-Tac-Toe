@@ -13,6 +13,7 @@ namespace TicTacToe.UI.LAN_Multiplayer
 {
     public partial class ConnectionPage : Form
     {
+        private const int PORT = 5757;
         public ConnectionPage()
         {
             InitializeComponent();
@@ -22,14 +23,19 @@ namespace TicTacToe.UI.LAN_Multiplayer
         {
             string username = txtName.Text;
             string hostIP = txtHostIP.Text;
-            Client client = new Client(username, Game_Logic.PlayerSymbols.O, hostIP, 5757);
-            
-
+            Client client = new Client(username, Game_Logic.PlayerSymbols.O, hostIP, PORT);
+            Form1 form1 = new Form1(_client: client);
+            form1.Show();
+    
         }
 
         private void btnHost_Click(object sender, EventArgs e)
         {
-            
+            string username = txtName.Text;
+            string hostIP = txtHostIP.Text;
+            Host host = new Host(username, Game_Logic.PlayerSymbols.X, PORT);
+            Form1 form1 = new Form1(_host: host);
+            form1.Show();
         }
     }
 }

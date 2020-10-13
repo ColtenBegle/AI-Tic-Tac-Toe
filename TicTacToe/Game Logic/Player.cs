@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace TicTacToe.Game_Logic
 {
-    enum PlayerSymbols
+    public enum PlayerSymbols
     {
         X,
         O
     }
-    class Player
+    public class Player
     {
         public Player(string name, PlayerSymbols symbol)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace TicTacToe.Game_Logic.LAN_Multiplayer
 {
-    class Client : Player
+    public class Client : Player
     {
         private int _port;
         private bool _isConnected;
@@ -38,6 +39,11 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             }
         }
 
+        private void MessageReciever_DoWork(object sender, DoWorkEventArgs e)
+        {
+            RecieveMove();
+        }
+
         public int Port
         {
             get { return _port; }
@@ -56,5 +62,18 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             set { _hostIP = value; }
         }
 
+        public byte[] RecieveMove()
+        {
+            //Wating for opponent to send move and put the move in the buffer
+            byte[] buffer = new byte[2];
+            _socket.Receive(buffer);
+            return buffer;
+        }
+
+        public void SendMove(int x, int y)
+        {
+            byte[] bytes = { (byte)x, (byte)y };
+            _socket.Send(bytes);
+        }
     }
 }

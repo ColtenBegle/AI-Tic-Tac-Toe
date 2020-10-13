@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.ComponentModel;
+using System.Security.Cryptography;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace TicTacToe.Game_Logic.LAN_Multiplayer
 {
-    class Host : Player
+    public class Host : Player
     {
         private int _port;
         private bool _hosting;
@@ -20,6 +23,7 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
         public Host(string name, PlayerSymbols symbol, int port) : base(name, symbol)
         {
             _port = port;
+
             Initialize_Server();
         }
 
@@ -33,9 +37,8 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
 
         private void MessageReciever_DoWork(object sender, DoWorkEventArgs e)
         {
-            //Continue work here
+            RecieveMove();
         }
-
 
         public int Port
         {
@@ -55,13 +58,18 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             set { _clientIP = value; }
         }
 
-        private void RecieveMove()
+        public byte[] RecieveMove()
         {
             //Wating for opponent to send move and put the move in the buffer
-            byte[] buffer = new byte[1];
+            byte[] buffer = new byte[2];
             _socket.Receive(buffer);
+            return buffer;
+        }
 
-            
+        public void SendMove(int x, int y)
+        {
+            byte[] bytes = { (byte)x, (byte)y };
+            _socket.Send(bytes);
         }
     }
 }
