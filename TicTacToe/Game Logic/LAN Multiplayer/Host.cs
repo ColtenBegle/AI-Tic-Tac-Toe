@@ -23,8 +23,6 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
         public Host(string name, PlayerSymbols symbol, int port) : base(name, symbol)
         {
             _port = port;
-
-            Initialize_Server();
         }
 
         private void Initialize_Server()
