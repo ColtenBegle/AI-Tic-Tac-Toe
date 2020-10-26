@@ -7,7 +7,7 @@ using TicTacToe.Game_Logic.LAN_Multiplayer;
 
 namespace TicTacToe
 {
-    public partial class Form1 : Form
+    public partial class GameForm : Form
     {
         public GFX engine;
         public Board theBoard = new Board();
@@ -27,7 +27,6 @@ namespace TicTacToe
             set { _host = value; }
         }
         private PlayerSymbols _playerSymbol;
-        private PlayerSymbols _oponentSymbol;
         private BackgroundWorker _messageReceiver = new BackgroundWorker();
 
 
@@ -36,7 +35,7 @@ namespace TicTacToe
             return aiGame;
         }
 
-        public Form1(bool client = false, bool host = false)
+        public GameForm(bool client = false, bool host = false)
         {
             InitializeComponent();
             if (client == true || host == true)
