@@ -1,7 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Deployment.Application;
 using System.Drawing;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -10,17 +13,15 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
     public class Client : Player
     {
         private int _port;
-        private bool _isConnected;
         private string _hostIP;
-        private IPHostEntry _ipHost;
-        private IPAddress _ipAddr;
-        private IPEndPoint _localEndPoint;
-        private Socket _listener;
-        private Socket _sender;
+        private Socket _socket;
+        private TcpClient client;
         public delegate void DetectHit(Point location, PlayerSymbols playerChar);
         private DetectHit _detectHit;
 
-        public Client(string name, PlayerSymbols symbol, string hostIP, int port, Action<Point, PlayerSymbols> detectHit) : base(name, symbol)
+
+        public Client(string name, PlayerSymbols symbol, string hostIP, int port, 
+            Action<Point, PlayerSymbols> detectHit) : base(name, symbol)
         {
             _hostIP = hostIP;
             _port = port;
@@ -32,99 +33,24 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
         {
             try
             {
-
-                // Establish the remote endpoint  
-                // for the socket. This example  
-                // uses port 11111 on the local  
-                // computer. 
-                _ipHost = Dns.GetHostEntry(Dns.GetHostName());
-                _ipAddr = _ipHost.AddressList[2];
-                _localEndPoint = new IPEndPoint(_ipAddr, 11111);
-
-                // Creation TCP/IP Socket using  
-                // Socket Class Costructor 
-                _sender = new Socket(_ipAddr.AddressFamily,
-                           SocketType.Stream, ProtocolType.Tcp);
-                _listener = new Socket(_ipAddr.AddressFamily,
-                     SocketType.Stream, ProtocolType.Tcp);
-
-            //    try
-            //    {
-
-            //        // Connect Socket to the remote  
-            //        // endpoint using method Connect() 
-            //        _sender.Connect(_localEndPoint);
-
-            //        // We print EndPoint information  
-            //        // that we are connected 
-            //        MessageBox.Show("Socket connected to -> {0} ",
-            //                      _sender.RemoteEndPoint.ToString());
-
-            //        // Creation of messagge that 
-            //        // we will send to Server 
-            //        byte[] messageSent = Encoding.ASCII.GetBytes("Test Client<EOF>");
-            //        int byteSent = _sender.Send(messageSent);
-
-            //        // Data buffer 
-            //        byte[] messageReceived = new byte[1024];
-
-            //        // We receive the messagge using  
-            //        // the method Receive(). This  
-            //        // method returns number of bytes 
-            //        // received, that we'll use to  
-            //        // convert them to string 
-            //        int byteRecv = _sender.Receive(messageReceived);
-            //        MessageBox.Show("Message from Server -> {0}",
-            //              Encoding.ASCII.GetString(messageReceived,
-            //                                         0, byteRecv));
-
-            //        // Close Socket using  
-            //        // the method Close() 
-            //        _sender.Shutdown(SocketShutdown.Both);
-            //        _sender.Close();
-            //    }
-
-            //    // Manage of Socket's Exceptions 
-            //    catch (ArgumentNullException ane)
-            //    {
-
-            //        MessageBox.Show("ArgumentNullException : {0}", ane.ToString());
-            //    }
-
-            //    catch (SocketException se)
-            //    {
-
-            //        MessageBox.Show("SocketException : {0}", se.ToString());
-            //    }
-
-            //    catch (Exception e)
-            //    {
-            //        MessageBox.Show("Unexpected exception : {0}", e.ToString());
-            //    }
+                client = new TcpClient(_hostIP, _port);
+                _socket = client.Client;
             }
-
-            catch (Exception e)
+            catch (Exception ex)
             {
-
-                MessageBox.Show(e.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 
-        //private void MessageReciever_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //    RecieveMove();
-        //}
+        public void KillClient()
+        {
+            _socket.Close();
+        }
 
         public int Port
         {
             get { return _port; }
             set { _port = value; }
-        }
-
-        public bool IsConnected 
-        {
-            get { return _isConnected; }
-            set { _isConnected = value; }
         }
 
         public string HostIP
@@ -135,18 +61,9 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
 
         public void RecieveMove()
         {
-            _listener.Bind(_localEndPoint);
-
-            // Using Listen() method we create  
-            // the Client list that will want 
-            // to connect to Server 
-            _listener.Listen(1);
-
-            Socket clientSocket = _listener.Accept();
-
             // Data buffer 
             byte[] bytes = new byte[2];
-            int numByte = clientSocket.Receive(bytes);
+            int numByte = _socket.Receive(bytes);
             int x = 0;
             int y = 0;
             if (numByte == 2)
@@ -158,22 +75,20 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             {
                 MessageBox.Show("Did not recieve the sufficient number of bytes!");
             }
+            x = ConvertXToLocation(x);
+            y = ConvertYToLocation(y);
             Point location = new Point(x, y);
-            _detectHit(location, Symbol);
-            _listener.Close();
+            if (Symbol == PlayerSymbols.X)
+                _detectHit(location, PlayerSymbols.O);
+            else
+                _detectHit(location, PlayerSymbols.X);
         }
 
         public void SendMove(byte[] move)
         {
             try
             {
-                _sender.Connect(_localEndPoint);
-                int bytesSent = _sender.Send(move);
-
-                // Close Socket using  
-                // the method Close() 
-                _sender.Shutdown(SocketShutdown.Both);
-                _sender.Close();
+                _socket.Send(move);
             }
             // Manage of Socket's Exceptions 
             catch (ArgumentNullException ane)
@@ -192,6 +107,29 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             {
                 MessageBox.Show("Unexpected exception : {0}", e.ToString());
             }
+        }
+
+        private int ConvertXToLocation(int x)
+        {
+            if (x == 0)
+                return 165;
+            else if (x == 1)
+                return 333;
+            else if (x == 2)
+                return 335;
+            else
+                return -1;
+        }
+        private int ConvertYToLocation(int y)
+        {
+            if (y == 0)
+                return 165;
+            else if (y == 1)
+                return 333;
+            else if (y == 2)
+                return 335;
+            else
+                return -1;
         }
     }
 }

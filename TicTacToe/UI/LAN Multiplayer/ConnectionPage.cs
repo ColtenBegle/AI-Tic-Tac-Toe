@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TicTacToe.Game_Logic.LAN_Multiplayer;
 
@@ -26,6 +19,7 @@ namespace TicTacToe.UI.LAN_Multiplayer
             Form1 form1 = new Form1(client:true);
             Client client = new Client(username, Game_Logic.PlayerSymbols.O, hostIP, PORT, form1.theBoard.detectHit);
             form1.Client = client;
+            form1.InitializeMessageReciever();
             
             if (!form1.IsDisposed)
                 form1.ShowDialog();
@@ -38,6 +32,7 @@ namespace TicTacToe.UI.LAN_Multiplayer
             Form1 form1 = new Form1(host:true);
             Host host = new Host(username, Game_Logic.PlayerSymbols.X, PORT, form1.theBoard.detectHit);
             form1.Host = host;
+            form1.InitializeMessageReciever();
 
             if (!form1.IsDisposed)
                 form1.ShowDialog();

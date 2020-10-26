@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
+using TicTacToe.Game_Logic;
 
 namespace TicTacToe
 {
@@ -13,6 +14,9 @@ namespace TicTacToe
         public int movesMade = 0;
         public int Owins = 0;
         public int Xwins = 0;
+
+        private int xPos;
+        private int yPos;
 
         private Rectangle[,] slots = new Rectangle[3,3];
         private Holder[,] holders = new Holder[3, 3];
@@ -51,49 +55,47 @@ namespace TicTacToe
                 }
             }
         }
-        public void detectHit(Point location)
+        public void detectHit(Point location, PlayerSymbols playerChar)
         {
             //checks if board is clicked
             if (location.Y <= 500)
             {
-                int x = 0;
-                int y = 0;
 
                 //x
                 if (location.X < 167)
                 {
-                    x = 0;
+                    xPos = 0;
                 }
                 else if (location.X > 167 && location.X < 334)
                 {
-                    x = 1;
+                    xPos = 1;
                 }
                 else if (location.X > 334)
                 {
-                    x = 2;
+                    xPos = 2;
                 }
                 // end x 
 
                 //y
                 if (location.Y < 167)
                 {
-                    y = 0;
+                    yPos = 0;
                 }
                 else if (location.Y > 167 && location.Y < 334)
                 {
-                    y = 1;
+                    yPos = 1;
                 }
                 else if (location.Y > 334 && location.Y < 501)
                 {
-                    y = 2;
+                    yPos = 2;
                 }
                 //end y
                 movesMade++;
 
-                if(movesMade % 2 == 0)
+                if (playerChar == PlayerSymbols.X)
                 {
-                    GFX.drawX(new Point(x, y));
-                    holders[x, y].setValue(X);
+                    GFX.drawX(new Point(xPos, yPos));
+                    holders[xPos, yPos].setValue(X);
                     if (detectRow())
                     {
                         MessageBox.Show("YOU HAVE WON, X!");
@@ -125,13 +127,13 @@ namespace TicTacToe
                         playersTurn = X;
 
                     }
-
-                    playersTurn = O;
+                    else
+                        playersTurn = O;
                 }
                 else
                 {
-                    GFX.drawO(new Point(x, y));
-                    holders[x, y].setValue(O);
+                    GFX.drawO(new Point(xPos, yPos));
+                    holders[xPos, yPos].setValue(O);
                     if (detectRow())
                     {
                         MessageBox.Show("YOU HAVE WON, O!");
@@ -215,6 +217,18 @@ namespace TicTacToe
                 }
             }
             return full;
+        }
+
+        public int XPos
+        {
+            get { return xPos; }
+            set { xPos = value; }
+        }
+
+        public int YPos
+        {
+            get { return yPos; }
+            set { yPos = value; }
         }
     }
 }

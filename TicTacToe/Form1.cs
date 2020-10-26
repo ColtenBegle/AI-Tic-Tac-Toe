@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TicTacToe.Game_Logic;
 using TicTacToe.Game_Logic.LAN_Multiplayer;
@@ -32,8 +26,9 @@ namespace TicTacToe
             get { return _host; }
             set { _host = value; }
         }
-        private string _ip;
         private PlayerSymbols _playerSymbol;
+        private PlayerSymbols _oponentSymbol;
+        private BackgroundWorker _messageReceiver = new BackgroundWorker();
 
 
         public static bool getAiGame()
@@ -44,14 +39,45 @@ namespace TicTacToe
         public Form1(bool client = false, bool host = false)
         {
             InitializeComponent();
-            if (client == true && host == false)
-                _playerSymbol = PlayerSymbols.O;
-            else if (host == true && client == false)
-                _playerSymbol = PlayerSymbols.X;
+            if (client == true || host == true)
+            {
+                CheckForIllegalCrossThreadCalls = false;
+                if (client == true && host == false)
+                    _playerSymbol = PlayerSymbols.O;
+                else if (host == true && client == false)
+                    _playerSymbol = PlayerSymbols.X;
+                else
+                {
+                    MessageBox.Show("Cannot be a host and client at the same time!");
+                    this.Close();
+                }
+            }
+        }
+
+        public void InitializeMessageReciever()
+        {
+            _messageReceiver.DoWork += MessageReceiver_DoWork;
+            if (_client != null)
+                _messageReceiver.RunWorkerAsync();
+            
+        }
+
+        private void MessageReceiver_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (theBoard.detectRow())
+                return;
+            //FreezeBoard();
+            if (_client != null)
+            {
+                _client.RecieveMove();
+            }
             else
             {
-                MessageBox.Show("Cannot be a host and client at the same time!");
-                this.Close();
+                _host.RecieveMove();
+            }
+            if (!theBoard.detectRow())
+            {
+                //UnfreezeBoard();
             }
         }
 
@@ -69,24 +95,29 @@ namespace TicTacToe
         {
             Point mouse = Cursor.Position;
             mouse = panel1.PointToClient(mouse);
-            theBoard.detectHit(mouse, _playerSymbol);
             if (_client != null || _host != null)
             {
+                theBoard.detectHit(mouse, _playerSymbol);
                 byte[] buffer = { (byte)theBoard.XPos, (byte)theBoard.YPos };
                 if (_client != null)
                 {
                     _client.SendMove(buffer);
-                    FreezeBoard();
-                    _client.RecieveMove();
-                    UnfreezeBoard();
+                    _messageReceiver.RunWorkerAsync();
                 }
                 if (_host != null)
                 {
                     _host.SendMove(buffer);
-                    FreezeBoard();
-                    _host.RecieveMove();
-                    UnfreezeBoard();
+                    _messageReceiver.RunWorkerAsync();
                 }
+            }
+            else
+            {
+                if (theBoard.playersTurn == 0)
+                {
+                    theBoard.detectHit(mouse, PlayerSymbols.X);
+                }
+                else
+                    theBoard.detectHit(mouse, PlayerSymbols.O);
             }
             refreshLabel();
         }
@@ -119,35 +150,34 @@ namespace TicTacToe
             label1.Text = newText;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //if (MessageBox.Show("Would you like to play against the computer?", "Tic Tac Toe", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            //{
-            //    aiGame = true;
-            //}
-        }
+        //private void FreezeBoard()
+        //{
+        //    panel1.Enabled = false;
+        //}
 
-        private void FreezeBoard()
-        {
-            panel1.Enabled = false;
-        }
-
-        private void UnfreezeBoard()
-        {
-            panel1.Enabled = true;
-        }
+        //private void UnfreezeBoard()
+        //{
+        //    panel1.Enabled = true;
+        //}
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (_host != null)
-            //{
-            //    _server.Stop();
-            //    _socket.Close();
-            //}
-            //if (_client != null)
-            //{
-            //    _socket.Close();
-            //}
+            if (_host != null)
+            {
+                _host.KillHost();
+            }
+            if (_client != null)
+            {
+                _client.KillClient();
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Would you like to play against the computer?", "Tic Tac Toe", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                aiGame = true;
+            }
         }
     }
 }

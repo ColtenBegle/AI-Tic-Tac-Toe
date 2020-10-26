@@ -1,36 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Sockets;
-using System.ComponentModel;
-using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Net;
-using System.Runtime.CompilerServices;
 
 namespace TicTacToe.Game_Logic.LAN_Multiplayer
 {
     public class Host : Player
     {
         private int _port;
-        private bool _hosting;
-        private string _clientIP;
-
-        // Establish the local endpoint  
-        // for the socket. Dns.GetHostName 
-        // returns the name of the host  
-        // running the application. 
-        private IPHostEntry _ipHost;
-        private IPAddress _ipAddr;
-        private IPEndPoint _localEndPoint;
-
-        // Creation TCP/IP Socket using  
-        // Socket Class Costructor 
-        private Socket _listener;
-        private Socket _sender;
+        private TcpListener server = null;
+        private Socket _socket;
 
         public delegate void DetectHit(Point location, PlayerSymbols playerChar);
         private DetectHit _detectHit; 
@@ -45,59 +25,17 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
 
         private void ExecuteHost()
         {
-            _ipHost = Dns.GetHostEntry(Dns.GetHostName());
-            _ipAddr = _ipHost.AddressList[2];
-            _localEndPoint = new IPEndPoint(_ipAddr, 11111);
-            _sender = new Socket(_ipAddr.AddressFamily,
-                           SocketType.Stream, ProtocolType.Tcp);
-            _listener = new Socket(_ipAddr.AddressFamily,
-                     SocketType.Stream, ProtocolType.Tcp);
-            // Using Bind() method we associate a 
-            // network address to the Server Socket 
-            // All client that will connect to this  
-            // Server Socket must know this network 
-            // Address 
-            _listener.Bind(_localEndPoint);
-
-            // Using Listen() method we create  
-            // the Client list that will want 
-            // to connect to Server 
-            _listener.Listen(1);
-
-            //while(true)
-            //{
-            //    MessageBox.Show("Waiting for connection...");
-            //    Socket clientSocket = _listener.Accept();
-
-            //    // Data buffer 
-            //    byte[] bytes = new byte[2];
-
-            //    while (true)
-            //    {
-
-            //        int numByte = clientSocket.Receive(bytes);
-            //        int x = 0;
-            //        int y = 0;
-            //        if (numByte == 2)
-            //        {
-            //            x = bytes[0];
-            //            y = bytes[1];
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Did not recieve the sufficient number of bytes!");
-            //        }
-            //        Point location = new Point(x, y);
-            //        _detectHit(location, Symbol);
-
-            //    }
-            //}
+            server = new TcpListener(IPAddress.Any, _port);
+            server.Start();
+            _socket = server.AcceptSocket();
         }
 
-        //private void MessageReciever_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //    RecieveMove();
-        //}
+        public void KillHost()
+        {
+            server.Stop();
+            _socket.Close();
+        }
+
 
         public int Port
         {
@@ -105,37 +43,11 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             set { _port = value; }
         }
 
-        public bool Hosting 
-        {
-            get { return _hosting; }
-            set { _hosting = value; }
-        }
-
-        public string Client_IP
-        {
-            get { return _clientIP; }
-            set { _clientIP = value; }
-        }
-
         public void RecieveMove()
         {
-            // Using Bind() method we associate a 
-            // network address to the Server Socket 
-            // All client that will connect to this  
-            // Server Socket must know this network 
-            // Address 
-            _listener.Bind(_localEndPoint);
-
-            // Using Listen() method we create  
-            // the Client list that will want 
-            // to connect to Server 
-            _listener.Listen(1);
-
-            Socket clientSocket = _listener.Accept();
-
             // Data buffer 
             byte[] bytes = new byte[2];
-            int numByte = clientSocket.Receive(bytes);
+            int numByte = _socket.Receive(bytes);
             int x = 0;
             int y = 0;
             if (numByte == 2)
@@ -147,23 +59,20 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             {
                 MessageBox.Show("Did not recieve the sufficient number of bytes!");
             }
+            x = ConvertXToLocation(x);
+            y = ConvertYToLocation(y);
             Point location = new Point(x, y);
-            _detectHit(location, Symbol);
-            _listener.Close();
+            if (Symbol == PlayerSymbols.X)
+                _detectHit(location, PlayerSymbols.O);
+            else
+                _detectHit(location, PlayerSymbols.X);
         }
 
         public void SendMove(byte[] move)
         {
-            _sender.Connect(_localEndPoint);
             try
             {
-                
-                int bytesSent = _sender.Send(move);
-
-                // Close Socket using  
-                // the method Close() 
-                _sender.Shutdown(SocketShutdown.Both);
-                _sender.Close();
+                _socket.Send(move);
             }
             // Manage of Socket's Exceptions 
             catch (ArgumentNullException ane)
@@ -182,6 +91,29 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             {
                 MessageBox.Show("Unexpected exception : {0}", e.ToString());
             }
+        }
+
+        private int ConvertXToLocation(int x)
+        {
+            if (x == 0)
+                return 165;
+            else if (x == 1)
+                return 333;
+            else if (x == 2)
+                return 335;
+            else
+                return -1;
+        }
+        private int ConvertYToLocation(int y)
+        {
+            if (y == 0)
+                return 165;
+            else if (y == 1)
+                return 333;
+            else if (y == 2)
+                return 335;
+            else
+                return -1;
         }
     }
 }
