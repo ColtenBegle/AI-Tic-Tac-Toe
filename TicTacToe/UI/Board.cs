@@ -109,7 +109,7 @@ namespace TicTacToe
                         movesMade++;
                     }
 
-                    if (Form1.getAiGame() && !detectRow() && !isBoardFull())
+                    if (GameForm.getAiGame() && !detectRow() && !isBoardFull())
                     {
                         Holder aiMove = ComputerLogic.determineAndPlaceMark(holders);
                         GFX.drawO(aiMove.getLocation());

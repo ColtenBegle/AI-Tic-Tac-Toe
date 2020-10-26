@@ -16,7 +16,7 @@ namespace TicTacToe.UI.LAN_Multiplayer
         {
             string username = txtName.Text;
             string hostIP = txtHostIP.Text;
-            Form1 form1 = new Form1(client:true);
+            GameForm form1 = new GameForm(client:true);
             Client client = new Client(username, Game_Logic.PlayerSymbols.O, hostIP, PORT, form1.theBoard.detectHit);
             form1.Client = client;
             form1.InitializeMessageReciever();
@@ -29,7 +29,7 @@ namespace TicTacToe.UI.LAN_Multiplayer
         {
             string username = txtName.Text;
             
-            Form1 form1 = new Form1(host:true);
+            GameForm form1 = new GameForm(host:true);
             Host host = new Host(username, Game_Logic.PlayerSymbols.X, PORT, form1.theBoard.detectHit);
             form1.Host = host;
             form1.InitializeMessageReciever();
