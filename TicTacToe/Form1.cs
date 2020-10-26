@@ -21,14 +21,19 @@ namespace TicTacToe
 
         //LAN Game variables
         private Client _client;
+        public Client Client
+        {
+            get { return _client; }
+            set { _client = value; }
+        }
         private Host _host;
+        public Host Host
+        {
+            get { return _host; }
+            set { _host = value; }
+        }
         private string _ip;
         private PlayerSymbols _playerSymbol;
-        private PlayerSymbols _opponentSymbol;
-        private Socket _socket;
-        private BackgroundWorker _messageReciever;
-        private TcpListener _server = null;
-        private TcpClient _tcpClient;
 
 
         public static bool getAiGame()
@@ -36,59 +41,18 @@ namespace TicTacToe
             return aiGame;
         }
 
-        public Form1()
+        public Form1(bool client = false, bool host = false)
         {
             InitializeComponent();
-            _playerSymbol = PlayerSymbols.X;
-        }
-
-        public Form1(Client client, string ip)
-        {
-            InitializeComponent();
-            theBoard.initBoard();
-            _client = client;
-            _ip = ip;
-            _playerSymbol = client.Symbol;
-            if (_playerSymbol == PlayerSymbols.O)
-                _opponentSymbol = PlayerSymbols.X;
+            if (client == true && host == false)
+                _playerSymbol = PlayerSymbols.O;
+            else if (host == true && client == false)
+                _playerSymbol = PlayerSymbols.X;
             else
-                _opponentSymbol = PlayerSymbols.O;
-            CheckForIllegalCrossThreadCalls = false;
-            try
             {
-                _tcpClient = new TcpClient(ip, _client.Port);
-                _socket = _tcpClient.Client;
-            } catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Close();
+                MessageBox.Show("Cannot be a host and client at the same time!");
+                this.Close();
             }
-        }
-
-        private void _messageReciever_DoWork(object sender, DoWorkEventArgs e)
-        {
-            if (theBoard.detectRow())
-                return;
-            FreezeBoard();
-            RecieveMove();
-            if (!theBoard.detectRow())
-                UnfreezeBoard();
-        }
-
-        public Form1(Host host)
-        {
-            InitializeComponent();
-            theBoard.initBoard();
-            _host = host;
-            _playerSymbol = host.Symbol;
-            if (_playerSymbol == PlayerSymbols.X)
-                _opponentSymbol = PlayerSymbols.O;
-            else
-                _opponentSymbol = PlayerSymbols.X;
-            CheckForIllegalCrossThreadCalls = false;
-            _server = new TcpListener(System.Net.IPAddress.Any, host.Port);
-            _server.Start();
-            _socket = _server.AcceptSocket();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -103,19 +67,26 @@ namespace TicTacToe
 
         private void panel1_Click(object sender, EventArgs e)
         {
-            if (_messageReciever == null)
-            {
-                _messageReciever = new BackgroundWorker();
-                _messageReciever.DoWork += _messageReciever_DoWork;
-            }
             Point mouse = Cursor.Position;
             mouse = panel1.PointToClient(mouse);
             theBoard.detectHit(mouse, _playerSymbol);
             if (_client != null || _host != null)
             {
                 byte[] buffer = { (byte)theBoard.XPos, (byte)theBoard.YPos };
-                _socket.Send(buffer);
-                _messageReciever.RunWorkerAsync();
+                if (_client != null)
+                {
+                    _client.SendMove(buffer);
+                    FreezeBoard();
+                    _client.RecieveMove();
+                    UnfreezeBoard();
+                }
+                if (_host != null)
+                {
+                    _host.SendMove(buffer);
+                    FreezeBoard();
+                    _host.RecieveMove();
+                    UnfreezeBoard();
+                }
             }
             refreshLabel();
         }
@@ -166,29 +137,17 @@ namespace TicTacToe
             panel1.Enabled = true;
         }
 
-        private void RecieveMove()
-        {
-            byte[] buffer = new byte[2];
-            _socket.Receive(buffer);
-            Point location = new Point(buffer[0], buffer[1]);
-            theBoard.detectHit(location, _opponentSymbol);
-
-            refreshLabel();
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _messageReciever.WorkerSupportsCancellation = true;
-            _messageReciever.CancelAsync();
-            if (_host != null)
-            {
-                _server.Stop();
-                _socket.Close();
-            }
-            if (_client != null)
-            {
-                _socket.Close();
-            }
+            //if (_host != null)
+            //{
+            //    _server.Stop();
+            //    _socket.Close();
+            //}
+            //if (_client != null)
+            //{
+            //    _socket.Close();
+            //}
         }
     }
 }
