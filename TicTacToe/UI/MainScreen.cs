@@ -24,7 +24,12 @@ namespace TicTacToe.UI
         {
             MainScreenPic.Visible = false;
             panelCustomize.Visible = false;
-            GameTypePanel.Visible = true;
+            //gametype panel changed to false temporaily
+            GameTypePanel.Visible = false;
+            // temp code added to start gameform
+            GameForm Game = new GameForm();
+            this.Hide();
+            Game.ShowDialog();
         }
 
 
@@ -32,6 +37,7 @@ namespace TicTacToe.UI
         {
             GameTypePanel.Visible = false;
             panelCustomize.Visible = true;
+            MainScreenPic.Visible = false;
         }
 
         private void GameNameLabel_Click(object sender, EventArgs e)
@@ -48,13 +54,6 @@ namespace TicTacToe.UI
             Game.ShowDialog();
         }
 
-        private void btnAI_Click(object sender, EventArgs e)
-        {
-           
-            GameForm Game = new GameForm();
-            this.Hide();
-            Game.ShowDialog();
-            aiGame = true;
-        }
+        
     }
 }

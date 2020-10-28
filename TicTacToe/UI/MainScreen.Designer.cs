@@ -76,7 +76,6 @@
             this.btnAI.TabIndex = 1;
             this.btnAI.Text = "AI";
             this.btnAI.UseVisualStyleBackColor = false;
-            this.btnAI.Click += new System.EventHandler(this.btnAI_Click);
             // 
             // btnLocalMult
             // 
