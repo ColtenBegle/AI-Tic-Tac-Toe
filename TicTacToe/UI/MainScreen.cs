@@ -12,9 +12,49 @@ namespace TicTacToe.UI
 {
     public partial class MainScreen : Form
     {
+        public static bool aiGame = false;
         public MainScreen()
         {
             InitializeComponent();
+            GameTypePanel.Visible = false;
+            panelCustomize.Visible = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MainScreenPic.Visible = false;
+            panelCustomize.Visible = false;
+            GameTypePanel.Visible = true;
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            GameTypePanel.Visible = false;
+            panelCustomize.Visible = true;
+        }
+
+        private void GameNameLabel_Click(object sender, EventArgs e)
+        {
+            MainScreenPic.Visible = true;
+            panelCustomize.Visible = false;
+            GameTypePanel.Visible = false;
+        }
+
+        private void btnLocalMult_Click(object sender, EventArgs e)
+        {
+            GameForm Game = new GameForm();
+            this.Hide();
+            Game.ShowDialog();
+        }
+
+        private void btnAI_Click(object sender, EventArgs e)
+        {
+           
+            GameForm Game = new GameForm();
+            this.Hide();
+            Game.ShowDialog();
+            aiGame = true;
         }
     }
 }

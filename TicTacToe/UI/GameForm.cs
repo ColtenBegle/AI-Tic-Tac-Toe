@@ -171,12 +171,12 @@ namespace TicTacToe
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Would you like to play against the computer?", "Tic Tac Toe", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                aiGame = true;
-            }
-        }
+        //private void Form1_Load(object sender, EventArgs e)
+        //{
+         //   if (MessageBox.Show("Would you like to play against the computer?", "Tic Tac Toe", MessageBoxButtons.YesNo) == DialogResult.Yes)
+         //   {
+         //       aiGame = true;
+         //   }
+        //}
     }
 }
