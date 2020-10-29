@@ -12,49 +12,71 @@ namespace TicTacToe.UI
 {
     public partial class MainScreen : Form
     {
+        Bitmap XSymbol1 = new Bitmap(Properties.Resources.Symbol_X);
+        Bitmap XSymbol2 = new Bitmap(Properties.Resources.Symbol_X);
+        Bitmap XSymbol3 = new Bitmap(Properties.Resources.Symbol_X);
+        Bitmap XSymbol4 = new Bitmap(Properties.Resources.Symbol_X);
+        Bitmap XSymbol5 = new Bitmap(Properties.Resources.Symbol_X);
+        Bitmap CrownSymbol = new Bitmap(Properties.Resources.CrownSymbol);
+
+
+
         public static bool aiGame = false;
         public MainScreen()
         {
             InitializeComponent();
-            GameTypePanel.Visible = false;
-            panelCustomize.Visible = false;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MainScreenPic.Visible = false;
-            panelCustomize.Visible = false;
-            GameTypePanel.Visible = true;
-        }
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            GameTypePanel.Visible = false;
-            panelCustomize.Visible = true;
+            tabControlRight.ItemSize = new Size(0, 1);
+            tabControlLeft.ItemSize = new Size(0, 1);
         }
 
         private void GameNameLabel_Click(object sender, EventArgs e)
         {
-            MainScreenPic.Visible = true;
-            panelCustomize.Visible = false;
-            GameTypePanel.Visible = false;
+            //Back to Main Screen
+            tabControlRight.SelectedIndex = (0);
+        }
+        private void picboxLogo_Click(object sender, EventArgs e)
+        {
+            //Back to Main Screen
+            tabControlRight.SelectedIndex = (0);
+            tabControlLeft.SelectedIndex = (0);
         }
 
+        private void buttonPlay_Click(object sender, EventArgs e)
+        {
+            //show Select Player Mode
+            tabControlRight.SelectedIndex = (1);
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            //show Customize tab
+            tabControlRight.SelectedIndex = (2);
+        }
         private void btnLocalMult_Click(object sender, EventArgs e)
         {
-            GameForm Game = new GameForm();
-            this.Hide();
-            Game.ShowDialog();
+            //GameForm Game = new GameForm();
+            //Game.ShowDialog();
+            tabControlRight.SelectedIndex = (3);
         }
 
-        private void btnAI_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-           
+            //Testing
+            button1.BackgroundImage = CrownSymbol;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Testing
+            button2.BackgroundImage = XSymbol2;
+        }
+
+        private void buttonGameForm_Click(object sender, EventArgs e)
+        {
             GameForm Game = new GameForm();
             this.Hide();
             Game.ShowDialog();
-            aiGame = true;
         }
     }
+       
 }
