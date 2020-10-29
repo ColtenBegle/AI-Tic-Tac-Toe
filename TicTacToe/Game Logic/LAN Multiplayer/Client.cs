@@ -1,11 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Deployment.Application;
 using System.Drawing;
-using System.Net;
 using System.Net.Sockets;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows.Forms;
 
 namespace TicTacToe.Game_Logic.LAN_Multiplayer
@@ -16,16 +11,16 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
         private string _hostIP;
         private Socket _socket;
         private TcpClient client;
-        public delegate void DetectHit(Point location, PlayerSymbols playerChar);
-        private DetectHit _detectHit;
+        public delegate void CellClicked(object sender, EventArgs e);
+        private CellClicked _cellClicked;
 
 
-        public Client(string name, PlayerSymbols symbol, string hostIP, int port, 
-            Action<Point, PlayerSymbols> detectHit) : base(name, symbol)
+        public Client(string name, PlayerSymbols symbol, bool isTurn, string hostIP, int port, 
+            Action<object, EventArgs> cellClicked) : base(name, symbol, isTurn)
         {
             _hostIP = hostIP;
             _port = port;
-            _detectHit = new DetectHit(detectHit);
+            _cellClicked = new CellClicked(cellClicked);
             ExecuteClient();
         }
 
@@ -61,27 +56,27 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
 
         public void RecieveMove()
         {
-            // Data buffer 
-            byte[] bytes = new byte[2];
-            int numByte = _socket.Receive(bytes);
-            int x = 0;
-            int y = 0;
-            if (numByte == 2)
-            {
-                x = bytes[0];
-                y = bytes[1];
-            }
-            else
-            {
-                MessageBox.Show("Did not recieve the sufficient number of bytes!");
-            }
-            x = ConvertXToLocation(x);
-            y = ConvertYToLocation(y);
-            Point location = new Point(x, y);
-            if (Symbol == PlayerSymbols.X)
-                _detectHit(location, PlayerSymbols.O);
-            else
-                _detectHit(location, PlayerSymbols.X);
+            //// Data buffer 
+            //byte[] bytes = new byte[2];
+            //int numByte = _socket.Receive(bytes);
+            //int x = 0;
+            //int y = 0;
+            //if (numByte == 2)
+            //{
+            //    x = bytes[0];
+            //    y = bytes[1];
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Did not recieve the sufficient number of bytes!");
+            //}
+            //x = ConvertXToLocation(x);
+            //y = ConvertYToLocation(y);
+            //Point location = new Point(x, y);
+            //if (Symbol == PlayerSymbols.X)
+            //    _cellClicked(location, PlayerSymbols.O);
+            //else
+            //    _cellClicked(location, PlayerSymbols.X);
         }
 
         public void SendMove(byte[] move)

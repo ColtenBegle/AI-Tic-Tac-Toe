@@ -13,12 +13,15 @@ namespace TicTacToe.Game_Logic
     }
     public class Player
     {
-        public Player(string name, PlayerSymbols symbol)
+        public Player(string name, PlayerSymbols symbol, bool isTurn)
         {
             Name = name;
             Symbol = symbol;
             Wins = 0;
+            IsTurn = isTurn;
         }
+
+        public bool IsTurn { get; set; }
 
         public string Name { get; set; }
 

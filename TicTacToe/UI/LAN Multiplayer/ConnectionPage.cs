@@ -16,26 +16,25 @@ namespace TicTacToe.UI.LAN_Multiplayer
         {
             string username = txtName.Text;
             string hostIP = txtHostIP.Text;
-            GameForm form1 = new GameForm(client:true);
-            Client client = new Client(username, Game_Logic.PlayerSymbols.O, hostIP, PORT, form1.theBoard.detectHit);
-            form1.Client = client;
-            form1.InitializeMessageReciever();
+            GameForm1 game = new GameForm1(3);
+            Client client = new Client(username, Game_Logic.PlayerSymbols.O, false, hostIP, PORT, game.CellClicked);
+            game.Client = client;
             
-            if (!form1.IsDisposed)
-                form1.ShowDialog();
+            if (!game.IsDisposed)
+                game.ShowDialog();
         }
 
         private void btnHost_Click(object sender, EventArgs e)
         {
-            string username = txtName.Text;
+            //string username = txtName.Text;
             
-            GameForm form1 = new GameForm(host:true);
-            Host host = new Host(username, Game_Logic.PlayerSymbols.X, PORT, form1.theBoard.detectHit);
-            form1.Host = host;
-            form1.InitializeMessageReciever();
+            //GameForm form1 = new GameForm(host:true);
+            //Host host = new Host(username, Game_Logic.PlayerSymbols.X, PORT, form1.theBoard.detectHit);
+            //form1.Host = host;
+            //form1.InitializeMessageReciever();
 
-            if (!form1.IsDisposed)
-                form1.ShowDialog();
+            //if (!form1.IsDisposed)
+            //    form1.ShowDialog();
         }
     }
 }

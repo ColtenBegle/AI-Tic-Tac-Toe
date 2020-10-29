@@ -3,6 +3,7 @@ using System.Net.Sockets;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Net;
+using System.ComponentModel;
 
 namespace TicTacToe.Game_Logic.LAN_Multiplayer
 {
@@ -11,15 +12,19 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
         private int _port;
         private TcpListener server = null;
         private Socket _socket;
+        private BackgroundWorker _messageReceiver = new BackgroundWorker();
 
         public delegate void DetectHit(Point location, PlayerSymbols playerChar);
-        private DetectHit _detectHit; 
-        
+        private DetectHit _detectHit;
 
-        public Host(string name, PlayerSymbols symbol, int port, Action<Point, PlayerSymbols> detectHit) : base(name, symbol)
+        public Host(string name, PlayerSymbols symbol, int port, bool isTurn, 
+            Action<Point, PlayerSymbols> detectHit) : base(name, symbol, isTurn)
         {
             _port = port;
             _detectHit = new DetectHit(detectHit);
+            //_detectRow = new DetectRow(detectRow);
+            //_freezeBoard = new FreezeBoard(freezeBoard);
+            //_unfreezeBoard = new UnfreezeBoard(unfreezeBoard);
             ExecuteHost();
         }
 
@@ -28,6 +33,18 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             server = new TcpListener(IPAddress.Any, _port);
             server.Start();
             _socket = server.AcceptSocket();
+        }
+
+        private void MessageReceiver_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //if (_detectRow())
+            //    return;
+            //_freezeBoard();
+            //RecieveMove();
+            //if (!_detectRow())
+            //{
+            //    _unfreezeBoard();
+            //}
         }
 
         public void KillHost()
