@@ -49,6 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="UI\Board.cs" />
     <Compile Include="Game Logic\AI\ComputerLogic.cs" />
     <Compile Include="UI\GameForm.cs">
@@ -81,13 +86,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="UI\LAN Multiplayer\ConnectionPage.resx">
       <DependentUpon>ConnectionPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -107,6 +108,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\TicTacToeLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Symbol_X.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Symbol O.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CrownSymbol.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
