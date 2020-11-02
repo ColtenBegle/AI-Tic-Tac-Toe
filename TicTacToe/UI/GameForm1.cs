@@ -1,10 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Deployment.Application;
-using System.Drawing;
-using System.Drawing.Printing;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using TicTacToe.Game_Logic;
 using TicTacToe.Game_Logic.AI;
@@ -43,6 +38,7 @@ namespace TicTacToe
             get { return _ai; }
             set { _ai = value; }
         }
+        private Player humanPlayer = new Player("Player 1", PlayerSymbols.X, true);
 
         public GameForm1(int gridSize)
         {
@@ -50,7 +46,12 @@ namespace TicTacToe
             grid = new Grid(gridSize);
             GenerateGrid(gridSize);
             _gridSize = gridSize;
+            lblPlayer1.Text = GetPlayer1Name();
+            lblPlayer2.Text = GetPlayer2Name();
+            lblPlayerTurn.Text = GetPlayer1Name();
         }
+
+        
 
         //Local multiplayer variables
         private Player player1 = new Player("Player 1", PlayerSymbols.X, true);
@@ -61,38 +62,71 @@ namespace TicTacToe
             //Vertical check
             for (int x = 0; x < _gridSize; x++)
             {
-                if (grid.Cells[x, 0].Text == grid.Cells[x, 1].Text && 
-                    grid.Cells[x, 1].Text == grid.Cells[x, 2].Text && 
-                    grid.Cells[x, 2].Text != "")
-                    return true;
+                string prevVal = grid.Cells[x, 0].Text;
+                for (int y = 0; y < _gridSize; y++)
+                {
+                    string value = grid.Cells[x, y].Text;
+                    if (value == "")
+                        break;
+                    if (value != prevVal)
+                        break;
+                    if (y + 1 == _gridSize)
+                        return true;
+                    prevVal = value;
+                }
             }
             //Horizontal check
             for (int y = 0; y < _gridSize; y++)
             {
-                if (grid.Cells[0, y].Text == grid.Cells[1, y].Text &&
-                    grid.Cells[1, y].Text == grid.Cells[2, y].Text &&
-                    grid.Cells[2, y].Text != "")
-                    return true;
+                string prevVal = grid.Cells[0, y].Text;
+                for (int x = 0; x < _gridSize; x++)
+                {
+                    string value = grid.Cells[x, y].Text;
+                    if (value == "")
+                        break;
+                    if (value != prevVal)
+                        break;
+                    if (x + 1 == _gridSize)
+                        return true;
+                    prevVal = value;
+                }
             }
             //Left diagonal check
             string symbol = grid.Cells[0, 0].Text;
             for (int x = 0, y = 0; x < _gridSize && y < _gridSize; x++, y++)
             {
+                if (symbol == "")
+                    break;
                 if (grid.Cells[x, y].Text != symbol)
-                    return false;
+                    break;
                 if (x + 1 == _gridSize && y + 1 == _gridSize)
                     return true;
             }
             //Right diagnol check
-            symbol = grid.Cells[_gridSize - 1, _gridSize - 1].Text;
-            for (int x = _gridSize - 1, y = _gridSize - 1; x >= 0 && y >= 0; x--, y--)
+            symbol = grid.Cells[_gridSize - 1, 0].Text;
+            for (int x = _gridSize - 1, y = 0; x >= 0 && y < _gridSize; x--, y++)
             {
+                if (symbol == "")
+                    break;
                 if (grid.Cells[x, y].Text != symbol)
-                    return false;
-                if (x == 0 && y == 0)
+                    break;
+                if (x == 0 && y + 1 == _gridSize)
                     return true;
             }
             return false;
+        }
+
+        public bool IsFull()
+        {
+            for (int x = 0; x < _gridSize; x++)
+            {
+                for (int y = 0; y < _gridSize; y++)
+                {
+                    if (String.IsNullOrEmpty(grid.Cells[x, y].Text))
+                        return false;
+                }
+            }
+            return true;
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -112,11 +146,75 @@ namespace TicTacToe
             }
         }
 
+        private string GetPlayer1Name()
+        {
+            if (_ai != null)
+            {
+                return player1.Name;
+            }
+            else if (_client != null)
+            {
+                return _client.Name;
+            }
+            else if (_host != null)
+            {
+                return _host.Name;
+            }
+            else
+            {
+                return player1.Name;
+            }
+        }
+
+        private string GetPlayer2Name()
+        {
+            if (_ai != null)
+            {
+                return _ai.Name;
+            }
+            else if (_client != null)
+            {
+                return _client.Name;
+            }
+            else if (_host != null)
+            {
+                return _host.Name;
+            }
+            else
+            {
+                return player2.Name;
+            }
+        }
+
         public void CellClicked(object sender, EventArgs e)
         {
             if (_ai != null)
             {
-
+                Type type = sender.GetType();
+                PropertyInfo property = type.GetProperty("Text");
+                property.SetValue(sender, humanPlayer.Symbol.ToString());
+                property = type.GetProperty("Enabled");
+                property.SetValue(sender, false);
+                lblPlayerTurn.Text = lblPlayer2.Text;
+                bool state = CheckState();
+                if (state == true)
+                {
+                    lblOutcome.Text = String.Format("{0} wins!", humanPlayer.Name);
+                    ResetCells();
+                    humanPlayer.Wins += 1;
+                }
+                else
+                {
+                    _ai.MakeMove(_gridSize, grid.Cells);
+                    state = CheckState();
+                    if (state == true)
+                    {
+                        lblOutcome.Text = String.Format("{0} wins!", _ai.Name);
+                        ResetCells();
+                        _ai.Wins += 1;
+                    }
+                    lblPlayerTurn.Text = lblPlayer1.Text;
+                }
             }
             else if (_client != null)
             {
@@ -133,16 +231,70 @@ namespace TicTacToe
                     Type type = sender.GetType();
                     PropertyInfo property = type.GetProperty("Text");
                     property.SetValue(sender, player1.Symbol.ToString());
-                    player1.IsTurn = false;
-                    player2.IsTurn = true;
+                    property = type.GetProperty("Enabled");
+                    property.SetValue(sender, false);
+                    bool state = CheckState();
+                    if (state == true)
+                    {
+                        lblOutcome.Text = String.Format("{0} wins!", player1.Name);
+                        ResetCells();
+                        player1.Wins += 1;
+                    }
+                    else
+                    {
+                        bool isFull = IsFull();
+                        if (isFull)
+                        {
+                            lblOutcome.Text = String.Format("It's a draw!");
+                            ResetCells();
+                        }
+                        else
+                        {
+                            player1.IsTurn = false;
+                            player2.IsTurn = true;
+                        }
+                    }
                 }
                 else
                 {
                     Type type = sender.GetType();
                     PropertyInfo property = type.GetProperty("Text");
                     property.SetValue(sender, player2.Symbol.ToString());
-                    player2.IsTurn = false;
-                    player1.IsTurn = true;
+                    property = type.GetProperty("Enabled");
+                    property.SetValue(sender, false);
+                    bool state = CheckState();
+                    if (state == true)
+                    {
+                        lblOutcome.Text = String.Format("{0} wins!", player2.Name);
+                        ResetCells();
+                        player2.Wins += 1;
+                    }
+                    else
+                    {
+                        bool isFull = IsFull();
+                        if (isFull)
+                        {
+                            lblOutcome.Text = String.Format("It's a draw!");
+                            ResetCells();
+                        }
+                        else
+                        {
+                            player2.IsTurn = false;
+                            player1.IsTurn = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ResetCells()
+        {
+            for (int x = 0; x < _gridSize; x++)
+            {
+                for (int y = 0; y < _gridSize; y++)
+                {
+                    grid.Cells[x, y].Text = "";
+                    grid.Cells[x, y].Enabled = true;
                 }
             }
         }

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game Logic\AI\AIPlayer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -65,7 +66,14 @@
     <Compile Include="Game Logic\LAN Multiplayer\Client.cs" />
     <Compile Include="Game Logic\LAN Multiplayer\Host.cs" />
     <Compile Include="Game Logic\Player.cs" />
+    <Compile Include="UI\GameForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\GameForm1.Designer.cs">
+      <DependentUpon>GameForm1.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\GFX.cs" />
+    <Compile Include="UI\Grid.cs" />
     <Compile Include="UI\Holder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,12 +97,16 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\GameForm1.resx">
+      <DependentUpon>GameForm1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\LAN Multiplayer\ConnectionPage.resx">
       <DependentUpon>ConnectionPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="bin\Debug\TicTacToe.exe.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -119,6 +131,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\CrownSymbol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\TicTacToe.exe" />
+    <Content Include="bin\Debug\TicTacToe.pdb" />
+    <Content Include="Images\O.jpg" />
+    <Content Include="Images\O.png" />
+    <Content Include="Images\X.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
