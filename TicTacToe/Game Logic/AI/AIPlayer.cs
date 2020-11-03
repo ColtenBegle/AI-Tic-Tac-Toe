@@ -31,6 +31,8 @@ namespace TicTacToe.Game_Logic.AI
 
         public void MakeMove(int gridSize, Button[,] cells)
         {
+            double alpha = double.NegativeInfinity;
+            double beta = double.PositiveInfinity;
             double bestScore = double.NegativeInfinity;
             Tuple<int, int> bestMove = new Tuple<int, int>(-1, -1);
             for (int x = 0; x < gridSize; x++)
@@ -40,7 +42,7 @@ namespace TicTacToe.Game_Logic.AI
                     if (cells[x, y].Text == "")
                     {
                         cells[x, y].Text = Symbol.ToString();
-                        double score = minimax(cells, gridSize, 0, false);
+                        double score = minimax(cells, gridSize, 0, false, alpha,beta);
                         cells[x, y].Text = "";
                         if (score > bestScore)
                         {
@@ -54,7 +56,7 @@ namespace TicTacToe.Game_Logic.AI
                 cells[bestMove.Item1, bestMove.Item2].Text = Symbol.ToString();
         }
 
-        private double minimax(Button[,] cells, int gridSize, int depth, bool isMaximizing)
+        private double minimax(Button[,] cells, int gridSize, int depth, bool isMaximizing, double alpha, double beta)
         {
             bool state = _checkState();
             double score = 0.0;
@@ -64,6 +66,9 @@ namespace TicTacToe.Game_Logic.AI
                 if (isMaximizing == false)
                 {
                     score = (double)Scores.O;
+                    //Console.WriteLine("WINNING BOARD");
+                    //PrintBoard(cells, gridSize);
+                    //Console.WriteLine("\n\n");
                     return score;
                 }
                 else
@@ -79,6 +84,8 @@ namespace TicTacToe.Game_Logic.AI
             }
             if (isMaximizing)
             {
+                
+                
                 double bestScore = double.NegativeInfinity;
                 for (int x = 0; x < gridSize; x++)
                 {
@@ -87,9 +94,15 @@ namespace TicTacToe.Game_Logic.AI
                         if (cells[x, y].Text == "")
                         {
                             cells[x, y].Text = Symbol.ToString();
-                            score = minimax(cells, gridSize, depth + 1, false);
+                            score = minimax(cells, gridSize, depth + 1, false, alpha, beta);
                             cells[x, y].Text = "";
+                            //bestScore = Math.Max(score, bestScore);
                             bestScore = Math.Max(score, bestScore);
+                            alpha = Math.Max(alpha, bestScore);
+                            if(beta<=alpha)
+                            {
+                                break;
+                            }
                         }
                     }
                 }
@@ -110,31 +123,38 @@ namespace TicTacToe.Game_Logic.AI
                         if (cells[x, y].Text == "")
                         {
                             cells[x, y].Text = opponentSymbol.ToString();
-                            score = minimax(cells, gridSize, depth + 1, true);
+                            score = minimax(cells, gridSize, depth + 1, true, alpha, beta);
                             cells[x, y].Text = "";
+                            //bestScore = Math.Min(score, bestScore);
                             bestScore = Math.Min(score, bestScore);
+                            beta = Math.Min(beta, bestScore);
+                            if (beta <= alpha)
+                            {
+                                break;
+                            }
                         }
                     }
+                    
                 }
                 return bestScore;
             }
         }
 
-        //private void PrintBoard(Button[,] cells, int gridSize)
-        //{
-        //    for (int x = 0; x < gridSize; x++)
-        //    {
-        //        for (int y = 0; y < gridSize; y++)
-        //        {
-        //            if (cells[x, y].Text == "")
-        //            {
-        //                Console.Write("| |");
-        //            }
-        //            else
-        //                Console.Write("|" + cells[x, y].Text + "|");
-        //        }
-        //        Console.WriteLine();
-        //    }
-        //}
+        private void PrintBoard(Button[,] cells, int gridSize)
+        {
+            for (int x = 0; x < gridSize; x++)
+            {
+                for (int y = 0; y < gridSize; y++)
+                {
+                    if (cells[x, y].Text == "")
+                    {
+                        Console.Write("| |");
+                    }
+                    else
+                        Console.Write("|" + cells[x, y].Text + "|");
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }
