@@ -21,11 +21,12 @@ namespace TicTacToe
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new GameForm());
-            //Application.Run(new MainScreen());
-            GameForm1 game = new GameForm1(3);
-            AIPlayer aIPlayer = new AIPlayer(PlayerSymbols.O, false, game.CheckState, game.IsFull);
-            game.AI = aIPlayer;
-            Application.Run(game);
+            Application.Run(new MainScreen());
+            //GameForm1 game = new GameForm1(3);
+            //AIPlayer aIPlayer = new AIPlayer(PlayerSymbols.O, false, game.CheckState, game.IsFull);
+            //game.AI = aIPlayer;
+            //Application.Run(game);
+            //Application.Run(new ConnectionPage());
         }
     }
 }
