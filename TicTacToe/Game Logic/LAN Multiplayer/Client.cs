@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Net.Sockets;
 using System.Windows.Forms;
@@ -11,16 +12,12 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
         private string _hostIP;
         private Socket _socket;
         private TcpClient client;
-        public delegate void CellClicked(object sender, EventArgs e);
-        private CellClicked _cellClicked;
 
 
-        public Client(string name, PlayerSymbols symbol, bool isTurn, string hostIP, int port, 
-            Action<object, EventArgs> cellClicked) : base(name, symbol, isTurn)
+        public Client(string name, PlayerSymbols symbol, bool isTurn, string hostIP, int port) : base(name, symbol, isTurn)
         {
             _hostIP = hostIP;
             _port = port;
-            _cellClicked = new CellClicked(cellClicked);
             ExecuteClient();
         }
 
@@ -54,29 +51,26 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             set { _hostIP = value; }
         }
 
-        public void RecieveMove()
+        public void RecieveMove(Button[,] cells)
         {
             //// Data buffer 
-            //byte[] bytes = new byte[2];
-            //int numByte = _socket.Receive(bytes);
-            //int x = 0;
-            //int y = 0;
-            //if (numByte == 2)
-            //{
-            //    x = bytes[0];
-            //    y = bytes[1];
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Did not recieve the sufficient number of bytes!");
-            //}
-            //x = ConvertXToLocation(x);
-            //y = ConvertYToLocation(y);
-            //Point location = new Point(x, y);
-            //if (Symbol == PlayerSymbols.X)
-            //    _cellClicked(location, PlayerSymbols.O);
-            //else
-            //    _cellClicked(location, PlayerSymbols.X);
+            byte[] bytes = new byte[2];
+            int numByte = _socket.Receive(bytes);
+            int x = 0;
+            int y = 0;
+            if (numByte == 2)
+            {
+                x = bytes[0];
+                y = bytes[1];
+            }
+            else
+            {
+                MessageBox.Show("Did not recieve the sufficient number of bytes!");
+            }
+            if (Symbol == PlayerSymbols.X)
+                cells[x, y].Text = PlayerSymbols.O.ToString();
+            else
+                cells[x, y].Text = PlayerSymbols.X.ToString();
         }
 
         public void SendMove(byte[] move)
@@ -102,29 +96,6 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             {
                 MessageBox.Show("Unexpected exception : {0}", e.ToString());
             }
-        }
-
-        private int ConvertXToLocation(int x)
-        {
-            if (x == 0)
-                return 165;
-            else if (x == 1)
-                return 333;
-            else if (x == 2)
-                return 335;
-            else
-                return -1;
-        }
-        private int ConvertYToLocation(int y)
-        {
-            if (y == 0)
-                return 165;
-            else if (y == 1)
-                return 333;
-            else if (y == 2)
-                return 335;
-            else
-                return -1;
         }
     }
 }

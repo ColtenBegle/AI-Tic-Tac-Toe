@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
 using TicTacToe.Game_Logic;
@@ -18,18 +19,39 @@ namespace TicTacToe
             set { grid = value; }
         }
         //LAN Game variables
+        private BackgroundWorker messageReciever = new BackgroundWorker();
         private Client _client;
         public Client Client
         {
             get { return _client; }
-            set { _client = value; }
+            set { _client = value; messageReciever.DoWork += MessageReciever_DoWork; messageReciever.RunWorkerAsync(); }
         }
+
         private Host _host;
         public Host Host
         {
             get { return _host; }
-            set { _host = value; }
+            set { _host = value; messageReciever.DoWork += MessageReciever_DoWork; }
         }
+
+        private void MessageReciever_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (CheckState())
+                return;
+            FreezeBoard();
+            if (_host != null)
+            {
+                _host.RecieveMove(grid.Cells);
+            }
+            else if (_client != null)
+            {
+                _client.RecieveMove(grid.Cells);
+            }
+            if (!CheckState())
+                UnfreezeBoard();
+        }
+
+        
 
         //AI Game variables
         private AIPlayer _ai;
@@ -43,6 +65,7 @@ namespace TicTacToe
         public GameForm1(int gridSize)
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
             grid = new Grid(gridSize);
             GenerateGrid(gridSize);
             _gridSize = gridSize;
@@ -114,6 +137,38 @@ namespace TicTacToe
                     return true;
             }
             return false;
+        }
+
+        private void ShowWinMessage(string value)
+        {
+            if (_ai != null)
+            {
+                if (value == PlayerSymbols.X.ToString())
+                    MessageBox.Show(String.Format("{0} won!", player1.Name));
+                else
+                    MessageBox.Show(String.Format("{0} won!", _ai.Name));
+            }
+            else if (_client != null)
+            {
+                if (value == PlayerSymbols.X.ToString() && _client.Symbol == PlayerSymbols.X)
+                    MessageBox.Show(String.Format("{0} won!", _client.Name));
+                else if (value == PlayerSymbols.O.ToString() && _client.Symbol == PlayerSymbols.O)
+                    MessageBox.Show(String.Format("{0} won!", _client.Name));
+            }
+            else if (_host != null)
+            {
+                if (value == PlayerSymbols.X.ToString() && _host.Symbol == PlayerSymbols.X)
+                    MessageBox.Show(String.Format("{0} won!", _host.Name));
+                else if (value == PlayerSymbols.O.ToString() && _host.Symbol == PlayerSymbols.O)
+                    MessageBox.Show(String.Format("{0} won!", _host.Name));
+            }
+            else
+            {
+                if (value == PlayerSymbols.X.ToString())
+                    MessageBox.Show(String.Format("{0} won!", player1.Name));
+                else
+                    MessageBox.Show(String.Format("{0} won!", player2.Name));
+            }
         }
 
         public bool IsFull()
@@ -218,11 +273,49 @@ namespace TicTacToe
             }
             else if (_client != null)
             {
-
+                for (int x = 0; x < _gridSize; x++)
+                {
+                    for (int y = 0; y < _gridSize; y++)
+                    {
+                        if (grid.Cells[x, y] == (Button)sender)
+                        {
+                            byte[] bytes = { (byte)x, (byte)y };
+                            _client.SendMove(bytes);
+                            grid.Cells[x, y].Text = _client.Symbol.ToString();
+                            bool state = CheckState();
+                            if (state == true)
+                            {
+                                lblOutcome.Text = String.Format("{0} wins!", _client.Name);
+                                ResetCells();
+                                _client.Wins += 1;
+                            }
+                            messageReciever.RunWorkerAsync();
+                        }
+                    }
+                }
             }
             else if (_host != null)
             {
-
+                for (int x = 0; x < _gridSize; x++)
+                {
+                    for (int y = 0; y < _gridSize; y++)
+                    {
+                        if (grid.Cells[x, y] == (Button)sender)
+                        {
+                            byte[] bytes = { (byte)x, (byte)y };
+                            _host.SendMove(bytes);
+                            grid.Cells[x, y].Text = _host.Symbol.ToString();
+                            bool state = CheckState();
+                            if (state == true)
+                            {
+                                lblOutcome.Text = String.Format("{0} wins!", _host.Name);
+                                ResetCells();
+                                _host.Wins += 1;
+                            }
+                            messageReciever.RunWorkerAsync();
+                        }
+                    }
+                }
             }
             else
             {
@@ -283,6 +376,28 @@ namespace TicTacToe
                             player1.IsTurn = true;
                         }
                     }
+                }
+            }
+        }
+
+        private void FreezeBoard()
+        {
+            for (int x = 0; x < _gridSize; x++)
+            {
+                for (int y = 0; y < _gridSize; y++)
+                {
+                    grid.Cells[x, y].Enabled = false;
+                }
+            }
+        }
+
+        private void UnfreezeBoard()
+        {
+            for (int x = 0; x < _gridSize; x++)
+            {
+                for (int y = 0; y < _gridSize; y++)
+                {
+                    grid.Cells[x, y].Enabled = true;
                 }
             }
         }
