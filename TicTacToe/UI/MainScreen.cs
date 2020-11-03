@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TicTacToe.Game_Logic;
+using TicTacToe.Game_Logic.AI;
 
 namespace TicTacToe.UI
 {
@@ -54,9 +56,9 @@ namespace TicTacToe.UI
         }
         private void btnLocalMult_Click(object sender, EventArgs e)
         {
-            //GameForm Game = new GameForm();
-            //Game.ShowDialog();
-            tabControlRight.SelectedIndex = (3);
+            GameForm game = new GameForm(3);
+            if (!game.IsDisposed)
+                game.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -73,9 +75,18 @@ namespace TicTacToe.UI
 
         private void buttonGameForm_Click(object sender, EventArgs e)
         {
-            GameForm Game = new GameForm();
-            this.Hide();
-            Game.ShowDialog();
+            //GameForm Game = new GameForm();
+            //this.Hide();
+            //Game.ShowDialog();
+        }
+
+        private void btnAI_Click(object sender, EventArgs e)
+        {
+            GameForm game = new GameForm(3);
+            AIPlayer aIPlayer = new AIPlayer(PlayerSymbols.O, false, game.CheckState, game.IsFull);
+            game.AI = aIPlayer;
+            if (!game.IsDisposed)
+                game.ShowDialog();
         }
     }
        

@@ -9,7 +9,7 @@ using TicTacToe.UI;
 
 namespace TicTacToe
 {
-    public partial class GameForm1 : Form
+    public partial class GameForm : Form
     {
         private int _gridSize;
         private Grid grid;
@@ -62,7 +62,7 @@ namespace TicTacToe
         }
         private Player humanPlayer = new Player("Player 1", PlayerSymbols.X, true);
 
-        public GameForm1(int gridSize)
+        public GameForm(int gridSize)
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
@@ -186,7 +186,7 @@ namespace TicTacToe
 
         private void exitButton_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

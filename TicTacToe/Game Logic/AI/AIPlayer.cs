@@ -64,9 +64,6 @@ namespace TicTacToe.Game_Logic.AI
                 if (isMaximizing == false)
                 {
                     score = (double)Scores.O;
-                    Console.WriteLine("WINNING BOARD");
-                    PrintBoard(cells, gridSize);
-                    Console.WriteLine("\n\n");
                     return score;
                 }
                 else
@@ -123,21 +120,21 @@ namespace TicTacToe.Game_Logic.AI
             }
         }
 
-        private void PrintBoard(Button[,] cells, int gridSize)
-        {
-            for (int x = 0; x < gridSize; x++)
-            {
-                for (int y = 0; y < gridSize; y++)
-                {
-                    if (cells[x, y].Text == "")
-                    {
-                        Console.Write("| |");
-                    }
-                    else
-                        Console.Write("|" + cells[x, y].Text + "|");
-                }
-                Console.WriteLine();
-            }
-        }
+        //private void PrintBoard(Button[,] cells, int gridSize)
+        //{
+        //    for (int x = 0; x < gridSize; x++)
+        //    {
+        //        for (int y = 0; y < gridSize; y++)
+        //        {
+        //            if (cells[x, y].Text == "")
+        //            {
+        //                Console.Write("| |");
+        //            }
+        //            else
+        //                Console.Write("|" + cells[x, y].Text + "|");
+        //        }
+        //        Console.WriteLine();
+        //    }
+        //}
     }
 }

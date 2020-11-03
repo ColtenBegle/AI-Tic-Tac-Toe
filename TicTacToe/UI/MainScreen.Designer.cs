@@ -57,7 +57,6 @@
             this.tabPlaySettings = new System.Windows.Forms.TabPage();
             this.buttonPlay = new System.Windows.Forms.Button();
             this.tabScoreboard = new System.Windows.Forms.TabPage();
-            this.buttonGameForm = new System.Windows.Forms.Button();
             this.TopDock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picboxLogo)).BeginInit();
             this.tabControlRight.SuspendLayout();
@@ -75,10 +74,9 @@
             this.labelGameName.AutoSize = true;
             this.labelGameName.Cursor = System.Windows.Forms.Cursors.Default;
             this.labelGameName.Font = new System.Drawing.Font("Franklin Gothic Heavy", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGameName.Location = new System.Drawing.Point(209, 0);
-            this.labelGameName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelGameName.Location = new System.Drawing.Point(279, 0);
             this.labelGameName.Name = "labelGameName";
-            this.labelGameName.Size = new System.Drawing.Size(462, 81);
+            this.labelGameName.Size = new System.Drawing.Size(577, 101);
             this.labelGameName.TabIndex = 0;
             this.labelGameName.Text = "AI TIC-TAC-TOE";
             this.labelGameName.Click += new System.EventHandler(this.GameNameLabel_Click);
@@ -88,22 +86,23 @@
             this.btnAI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAI.BackColor = System.Drawing.SystemColors.Window;
             this.btnAI.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAI.Location = new System.Drawing.Point(41, 5);
-            this.btnAI.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAI.Location = new System.Drawing.Point(55, 6);
+            this.btnAI.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAI.Name = "btnAI";
-            this.btnAI.Size = new System.Drawing.Size(434, 80);
+            this.btnAI.Size = new System.Drawing.Size(579, 98);
             this.btnAI.TabIndex = 1;
             this.btnAI.Text = "AI";
             this.btnAI.UseVisualStyleBackColor = false;
+            this.btnAI.Click += new System.EventHandler(this.btnAI_Click);
             // 
             // btnLocalMult
             // 
             this.btnLocalMult.BackColor = System.Drawing.SystemColors.Window;
             this.btnLocalMult.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLocalMult.Location = new System.Drawing.Point(41, 102);
-            this.btnLocalMult.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLocalMult.Location = new System.Drawing.Point(55, 126);
+            this.btnLocalMult.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLocalMult.Name = "btnLocalMult";
-            this.btnLocalMult.Size = new System.Drawing.Size(434, 89);
+            this.btnLocalMult.Size = new System.Drawing.Size(579, 110);
             this.btnLocalMult.TabIndex = 2;
             this.btnLocalMult.Text = "Local Multiplayer";
             this.btnLocalMult.UseVisualStyleBackColor = false;
@@ -113,10 +112,10 @@
             // 
             this.btnLANMult.BackColor = System.Drawing.SystemColors.Window;
             this.btnLANMult.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLANMult.Location = new System.Drawing.Point(41, 202);
-            this.btnLANMult.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLANMult.Location = new System.Drawing.Point(55, 249);
+            this.btnLANMult.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLANMult.Name = "btnLANMult";
-            this.btnLANMult.Size = new System.Drawing.Size(434, 94);
+            this.btnLANMult.Size = new System.Drawing.Size(579, 116);
             this.btnLANMult.TabIndex = 3;
             this.btnLANMult.Text = "LAN Multiplayer";
             this.btnLANMult.UseVisualStyleBackColor = false;
@@ -126,9 +125,10 @@
             this.buttonSettings.BackColor = System.Drawing.SystemColors.Window;
             this.buttonSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSettings.Font = new System.Drawing.Font("Franklin Gothic Heavy", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSettings.Location = new System.Drawing.Point(3, 202);
+            this.buttonSettings.Location = new System.Drawing.Point(4, 249);
+            this.buttonSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Size = new System.Drawing.Size(180, 156);
+            this.buttonSettings.Size = new System.Drawing.Size(240, 192);
             this.buttonSettings.TabIndex = 1;
             this.buttonSettings.Text = "SETTINGS";
             this.buttonSettings.UseVisualStyleBackColor = false;
@@ -141,17 +141,19 @@
             this.TopDock.Controls.Add(this.labelGameName);
             this.TopDock.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopDock.Location = new System.Drawing.Point(0, 0);
+            this.TopDock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TopDock.Name = "TopDock";
-            this.TopDock.Size = new System.Drawing.Size(732, 100);
+            this.TopDock.Size = new System.Drawing.Size(976, 123);
             this.TopDock.TabIndex = 6;
             // 
             // picboxLogo
             // 
             this.picboxLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.picboxLogo.Image = global::TicTacToe.Properties.Resources.TicTacToeLogo;
-            this.picboxLogo.Location = new System.Drawing.Point(45, 3);
+            this.picboxLogo.Location = new System.Drawing.Point(60, 4);
+            this.picboxLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picboxLogo.Name = "picboxLogo";
-            this.picboxLogo.Size = new System.Drawing.Size(100, 94);
+            this.picboxLogo.Size = new System.Drawing.Size(133, 116);
             this.picboxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picboxLogo.TabIndex = 1;
             this.picboxLogo.TabStop = false;
@@ -163,10 +165,11 @@
             this.tabControlRight.Controls.Add(this.tabPlayerMode);
             this.tabControlRight.Controls.Add(this.tabCustomize);
             this.tabControlRight.Controls.Add(this.tab3Grid);
-            this.tabControlRight.Location = new System.Drawing.Point(212, 106);
+            this.tabControlRight.Location = new System.Drawing.Point(283, 130);
+            this.tabControlRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControlRight.Name = "tabControlRight";
             this.tabControlRight.SelectedIndex = 0;
-            this.tabControlRight.Size = new System.Drawing.Size(507, 409);
+            this.tabControlRight.Size = new System.Drawing.Size(676, 503);
             this.tabControlRight.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlRight.TabIndex = 4;
             this.tabControlRight.TabStop = false;
@@ -175,10 +178,11 @@
             // 
             this.tabStartPage.BackColor = System.Drawing.SystemColors.WindowText;
             this.tabStartPage.Controls.Add(this.MainScreenPic);
-            this.tabStartPage.Location = new System.Drawing.Point(4, 25);
+            this.tabStartPage.Location = new System.Drawing.Point(4, 28);
+            this.tabStartPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabStartPage.Name = "tabStartPage";
-            this.tabStartPage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStartPage.Size = new System.Drawing.Size(499, 380);
+            this.tabStartPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabStartPage.Size = new System.Drawing.Size(668, 471);
             this.tabStartPage.TabIndex = 0;
             this.tabStartPage.Text = "tabStartPage";
             // 
@@ -187,9 +191,10 @@
             this.MainScreenPic.BackColor = System.Drawing.SystemColors.Window;
             this.MainScreenPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.MainScreenPic.Image = ((System.Drawing.Image)(resources.GetObject("MainScreenPic.Image")));
-            this.MainScreenPic.Location = new System.Drawing.Point(57, 14);
+            this.MainScreenPic.Location = new System.Drawing.Point(76, 17);
+            this.MainScreenPic.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MainScreenPic.Name = "MainScreenPic";
-            this.MainScreenPic.Size = new System.Drawing.Size(386, 360);
+            this.MainScreenPic.Size = new System.Drawing.Size(515, 443);
             this.MainScreenPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.MainScreenPic.TabIndex = 8;
             this.MainScreenPic.TabStop = false;
@@ -197,14 +202,14 @@
             // tabPlayerMode
             // 
             this.tabPlayerMode.BackColor = System.Drawing.SystemColors.WindowText;
-            this.tabPlayerMode.Controls.Add(this.buttonGameForm);
             this.tabPlayerMode.Controls.Add(this.btnLANMult);
             this.tabPlayerMode.Controls.Add(this.btnAI);
             this.tabPlayerMode.Controls.Add(this.btnLocalMult);
-            this.tabPlayerMode.Location = new System.Drawing.Point(4, 25);
+            this.tabPlayerMode.Location = new System.Drawing.Point(4, 28);
+            this.tabPlayerMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPlayerMode.Name = "tabPlayerMode";
-            this.tabPlayerMode.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlayerMode.Size = new System.Drawing.Size(499, 380);
+            this.tabPlayerMode.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPlayerMode.Size = new System.Drawing.Size(668, 471);
             this.tabPlayerMode.TabIndex = 1;
             this.tabPlayerMode.Text = "tabPlayerMode";
             // 
@@ -212,10 +217,11 @@
             // 
             this.tabCustomize.BackColor = System.Drawing.SystemColors.WindowText;
             this.tabCustomize.Controls.Add(this.labelCustomize);
-            this.tabCustomize.Location = new System.Drawing.Point(4, 25);
+            this.tabCustomize.Location = new System.Drawing.Point(4, 28);
+            this.tabCustomize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabCustomize.Name = "tabCustomize";
-            this.tabCustomize.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCustomize.Size = new System.Drawing.Size(499, 380);
+            this.tabCustomize.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabCustomize.Size = new System.Drawing.Size(668, 471);
             this.tabCustomize.TabIndex = 2;
             this.tabCustomize.Text = "tabCustomize";
             // 
@@ -224,10 +230,9 @@
             this.labelCustomize.BackColor = System.Drawing.SystemColors.Window;
             this.labelCustomize.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelCustomize.Font = new System.Drawing.Font("Franklin Gothic Heavy", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCustomize.Location = new System.Drawing.Point(3, 3);
-            this.labelCustomize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCustomize.Location = new System.Drawing.Point(4, 4);
             this.labelCustomize.Name = "labelCustomize";
-            this.labelCustomize.Size = new System.Drawing.Size(493, 81);
+            this.labelCustomize.Size = new System.Drawing.Size(660, 100);
             this.labelCustomize.TabIndex = 1;
             this.labelCustomize.Text = "Customize";
             this.labelCustomize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -244,10 +249,11 @@
             this.tab3Grid.Controls.Add(this.button3);
             this.tab3Grid.Controls.Add(this.button2);
             this.tab3Grid.Controls.Add(this.button1);
-            this.tab3Grid.Location = new System.Drawing.Point(4, 25);
+            this.tab3Grid.Location = new System.Drawing.Point(4, 28);
+            this.tab3Grid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tab3Grid.Name = "tab3Grid";
-            this.tab3Grid.Padding = new System.Windows.Forms.Padding(3);
-            this.tab3Grid.Size = new System.Drawing.Size(499, 380);
+            this.tab3Grid.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tab3Grid.Size = new System.Drawing.Size(668, 471);
             this.tab3Grid.TabIndex = 3;
             this.tab3Grid.Text = "tab3Grid";
             // 
@@ -255,9 +261,10 @@
             // 
             this.button9.BackColor = System.Drawing.SystemColors.Window;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Location = new System.Drawing.Point(332, 258);
+            this.button9.Location = new System.Drawing.Point(443, 318);
+            this.button9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(100, 100);
+            this.button9.Size = new System.Drawing.Size(133, 123);
             this.button9.TabIndex = 8;
             this.button9.UseVisualStyleBackColor = false;
             // 
@@ -265,9 +272,10 @@
             // 
             this.button8.BackColor = System.Drawing.SystemColors.Window;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(198, 258);
+            this.button8.Location = new System.Drawing.Point(264, 318);
+            this.button8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(100, 100);
+            this.button8.Size = new System.Drawing.Size(133, 123);
             this.button8.TabIndex = 7;
             this.button8.UseVisualStyleBackColor = false;
             // 
@@ -275,9 +283,10 @@
             // 
             this.button7.BackColor = System.Drawing.SystemColors.Window;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(65, 258);
+            this.button7.Location = new System.Drawing.Point(87, 318);
+            this.button7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(100, 100);
+            this.button7.Size = new System.Drawing.Size(133, 123);
             this.button7.TabIndex = 6;
             this.button7.UseVisualStyleBackColor = false;
             // 
@@ -285,9 +294,10 @@
             // 
             this.button6.BackColor = System.Drawing.SystemColors.Window;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(332, 133);
+            this.button6.Location = new System.Drawing.Point(443, 164);
+            this.button6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 100);
+            this.button6.Size = new System.Drawing.Size(133, 123);
             this.button6.TabIndex = 5;
             this.button6.UseVisualStyleBackColor = false;
             // 
@@ -295,9 +305,10 @@
             // 
             this.button5.BackColor = System.Drawing.SystemColors.Window;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(198, 133);
+            this.button5.Location = new System.Drawing.Point(264, 164);
+            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 100);
+            this.button5.Size = new System.Drawing.Size(133, 123);
             this.button5.TabIndex = 4;
             this.button5.UseVisualStyleBackColor = false;
             // 
@@ -305,9 +316,10 @@
             // 
             this.button4.BackColor = System.Drawing.SystemColors.Window;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(65, 133);
+            this.button4.Location = new System.Drawing.Point(87, 164);
+            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 100);
+            this.button4.Size = new System.Drawing.Size(133, 123);
             this.button4.TabIndex = 3;
             this.button4.UseVisualStyleBackColor = false;
             // 
@@ -315,9 +327,10 @@
             // 
             this.button3.BackColor = System.Drawing.SystemColors.Window;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(332, 6);
+            this.button3.Location = new System.Drawing.Point(443, 7);
+            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 100);
+            this.button3.Size = new System.Drawing.Size(133, 123);
             this.button3.TabIndex = 2;
             this.button3.UseVisualStyleBackColor = false;
             // 
@@ -325,9 +338,10 @@
             // 
             this.button2.BackColor = System.Drawing.SystemColors.Window;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(198, 6);
+            this.button2.Location = new System.Drawing.Point(264, 7);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 100);
+            this.button2.Size = new System.Drawing.Size(133, 123);
             this.button2.TabIndex = 1;
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -336,9 +350,10 @@
             // 
             this.button1.BackColor = System.Drawing.SystemColors.Window;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(65, 6);
+            this.button1.Location = new System.Drawing.Point(87, 7);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 100);
+            this.button1.Size = new System.Drawing.Size(133, 123);
             this.button1.TabIndex = 0;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -348,10 +363,11 @@
             this.tabControlLeft.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControlLeft.Controls.Add(this.tabPlaySettings);
             this.tabControlLeft.Controls.Add(this.tabScoreboard);
-            this.tabControlLeft.Location = new System.Drawing.Point(12, 106);
+            this.tabControlLeft.Location = new System.Drawing.Point(16, 130);
+            this.tabControlLeft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControlLeft.Name = "tabControlLeft";
             this.tabControlLeft.SelectedIndex = 0;
-            this.tabControlLeft.Size = new System.Drawing.Size(194, 409);
+            this.tabControlLeft.Size = new System.Drawing.Size(259, 503);
             this.tabControlLeft.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlLeft.TabIndex = 9;
             // 
@@ -360,10 +376,11 @@
             this.tabPlaySettings.BackColor = System.Drawing.SystemColors.WindowText;
             this.tabPlaySettings.Controls.Add(this.buttonPlay);
             this.tabPlaySettings.Controls.Add(this.buttonSettings);
-            this.tabPlaySettings.Location = new System.Drawing.Point(4, 25);
+            this.tabPlaySettings.Location = new System.Drawing.Point(4, 28);
+            this.tabPlaySettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPlaySettings.Name = "tabPlaySettings";
-            this.tabPlaySettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlaySettings.Size = new System.Drawing.Size(186, 380);
+            this.tabPlaySettings.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPlaySettings.Size = new System.Drawing.Size(251, 471);
             this.tabPlaySettings.TabIndex = 0;
             this.tabPlaySettings.Text = "tabPlaySettings";
             // 
@@ -372,9 +389,10 @@
             this.buttonPlay.BackColor = System.Drawing.SystemColors.Window;
             this.buttonPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPlay.Font = new System.Drawing.Font("Franklin Gothic Heavy", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonPlay.Location = new System.Drawing.Point(3, 29);
+            this.buttonPlay.Location = new System.Drawing.Point(4, 36);
+            this.buttonPlay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonPlay.Name = "buttonPlay";
-            this.buttonPlay.Size = new System.Drawing.Size(180, 156);
+            this.buttonPlay.Size = new System.Drawing.Size(240, 192);
             this.buttonPlay.TabIndex = 2;
             this.buttonPlay.Text = "PLAY";
             this.buttonPlay.UseVisualStyleBackColor = false;
@@ -383,34 +401,25 @@
             // tabScoreboard
             // 
             this.tabScoreboard.BackColor = System.Drawing.SystemColors.WindowText;
-            this.tabScoreboard.Location = new System.Drawing.Point(4, 25);
+            this.tabScoreboard.Location = new System.Drawing.Point(4, 28);
+            this.tabScoreboard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabScoreboard.Name = "tabScoreboard";
-            this.tabScoreboard.Padding = new System.Windows.Forms.Padding(3);
-            this.tabScoreboard.Size = new System.Drawing.Size(186, 380);
+            this.tabScoreboard.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabScoreboard.Size = new System.Drawing.Size(251, 471);
             this.tabScoreboard.TabIndex = 1;
             this.tabScoreboard.Text = "tabScoreboard";
             // 
-            // buttonGameForm
-            // 
-            this.buttonGameForm.Location = new System.Drawing.Point(169, 324);
-            this.buttonGameForm.Name = "buttonGameForm";
-            this.buttonGameForm.Size = new System.Drawing.Size(176, 23);
-            this.buttonGameForm.TabIndex = 4;
-            this.buttonGameForm.Text = "Load Old Code (GameForm)";
-            this.buttonGameForm.UseVisualStyleBackColor = true;
-            this.buttonGameForm.Click += new System.EventHandler(this.buttonGameForm_Click);
-            // 
             // MainScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowText;
-            this.ClientSize = new System.Drawing.Size(732, 532);
+            this.ClientSize = new System.Drawing.Size(976, 655);
             this.Controls.Add(this.tabControlLeft);
             this.Controls.Add(this.tabControlRight);
             this.Controls.Add(this.TopDock);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainScreen";
@@ -459,6 +468,5 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button buttonGameForm;
     }
 }
