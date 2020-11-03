@@ -260,6 +260,7 @@ namespace TicTacToe
                 }
                 else
                 {
+                    FreezeBoard();
                     _ai.MakeMove(_gridSize, grid.Cells);
                     state = CheckState();
                     if (state == true)
@@ -269,6 +270,7 @@ namespace TicTacToe
                         _ai.Wins += 1;
                     }
                     lblPlayerTurn.Text = lblPlayer1.Text;
+                    UnfreezeBoard();
                 }
             }
             else if (_client != null)
@@ -397,7 +399,10 @@ namespace TicTacToe
             {
                 for (int y = 0; y < _gridSize; y++)
                 {
-                    grid.Cells[x, y].Enabled = true;
+                    if (grid.Cells[x, y].Text == "")
+                        grid.Cells[x, y].Enabled = true;
+                    else
+                        grid.Cells[x, y].Enabled = false;   
                 }
             }
         }

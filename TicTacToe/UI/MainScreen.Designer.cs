@@ -86,6 +86,7 @@
             this.btnAI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAI.BackColor = System.Drawing.SystemColors.Window;
             this.btnAI.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAI.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAI.Location = new System.Drawing.Point(55, 6);
             this.btnAI.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAI.Name = "btnAI";
@@ -99,6 +100,7 @@
             // 
             this.btnLocalMult.BackColor = System.Drawing.SystemColors.Window;
             this.btnLocalMult.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLocalMult.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLocalMult.Location = new System.Drawing.Point(55, 126);
             this.btnLocalMult.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLocalMult.Name = "btnLocalMult";
@@ -111,13 +113,15 @@
             // btnLANMult
             // 
             this.btnLANMult.BackColor = System.Drawing.SystemColors.Window;
+            this.btnLANMult.Enabled = false;
             this.btnLANMult.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLANMult.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLANMult.Location = new System.Drawing.Point(55, 249);
             this.btnLANMult.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLANMult.Name = "btnLANMult";
             this.btnLANMult.Size = new System.Drawing.Size(579, 116);
             this.btnLANMult.TabIndex = 3;
-            this.btnLANMult.Text = "LAN Multiplayer";
+            this.btnLANMult.Text = "LAN Multiplayer (Under construction)";
             this.btnLANMult.UseVisualStyleBackColor = false;
             // 
             // buttonSettings
@@ -419,6 +423,7 @@
             this.Controls.Add(this.tabControlRight);
             this.Controls.Add(this.TopDock);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
