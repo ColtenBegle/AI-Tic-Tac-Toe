@@ -367,9 +367,9 @@
             this.lblOutcome.Location = new System.Drawing.Point(283, 10);
             this.lblOutcome.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOutcome.Name = "lblOutcome";
-            this.lblOutcome.Size = new System.Drawing.Size(99, 38);
+            this.lblOutcome.Size = new System.Drawing.Size(135, 38);
             this.lblOutcome.TabIndex = 4;
-            this.lblOutcome.Text = "label1";
+            this.lblOutcome.Text = "Outcome";
             // 
             // lblPlayerTurn
             // 

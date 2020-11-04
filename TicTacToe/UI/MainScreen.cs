@@ -88,6 +88,11 @@ namespace TicTacToe.UI
             if (!game.IsDisposed)
                 game.ShowDialog();
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
        
 }
