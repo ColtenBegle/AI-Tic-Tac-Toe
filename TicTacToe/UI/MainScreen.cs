@@ -21,7 +21,10 @@ namespace TicTacToe.UI
         Bitmap XSymbol5 = new Bitmap(Properties.Resources.Symbol_X);
         Bitmap CrownSymbol = new Bitmap(Properties.Resources.CrownSymbol);
 
-
+        public void ClickPlay()
+        {
+            buttonPlay.PerformClick();
+        }
 
         public static bool aiGame = false;
         public MainScreen()
@@ -43,7 +46,7 @@ namespace TicTacToe.UI
             tabControlLeft.SelectedIndex = (0);
         }
 
-        private void buttonPlay_Click(object sender, EventArgs e)
+        public void buttonPlay_Click(object sender, EventArgs e)
         {
             //show Select Player Mode
             tabControlRight.SelectedIndex = (1);
@@ -89,10 +92,11 @@ namespace TicTacToe.UI
                 game.ShowDialog();
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        public void button10_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
     }
        
 }

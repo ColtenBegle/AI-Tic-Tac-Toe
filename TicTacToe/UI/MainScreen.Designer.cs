@@ -478,7 +478,7 @@
         private System.Windows.Forms.TabControl tabControlLeft;
         private System.Windows.Forms.TabPage tabPlaySettings;
         private System.Windows.Forms.TabPage tabScoreboard;
-        private System.Windows.Forms.Button buttonPlay;
+        public System.Windows.Forms.Button buttonPlay;
         private System.Windows.Forms.TabPage tab3Grid;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;

@@ -66,9 +66,9 @@ namespace TicTacToe.Game_Logic.AI
                 if (isMaximizing == false)
                 {
                     score = (double)Scores.O;
-                    //Console.WriteLine("WINNING BOARD");
-                    //PrintBoard(cells, gridSize);
-                    //Console.WriteLine("\n\n");
+                    Console.WriteLine("WINNING BOARD");
+                    PrintBoard(cells, gridSize);
+                    Console.WriteLine("\n\n");
                     return score;
                 }
                 else
