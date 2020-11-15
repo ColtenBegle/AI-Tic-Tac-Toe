@@ -55,9 +55,12 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabControlLeft = new System.Windows.Forms.TabControl();
             this.tabPlaySettings = new System.Windows.Forms.TabPage();
+            this.button10 = new System.Windows.Forms.Button();
             this.buttonPlay = new System.Windows.Forms.Button();
             this.tabScoreboard = new System.Windows.Forms.TabPage();
-            this.button10 = new System.Windows.Forms.Button();
+            this.btn3x3 = new System.Windows.Forms.Button();
+            this.btn4x4 = new System.Windows.Forms.Button();
+            this.btn5x5 = new System.Windows.Forms.Button();
             this.TopDock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picboxLogo)).BeginInit();
             this.tabControlRight.SuspendLayout();
@@ -86,9 +89,10 @@
             // 
             this.btnAI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAI.BackColor = System.Drawing.SystemColors.Window;
+            this.btnAI.Enabled = false;
             this.btnAI.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAI.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAI.Location = new System.Drawing.Point(55, 6);
+            this.btnAI.Location = new System.Drawing.Point(55, 60);
             this.btnAI.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAI.Name = "btnAI";
             this.btnAI.Size = new System.Drawing.Size(579, 98);
@@ -100,9 +104,10 @@
             // btnLocalMult
             // 
             this.btnLocalMult.BackColor = System.Drawing.SystemColors.Window;
+            this.btnLocalMult.Enabled = false;
             this.btnLocalMult.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLocalMult.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLocalMult.Location = new System.Drawing.Point(55, 126);
+            this.btnLocalMult.Location = new System.Drawing.Point(55, 194);
             this.btnLocalMult.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLocalMult.Name = "btnLocalMult";
             this.btnLocalMult.Size = new System.Drawing.Size(579, 110);
@@ -117,7 +122,7 @@
             this.btnLANMult.Enabled = false;
             this.btnLANMult.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLANMult.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLANMult.Location = new System.Drawing.Point(55, 249);
+            this.btnLANMult.Location = new System.Drawing.Point(55, 325);
             this.btnLANMult.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLANMult.Name = "btnLANMult";
             this.btnLANMult.Size = new System.Drawing.Size(579, 116);
@@ -207,6 +212,9 @@
             // tabPlayerMode
             // 
             this.tabPlayerMode.BackColor = System.Drawing.SystemColors.WindowText;
+            this.tabPlayerMode.Controls.Add(this.btn5x5);
+            this.tabPlayerMode.Controls.Add(this.btn4x4);
+            this.tabPlayerMode.Controls.Add(this.btn3x3);
             this.tabPlayerMode.Controls.Add(this.btnLANMult);
             this.tabPlayerMode.Controls.Add(this.btnAI);
             this.tabPlayerMode.Controls.Add(this.btnLocalMult);
@@ -390,6 +398,20 @@
             this.tabPlaySettings.TabIndex = 0;
             this.tabPlaySettings.Text = "tabPlaySettings";
             // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.SystemColors.Window;
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Font = new System.Drawing.Font("Franklin Gothic Heavy", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button10.Location = new System.Drawing.Point(4, 325);
+            this.button10.Margin = new System.Windows.Forms.Padding(4);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(240, 145);
+            this.button10.TabIndex = 3;
+            this.button10.Text = "EXIT";
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // buttonPlay
             // 
             this.buttonPlay.BackColor = System.Drawing.SystemColors.Window;
@@ -415,19 +437,50 @@
             this.tabScoreboard.TabIndex = 1;
             this.tabScoreboard.Text = "tabScoreboard";
             // 
-            // button10
+            // btn3x3
             // 
-            this.button10.BackColor = System.Drawing.SystemColors.Window;
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Font = new System.Drawing.Font("Franklin Gothic Heavy", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button10.Location = new System.Drawing.Point(4, 325);
-            this.button10.Margin = new System.Windows.Forms.Padding(4);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(240, 145);
-            this.button10.TabIndex = 3;
-            this.button10.Text = "EXIT";
-            this.button10.UseVisualStyleBackColor = false;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.btn3x3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn3x3.BackColor = System.Drawing.SystemColors.Window;
+            this.btn3x3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn3x3.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn3x3.Location = new System.Drawing.Point(55, 6);
+            this.btn3x3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn3x3.Name = "btn3x3";
+            this.btn3x3.Size = new System.Drawing.Size(144, 40);
+            this.btn3x3.TabIndex = 4;
+            this.btn3x3.Text = "3x3";
+            this.btn3x3.UseVisualStyleBackColor = false;
+            this.btn3x3.Click += new System.EventHandler(this.btn3x3_Click);
+            // 
+            // btn4x4
+            // 
+            this.btn4x4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn4x4.BackColor = System.Drawing.SystemColors.Window;
+            this.btn4x4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn4x4.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn4x4.Location = new System.Drawing.Point(273, 6);
+            this.btn4x4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn4x4.Name = "btn4x4";
+            this.btn4x4.Size = new System.Drawing.Size(144, 40);
+            this.btn4x4.TabIndex = 5;
+            this.btn4x4.Text = "4x4";
+            this.btn4x4.UseVisualStyleBackColor = false;
+            this.btn4x4.Click += new System.EventHandler(this.btn4x4_Click);
+            // 
+            // btn5x5
+            // 
+            this.btn5x5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn5x5.BackColor = System.Drawing.SystemColors.Window;
+            this.btn5x5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn5x5.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn5x5.Location = new System.Drawing.Point(490, 6);
+            this.btn5x5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn5x5.Name = "btn5x5";
+            this.btn5x5.Size = new System.Drawing.Size(144, 40);
+            this.btn5x5.TabIndex = 6;
+            this.btn5x5.Text = "5x5";
+            this.btn5x5.UseVisualStyleBackColor = false;
+            this.btn5x5.Click += new System.EventHandler(this.btn5x5_Click);
             // 
             // MainScreen
             // 
@@ -490,5 +543,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button btn5x5;
+        private System.Windows.Forms.Button btn4x4;
+        private System.Windows.Forms.Button btn3x3;
     }
 }

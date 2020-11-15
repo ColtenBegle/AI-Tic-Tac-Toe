@@ -816,11 +816,11 @@
             }
             else if (gridSize == 5)
             {
-                int startingXPos = 60;
-                int startingYPos = 35;
+                int startingXPos = 20;
+                int startingYPos = 7;
 
-                int distanceBetweenX = 97;
-                int distanceBetweenY = 92;
+                int distanceBetweenX = 90;
+                int distanceBetweenY = 82;
                 // 
                 // btnPoint1
                 // 
@@ -882,52 +882,52 @@
                 this.btnPoint5.BackColor = System.Drawing.Color.White;
                 this.btnPoint5.ForeColor = System.Drawing.Color.Black;
                 this.btnPoint5.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.btnPoint5.Location = new System.Drawing.Point(startingXPos, startingYPos + distanceBetweenY);
+                this.btnPoint5.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 4, startingYPos);
                 this.btnPoint5.Name = "btnPoint5";
                 this.btnPoint5.Size = new System.Drawing.Size(75, 75);
                 this.btnPoint5.TabIndex = 4;
                 this.btnPoint5.UseVisualStyleBackColor = false;
                 this.btnPoint5.Click += CellClicked;
-                Grid.Cells[0, 1] = btnPoint5;
+                Grid.Cells[4, 0] = btnPoint5;
                 // 
                 // btnPoint6
                 // 
                 this.btnPoint6.BackColor = System.Drawing.Color.White;
                 this.btnPoint6.ForeColor = System.Drawing.Color.Black;
                 this.btnPoint6.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.btnPoint6.Location = new System.Drawing.Point(startingXPos + distanceBetweenX, startingYPos + distanceBetweenY);
+                this.btnPoint6.Location = new System.Drawing.Point(startingXPos, startingYPos + distanceBetweenY);
                 this.btnPoint6.Name = "btnPoint6";
                 this.btnPoint6.Size = new System.Drawing.Size(75, 75);
                 this.btnPoint6.TabIndex = 5;
                 this.btnPoint6.UseVisualStyleBackColor = false;
                 this.btnPoint6.Click += CellClicked;
-                Grid.Cells[1, 1] = btnPoint6;
+                Grid.Cells[0, 1] = btnPoint6;
                 // 
                 // btnPoint7
                 // 
                 this.btnPoint7.BackColor = System.Drawing.Color.White;
                 this.btnPoint7.ForeColor = System.Drawing.Color.Black;
                 this.btnPoint7.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.btnPoint7.Location = new System.Drawing.Point(startingXPos + (distanceBetweenX * 2), startingYPos + distanceBetweenY);
+                this.btnPoint7.Location = new System.Drawing.Point(startingXPos + (distanceBetweenX), startingYPos + distanceBetweenY);
                 this.btnPoint7.Name = "btnPoint7";
                 this.btnPoint7.Size = new System.Drawing.Size(75, 75);
                 this.btnPoint7.TabIndex = 6;
                 this.btnPoint7.UseVisualStyleBackColor = false;
                 this.btnPoint7.Click += CellClicked;
-                Grid.Cells[2, 1] = btnPoint7;
+                Grid.Cells[1, 1] = btnPoint7;
                 // 
                 // btnPoint8
                 // 
                 this.btnPoint8.BackColor = System.Drawing.Color.White;
                 this.btnPoint8.ForeColor = System.Drawing.Color.Black;
                 this.btnPoint8.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.btnPoint8.Location = new System.Drawing.Point(startingXPos + (distanceBetweenX * 3), startingYPos + distanceBetweenY);
+                this.btnPoint8.Location = new System.Drawing.Point(startingXPos + (distanceBetweenX * 2), startingYPos + distanceBetweenY);
                 this.btnPoint8.Name = "btnPoint8";
                 this.btnPoint8.Size = new System.Drawing.Size(75, 75);
                 this.btnPoint8.TabIndex = 7;
                 this.btnPoint8.UseVisualStyleBackColor = false;
                 this.btnPoint8.Click += CellClicked;
-                Grid.Cells[3, 1] = btnPoint8;
+                Grid.Cells[2, 1] = btnPoint8;
                 // 
                 // btnPoint9
                 // 
@@ -935,13 +935,13 @@
                 this.btnPoint9.ForeColor = System.Drawing.Color.Black;
                 this.btnPoint9.FlatAppearance.BorderColor = System.Drawing.Color.White;
                 this.btnPoint9.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.btnPoint9.Location = new System.Drawing.Point(startingXPos, startingYPos + distanceBetweenY * 2);
+                this.btnPoint9.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 3, startingYPos + distanceBetweenY);
                 this.btnPoint9.Name = "btnPoint9";
                 this.btnPoint9.Size = new System.Drawing.Size(75, 75);
                 this.btnPoint9.TabIndex = 8;
                 this.btnPoint9.UseVisualStyleBackColor = false;
                 this.btnPoint9.Click += CellClicked;
-                Grid.Cells[0, 2] = btnPoint9;
+                Grid.Cells[3, 1] = btnPoint9;
                 // 
                 // btnPoint10
                 // 
@@ -949,13 +949,13 @@
                 this.btnPoint10.ForeColor = System.Drawing.Color.Black;
                 this.btnPoint10.FlatAppearance.BorderColor = System.Drawing.Color.White;
                 this.btnPoint10.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.btnPoint10.Location = new System.Drawing.Point(startingXPos + distanceBetweenX, startingYPos + distanceBetweenY * 2);
+                this.btnPoint10.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 4, startingYPos + distanceBetweenY);
                 this.btnPoint10.Name = "btnPoint10";
                 this.btnPoint10.Size = new System.Drawing.Size(75, 75);
                 this.btnPoint10.TabIndex = 8;
                 this.btnPoint10.UseVisualStyleBackColor = false;
                 this.btnPoint10.Click += CellClicked;
-                Grid.Cells[1, 2] = btnPoint10;
+                Grid.Cells[4, 1] = btnPoint10;
                 // 
                 // btnPoint11
                 // 
@@ -963,13 +963,13 @@
                 this.btnPoint11.ForeColor = System.Drawing.Color.Black;
                 this.btnPoint11.FlatAppearance.BorderColor = System.Drawing.Color.White;
                 this.btnPoint11.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.btnPoint11.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 2, startingYPos + distanceBetweenY * 2);
+                this.btnPoint11.Location = new System.Drawing.Point(startingXPos, startingYPos + distanceBetweenY * 2);
                 this.btnPoint11.Name = "btnPoint11";
                 this.btnPoint11.Size = new System.Drawing.Size(75, 75);
                 this.btnPoint11.TabIndex = 8;
                 this.btnPoint11.UseVisualStyleBackColor = false;
                 this.btnPoint11.Click += CellClicked;
-                Grid.Cells[2, 2] = btnPoint11;
+                Grid.Cells[0, 2] = btnPoint11;
                 // 
                 // btnPoint12
                 // 
@@ -977,13 +977,13 @@
                 this.btnPoint12.ForeColor = System.Drawing.Color.Black;
                 this.btnPoint12.FlatAppearance.BorderColor = System.Drawing.Color.White;
                 this.btnPoint12.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.btnPoint12.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 3, startingYPos + distanceBetweenY * 2);
+                this.btnPoint12.Location = new System.Drawing.Point(startingXPos + distanceBetweenX, startingYPos + distanceBetweenY * 2);
                 this.btnPoint12.Name = "btnPoint12";
                 this.btnPoint12.Size = new System.Drawing.Size(75, 75);
                 this.btnPoint12.TabIndex = 8;
                 this.btnPoint12.UseVisualStyleBackColor = false;
                 this.btnPoint12.Click += CellClicked;
-                Grid.Cells[3, 2] = btnPoint12;
+                Grid.Cells[1, 2] = btnPoint12;
                 // 
                 // btnPoint13
                 // 
@@ -991,13 +991,13 @@
                 this.btnPoint13.ForeColor = System.Drawing.Color.Black;
                 this.btnPoint13.FlatAppearance.BorderColor = System.Drawing.Color.White;
                 this.btnPoint13.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.btnPoint13.Location = new System.Drawing.Point(startingXPos, startingYPos + distanceBetweenY * 3);
+                this.btnPoint13.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 2, startingYPos + distanceBetweenY * 2);
                 this.btnPoint13.Name = "btnPoint13";
                 this.btnPoint13.Size = new System.Drawing.Size(75, 75);
                 this.btnPoint13.TabIndex = 8;
                 this.btnPoint13.UseVisualStyleBackColor = false;
                 this.btnPoint13.Click += CellClicked;
-                Grid.Cells[0, 3] = btnPoint13;
+                Grid.Cells[2, 2] = btnPoint13;
                 // 
                 // btnPoint14
                 // 
@@ -1005,13 +1005,13 @@
                 this.btnPoint14.ForeColor = System.Drawing.Color.Black;
                 this.btnPoint14.FlatAppearance.BorderColor = System.Drawing.Color.White;
                 this.btnPoint14.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.btnPoint14.Location = new System.Drawing.Point(startingXPos + distanceBetweenX, startingYPos + distanceBetweenY * 3);
+                this.btnPoint14.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 3, startingYPos + distanceBetweenY * 2);
                 this.btnPoint14.Name = "btnPoint14";
                 this.btnPoint14.Size = new System.Drawing.Size(75, 75);
                 this.btnPoint14.TabIndex = 8;
                 this.btnPoint14.UseVisualStyleBackColor = false;
                 this.btnPoint14.Click += CellClicked;
-                Grid.Cells[1, 3] = btnPoint14;
+                Grid.Cells[3, 2] = btnPoint14;
                 // 
                 // btnPoint15
                 // 
@@ -1019,13 +1019,13 @@
                 this.btnPoint15.ForeColor = System.Drawing.Color.Black;
                 this.btnPoint15.FlatAppearance.BorderColor = System.Drawing.Color.White;
                 this.btnPoint15.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.btnPoint15.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 2, startingYPos + distanceBetweenY * 3);
+                this.btnPoint15.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 4, startingYPos + distanceBetweenY * 2);
                 this.btnPoint15.Name = "btnPoint15";
                 this.btnPoint15.Size = new System.Drawing.Size(75, 75);
                 this.btnPoint15.TabIndex = 8;
                 this.btnPoint15.UseVisualStyleBackColor = false;
                 this.btnPoint15.Click += CellClicked;
-                Grid.Cells[2, 3] = btnPoint15;
+                Grid.Cells[4, 2] = btnPoint15;
                 // 
                 // btnPoint16
                 // 
@@ -1033,14 +1033,149 @@
                 this.btnPoint16.ForeColor = System.Drawing.Color.Black;
                 this.btnPoint16.FlatAppearance.BorderColor = System.Drawing.Color.White;
                 this.btnPoint16.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.btnPoint16.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 3, startingYPos + distanceBetweenY * 3);
+                this.btnPoint16.Location = new System.Drawing.Point(startingXPos, startingYPos + distanceBetweenY * 3);
                 this.btnPoint16.Name = "btnPoint16";
                 this.btnPoint16.Size = new System.Drawing.Size(75, 75);
                 this.btnPoint16.TabIndex = 8;
                 this.btnPoint16.UseVisualStyleBackColor = false;
                 this.btnPoint16.Click += CellClicked;
                 this.btnPoint16.Visible = true;
-                Grid.Cells[3, 3] = btnPoint16;
+                Grid.Cells[0, 3] = btnPoint16;
+                // 
+                // btnPoint17
+                // 
+                this.btnPoint17.BackColor = System.Drawing.Color.White;
+                this.btnPoint17.ForeColor = System.Drawing.Color.Black;
+                this.btnPoint17.FlatAppearance.BorderColor = System.Drawing.Color.White;
+                this.btnPoint17.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.btnPoint17.Location = new System.Drawing.Point(startingXPos + distanceBetweenX, startingYPos + distanceBetweenY * 3);
+                this.btnPoint17.Name = "btnPoint17";
+                this.btnPoint17.Size = new System.Drawing.Size(75, 75);
+                this.btnPoint17.TabIndex = 8;
+                this.btnPoint17.UseVisualStyleBackColor = false;
+                this.btnPoint17.Click += CellClicked;
+                this.btnPoint17.Visible = true;
+                Grid.Cells[1, 3] = btnPoint17;
+                // 
+                // btnPoint18
+                // 
+                this.btnPoint18.BackColor = System.Drawing.Color.White;
+                this.btnPoint18.ForeColor = System.Drawing.Color.Black;
+                this.btnPoint18.FlatAppearance.BorderColor = System.Drawing.Color.White;
+                this.btnPoint18.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.btnPoint18.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 2, startingYPos + distanceBetweenY * 3);
+                this.btnPoint18.Name = "btnPoint18";
+                this.btnPoint18.Size = new System.Drawing.Size(75, 75);
+                this.btnPoint18.TabIndex = 8;
+                this.btnPoint18.UseVisualStyleBackColor = false;
+                this.btnPoint18.Click += CellClicked;
+                this.btnPoint18.Visible = true;
+                Grid.Cells[2, 3] = btnPoint18;
+                // 
+                // btnPoint19
+                // 
+                this.btnPoint19.BackColor = System.Drawing.Color.White;
+                this.btnPoint19.ForeColor = System.Drawing.Color.Black;
+                this.btnPoint19.FlatAppearance.BorderColor = System.Drawing.Color.White;
+                this.btnPoint19.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.btnPoint19.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 3, startingYPos + distanceBetweenY * 3);
+                this.btnPoint19.Name = "btnPoint19";
+                this.btnPoint19.Size = new System.Drawing.Size(75, 75);
+                this.btnPoint19.TabIndex = 8;
+                this.btnPoint19.UseVisualStyleBackColor = false;
+                this.btnPoint19.Click += CellClicked;
+                this.btnPoint19.Visible = true;
+                Grid.Cells[3, 3] = btnPoint19;
+                // 
+                // btnPoint20
+                // 
+                this.btnPoint20.BackColor = System.Drawing.Color.White;
+                this.btnPoint20.ForeColor = System.Drawing.Color.Black;
+                this.btnPoint20.FlatAppearance.BorderColor = System.Drawing.Color.White;
+                this.btnPoint20.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.btnPoint20.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 4, startingYPos + distanceBetweenY * 3);
+                this.btnPoint20.Name = "btnPoint20";
+                this.btnPoint20.Size = new System.Drawing.Size(75, 75);
+                this.btnPoint20.TabIndex = 8;
+                this.btnPoint20.UseVisualStyleBackColor = false;
+                this.btnPoint20.Click += CellClicked;
+                this.btnPoint20.Visible = true;
+                Grid.Cells[4, 3] = btnPoint20;
+                // 
+                // btnPoint21
+                // 
+                this.btnPoint21.BackColor = System.Drawing.Color.White;
+                this.btnPoint21.ForeColor = System.Drawing.Color.Black;
+                this.btnPoint21.FlatAppearance.BorderColor = System.Drawing.Color.White;
+                this.btnPoint21.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.btnPoint21.Location = new System.Drawing.Point(startingXPos, startingYPos + distanceBetweenY * 4);
+                this.btnPoint21.Name = "btnPoint21";
+                this.btnPoint21.Size = new System.Drawing.Size(75, 75);
+                this.btnPoint21.TabIndex = 8;
+                this.btnPoint21.UseVisualStyleBackColor = false;
+                this.btnPoint21.Click += CellClicked;
+                this.btnPoint21.Visible = true;
+                Grid.Cells[0, 4] = btnPoint21;
+                // 
+                // btnPoint22
+                // 
+                this.btnPoint22.BackColor = System.Drawing.Color.White;
+                this.btnPoint22.ForeColor = System.Drawing.Color.Black;
+                this.btnPoint22.FlatAppearance.BorderColor = System.Drawing.Color.White;
+                this.btnPoint22.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.btnPoint22.Location = new System.Drawing.Point(startingXPos + distanceBetweenX, startingYPos + distanceBetweenY * 4);
+                this.btnPoint22.Name = "btnPoint22";
+                this.btnPoint22.Size = new System.Drawing.Size(75, 75);
+                this.btnPoint22.TabIndex = 8;
+                this.btnPoint22.UseVisualStyleBackColor = false;
+                this.btnPoint22.Click += CellClicked;
+                this.btnPoint22.Visible = true;
+                Grid.Cells[1, 4] = btnPoint22;
+                // 
+                // btnPoint23
+                // 
+                this.btnPoint23.BackColor = System.Drawing.Color.White;
+                this.btnPoint23.ForeColor = System.Drawing.Color.Black;
+                this.btnPoint23.FlatAppearance.BorderColor = System.Drawing.Color.White;
+                this.btnPoint23.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.btnPoint23.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 2, startingYPos + distanceBetweenY * 4);
+                this.btnPoint23.Name = "btnPoint23";
+                this.btnPoint23.Size = new System.Drawing.Size(75, 75);
+                this.btnPoint23.TabIndex = 8;
+                this.btnPoint23.UseVisualStyleBackColor = false;
+                this.btnPoint23.Click += CellClicked;
+                this.btnPoint23.Visible = true;
+                Grid.Cells[2, 4] = btnPoint23;
+                // 
+                // btnPoint24
+                // 
+                this.btnPoint24.BackColor = System.Drawing.Color.White;
+                this.btnPoint24.ForeColor = System.Drawing.Color.Black;
+                this.btnPoint24.FlatAppearance.BorderColor = System.Drawing.Color.White;
+                this.btnPoint24.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.btnPoint24.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 3, startingYPos + distanceBetweenY * 4);
+                this.btnPoint24.Name = "btnPoint24";
+                this.btnPoint24.Size = new System.Drawing.Size(75, 75);
+                this.btnPoint24.TabIndex = 8;
+                this.btnPoint24.UseVisualStyleBackColor = false;
+                this.btnPoint24.Click += CellClicked;
+                this.btnPoint24.Visible = true;
+                Grid.Cells[3, 4] = btnPoint24;
+                // 
+                // btnPoint25
+                // 
+                this.btnPoint25.BackColor = System.Drawing.Color.White;
+                this.btnPoint25.ForeColor = System.Drawing.Color.Black;
+                this.btnPoint25.FlatAppearance.BorderColor = System.Drawing.Color.White;
+                this.btnPoint25.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.btnPoint25.Location = new System.Drawing.Point(startingXPos + distanceBetweenX * 4, startingYPos + distanceBetweenY * 4);
+                this.btnPoint25.Name = "btnPoint25";
+                this.btnPoint25.Size = new System.Drawing.Size(75, 75);
+                this.btnPoint25.TabIndex = 8;
+                this.btnPoint25.UseVisualStyleBackColor = false;
+                this.btnPoint25.Click += CellClicked;
+                this.btnPoint25.Visible = true;
+                Grid.Cells[4, 4] = btnPoint25;
 
 
 
@@ -1060,7 +1195,17 @@
                 this.panel4.Controls.Add(this.btnPoint14);
                 this.panel4.Controls.Add(this.btnPoint15);
                 this.panel4.Controls.Add(this.btnPoint16);
+                this.panel4.Controls.Add(this.btnPoint17);
+                this.panel4.Controls.Add(this.btnPoint18);
+                this.panel4.Controls.Add(this.btnPoint19);
+                this.panel4.Controls.Add(this.btnPoint20);
+                this.panel4.Controls.Add(this.btnPoint21);
+                this.panel4.Controls.Add(this.btnPoint22);
+                this.panel4.Controls.Add(this.btnPoint23);
+                this.panel4.Controls.Add(this.btnPoint24);
+                this.panel4.Controls.Add(this.btnPoint25);
             }
+           
         }
 
         private void BtnPoint1_Click(object sender, System.EventArgs e)
