@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TicTacToe.Game_Logic;
 using TicTacToe.Game_Logic.AI;
+using TicTacToe.Music;
 
 namespace TicTacToe.UI
 {
@@ -20,7 +22,10 @@ namespace TicTacToe.UI
         Bitmap XSymbol4 = new Bitmap(Properties.Resources.Symbol_X);
         Bitmap XSymbol5 = new Bitmap(Properties.Resources.Symbol_X);
         Bitmap CrownSymbol = new Bitmap(Properties.Resources.CrownSymbol);
+        BackgroundMusic backgroundMusic = new BackgroundMusic();
+        Sound sound;
         private int gridSize;
+        
 
         public void ClickPlay()
         {
@@ -28,11 +33,29 @@ namespace TicTacToe.UI
         }
 
         public static bool aiGame = false;
+
         public MainScreen()
         {
             InitializeComponent();
+            InitializeSound();
+            InitializeMusicSelection();
+            
             tabControlRight.ItemSize = new Size(0, 1);
             tabControlLeft.ItemSize = new Size(0, 1);
+        }
+
+        private void InitializeMusicSelection()
+        {
+            foreach (Sound sound in backgroundMusic.Sounds)
+            {
+                musicListBox.Items.Add(sound.SoundName);
+            }
+        }
+
+        private void InitializeSound()
+        {
+            sound = backgroundMusic.GetSound("Chamber of Secrets");
+            sound.PlaySound();
         }
 
         private void GameNameLabel_Click(object sender, EventArgs e)
@@ -129,6 +152,27 @@ namespace TicTacToe.UI
             btnAI.Enabled = true;
             btnLocalMult.Enabled = true;
             btnLANMult.Enabled = true;
+        }
+
+        private void musicCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (musicCheckBox.Checked)
+            {
+                sound.PlaySound();
+            }
+            else
+            {
+                sound.StopSound();
+            }
+        }
+
+        private void musicListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            sound.StopSound();
+            string soundName = musicListBox.SelectedItem.ToString();
+            sound = backgroundMusic.GetSound(soundName);
+            sound.PlaySound();
+            musicCheckBox.Checked = true;
         }
     }
        

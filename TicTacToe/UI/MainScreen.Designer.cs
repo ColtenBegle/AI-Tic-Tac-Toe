@@ -41,7 +41,12 @@
             this.tabStartPage = new System.Windows.Forms.TabPage();
             this.MainScreenPic = new System.Windows.Forms.PictureBox();
             this.tabPlayerMode = new System.Windows.Forms.TabPage();
+            this.btn5x5 = new System.Windows.Forms.Button();
+            this.btn4x4 = new System.Windows.Forms.Button();
+            this.btn3x3 = new System.Windows.Forms.Button();
             this.tabCustomize = new System.Windows.Forms.TabPage();
+            this.musicListBox = new System.Windows.Forms.ListBox();
+            this.musicCheckBox = new System.Windows.Forms.CheckBox();
             this.labelCustomize = new System.Windows.Forms.Label();
             this.tab3Grid = new System.Windows.Forms.TabPage();
             this.button9 = new System.Windows.Forms.Button();
@@ -58,9 +63,7 @@
             this.button10 = new System.Windows.Forms.Button();
             this.buttonPlay = new System.Windows.Forms.Button();
             this.tabScoreboard = new System.Windows.Forms.TabPage();
-            this.btn3x3 = new System.Windows.Forms.Button();
-            this.btn4x4 = new System.Windows.Forms.Button();
-            this.btn5x5 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.TopDock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picboxLogo)).BeginInit();
             this.tabControlRight.SuspendLayout();
@@ -226,9 +229,57 @@
             this.tabPlayerMode.TabIndex = 1;
             this.tabPlayerMode.Text = "tabPlayerMode";
             // 
+            // btn5x5
+            // 
+            this.btn5x5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn5x5.BackColor = System.Drawing.SystemColors.Window;
+            this.btn5x5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn5x5.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn5x5.Location = new System.Drawing.Point(490, 6);
+            this.btn5x5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn5x5.Name = "btn5x5";
+            this.btn5x5.Size = new System.Drawing.Size(144, 40);
+            this.btn5x5.TabIndex = 6;
+            this.btn5x5.Text = "5x5";
+            this.btn5x5.UseVisualStyleBackColor = false;
+            this.btn5x5.Click += new System.EventHandler(this.btn5x5_Click);
+            // 
+            // btn4x4
+            // 
+            this.btn4x4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn4x4.BackColor = System.Drawing.SystemColors.Window;
+            this.btn4x4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn4x4.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn4x4.Location = new System.Drawing.Point(273, 6);
+            this.btn4x4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn4x4.Name = "btn4x4";
+            this.btn4x4.Size = new System.Drawing.Size(144, 40);
+            this.btn4x4.TabIndex = 5;
+            this.btn4x4.Text = "4x4";
+            this.btn4x4.UseVisualStyleBackColor = false;
+            this.btn4x4.Click += new System.EventHandler(this.btn4x4_Click);
+            // 
+            // btn3x3
+            // 
+            this.btn3x3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn3x3.BackColor = System.Drawing.SystemColors.Window;
+            this.btn3x3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn3x3.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn3x3.Location = new System.Drawing.Point(55, 6);
+            this.btn3x3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn3x3.Name = "btn3x3";
+            this.btn3x3.Size = new System.Drawing.Size(144, 40);
+            this.btn3x3.TabIndex = 4;
+            this.btn3x3.Text = "3x3";
+            this.btn3x3.UseVisualStyleBackColor = false;
+            this.btn3x3.Click += new System.EventHandler(this.btn3x3_Click);
+            // 
             // tabCustomize
             // 
             this.tabCustomize.BackColor = System.Drawing.SystemColors.WindowText;
+            this.tabCustomize.Controls.Add(this.label1);
+            this.tabCustomize.Controls.Add(this.musicListBox);
+            this.tabCustomize.Controls.Add(this.musicCheckBox);
             this.tabCustomize.Controls.Add(this.labelCustomize);
             this.tabCustomize.Location = new System.Drawing.Point(4, 28);
             this.tabCustomize.Margin = new System.Windows.Forms.Padding(4);
@@ -237,6 +288,35 @@
             this.tabCustomize.Size = new System.Drawing.Size(668, 471);
             this.tabCustomize.TabIndex = 2;
             this.tabCustomize.Text = "tabCustomize";
+            // 
+            // musicListBox
+            // 
+            this.musicListBox.BackColor = System.Drawing.SystemColors.WindowText;
+            this.musicListBox.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.musicListBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.musicListBox.FormattingEnabled = true;
+            this.musicListBox.ItemHeight = 25;
+            this.musicListBox.Location = new System.Drawing.Point(165, 190);
+            this.musicListBox.Name = "musicListBox";
+            this.musicListBox.Size = new System.Drawing.Size(174, 129);
+            this.musicListBox.TabIndex = 4;
+            this.musicListBox.SelectedIndexChanged += new System.EventHandler(this.musicListBox_SelectedIndexChanged);
+            // 
+            // musicCheckBox
+            // 
+            this.musicCheckBox.AutoSize = true;
+            this.musicCheckBox.Checked = true;
+            this.musicCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.musicCheckBox.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.musicCheckBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.musicCheckBox.Location = new System.Drawing.Point(21, 119);
+            this.musicCheckBox.Name = "musicCheckBox";
+            this.musicCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.musicCheckBox.Size = new System.Drawing.Size(155, 65);
+            this.musicCheckBox.TabIndex = 3;
+            this.musicCheckBox.Text = "Music";
+            this.musicCheckBox.UseVisualStyleBackColor = true;
+            this.musicCheckBox.CheckedChanged += new System.EventHandler(this.musicCheckBox_CheckedChanged);
             // 
             // labelCustomize
             // 
@@ -437,50 +517,16 @@
             this.tabScoreboard.TabIndex = 1;
             this.tabScoreboard.Text = "tabScoreboard";
             // 
-            // btn3x3
+            // label1
             // 
-            this.btn3x3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn3x3.BackColor = System.Drawing.SystemColors.Window;
-            this.btn3x3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn3x3.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn3x3.Location = new System.Drawing.Point(55, 6);
-            this.btn3x3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn3x3.Name = "btn3x3";
-            this.btn3x3.Size = new System.Drawing.Size(144, 40);
-            this.btn3x3.TabIndex = 4;
-            this.btn3x3.Text = "3x3";
-            this.btn3x3.UseVisualStyleBackColor = false;
-            this.btn3x3.Click += new System.EventHandler(this.btn3x3_Click);
-            // 
-            // btn4x4
-            // 
-            this.btn4x4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn4x4.BackColor = System.Drawing.SystemColors.Window;
-            this.btn4x4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn4x4.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn4x4.Location = new System.Drawing.Point(273, 6);
-            this.btn4x4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn4x4.Name = "btn4x4";
-            this.btn4x4.Size = new System.Drawing.Size(144, 40);
-            this.btn4x4.TabIndex = 5;
-            this.btn4x4.Text = "4x4";
-            this.btn4x4.UseVisualStyleBackColor = false;
-            this.btn4x4.Click += new System.EventHandler(this.btn4x4_Click);
-            // 
-            // btn5x5
-            // 
-            this.btn5x5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn5x5.BackColor = System.Drawing.SystemColors.Window;
-            this.btn5x5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn5x5.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn5x5.Location = new System.Drawing.Point(490, 6);
-            this.btn5x5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn5x5.Name = "btn5x5";
-            this.btn5x5.Size = new System.Drawing.Size(144, 40);
-            this.btn5x5.TabIndex = 6;
-            this.btn5x5.Text = "5x5";
-            this.btn5x5.UseVisualStyleBackColor = false;
-            this.btn5x5.Click += new System.EventHandler(this.btn5x5_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.Window;
+            this.label1.Location = new System.Drawing.Point(23, 185);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(136, 61);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Songs";
             // 
             // MainScreen
             // 
@@ -505,6 +551,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.MainScreenPic)).EndInit();
             this.tabPlayerMode.ResumeLayout(false);
             this.tabCustomize.ResumeLayout(false);
+            this.tabCustomize.PerformLayout();
             this.tab3Grid.ResumeLayout(false);
             this.tabControlLeft.ResumeLayout(false);
             this.tabPlaySettings.ResumeLayout(false);
@@ -546,5 +593,8 @@
         private System.Windows.Forms.Button btn5x5;
         private System.Windows.Forms.Button btn4x4;
         private System.Windows.Forms.Button btn3x3;
+        private System.Windows.Forms.CheckBox musicCheckBox;
+        private System.Windows.Forms.ListBox musicListBox;
+        private System.Windows.Forms.Label label1;
     }
 }

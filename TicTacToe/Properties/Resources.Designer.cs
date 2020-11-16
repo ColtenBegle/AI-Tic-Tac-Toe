@@ -61,12 +61,30 @@ namespace TicTacToe.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Chamber_Of_Secrets {
+            get {
+                return ResourceManager.GetStream("Chamber Of Secrets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap CrownSymbol {
             get {
                 object obj = ResourceManager.GetObject("CrownSymbol", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Nuts_And_Bolts {
+            get {
+                return ResourceManager.GetStream("Nuts And Bolts", resourceCulture);
             }
         }
         
@@ -87,6 +105,15 @@ namespace TicTacToe.Properties {
             get {
                 object obj = ResourceManager.GetObject("Symbol_X", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream The_Foyer {
+            get {
+                return ResourceManager.GetStream("The Foyer", resourceCulture);
             }
         }
         

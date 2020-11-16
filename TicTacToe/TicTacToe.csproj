@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game Logic\AI\AIPlayer.cs" />
+    <Compile Include="Music\Sound.cs" />
+    <Compile Include="Music\BackgroundMusic.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -142,6 +144,10 @@
     <Content Include="Images\O.jpg" />
     <Content Include="Images\O.png" />
     <Content Include="Images\X.jpg" />
+    <Content Include="Resources\POL-nuts-and-bolts-short.wav" />
+    <None Include="Resources\POL-the-foyer-short.wav" />
+    <None Include="Resources\Background_Music.bmp" />
+    <Content Include="Resources\POL-chamber-of-secrets-short.wav" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\" />
