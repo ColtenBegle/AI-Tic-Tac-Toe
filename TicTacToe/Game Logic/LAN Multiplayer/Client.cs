@@ -19,6 +19,7 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             _hostIP = hostIP;
             _port = port;
             ExecuteClient();
+            
         }
 
         private void ExecuteClient()

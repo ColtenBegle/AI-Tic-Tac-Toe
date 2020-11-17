@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using TicTacToe.Game_Logic;
 using TicTacToe.Game_Logic.AI;
 using TicTacToe.Music;
+using TicTacToe.Game_Logic.LAN_Multiplayer;
 
 namespace TicTacToe.UI
 {
@@ -173,6 +174,49 @@ namespace TicTacToe.UI
             sound = backgroundMusic.GetSound(soundName);
             sound.PlaySound();
             musicCheckBox.Checked = true;
+        }
+
+        private void btnLANMult_Click(object sender, EventArgs e)
+        {
+            tabControlRight.SelectedTab = tabLanConnectionPage;
+            HostSniffer sniffer = new HostSniffer(gridSize.ToString(), 8888);
+            Dictionary<string, string> hosts = sniffer.PotentialHosts;
+            foreach (KeyValuePair keyValuePair in hosts)
+            {
+                
+            }
+        }
+
+        private void btnHost_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btnJoin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUserName_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtUserName.Text))
+            {
+                btnHost.Enabled = false;
+                btnJoin.Enabled = false;
+                lbHosts.Enabled = false;
+            }
+            else if (txtUserName.Text.Length > 10)
+            {
+                btnHost.Enabled = false;
+                btnJoin.Enabled = false;
+                lbHosts.Enabled = false;
+            }
+            else
+            {
+                btnHost.Enabled = true;
+                btnJoin.Enabled = true;
+                lbHosts.Enabled = true;
+            }
         }
     }
        

@@ -9,6 +9,7 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
 {
     public class Host : Player
     {
+
         private int _port;
         private TcpListener server = null;
         private Socket _socket;

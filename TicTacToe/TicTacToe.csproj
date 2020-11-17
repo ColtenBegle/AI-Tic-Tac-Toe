@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game Logic\AI\AIPlayer.cs" />
+    <Compile Include="Game Logic\LAN Multiplayer\HostSniffer.cs" />
     <Compile Include="Music\Sound.cs" />
     <Compile Include="Music\BackgroundMusic.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

@@ -45,6 +45,7 @@
             this.btn4x4 = new System.Windows.Forms.Button();
             this.btn3x3 = new System.Windows.Forms.Button();
             this.tabCustomize = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.musicListBox = new System.Windows.Forms.ListBox();
             this.musicCheckBox = new System.Windows.Forms.CheckBox();
             this.labelCustomize = new System.Windows.Forms.Label();
@@ -63,7 +64,11 @@
             this.button10 = new System.Windows.Forms.Button();
             this.buttonPlay = new System.Windows.Forms.Button();
             this.tabScoreboard = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tabLanConnectionPage = new System.Windows.Forms.TabPage();
+            this.txtUserName = new System.Windows.Forms.TextBox();
+            this.lbHosts = new System.Windows.Forms.ListBox();
+            this.btnHost = new System.Windows.Forms.Button();
+            this.btnJoin = new System.Windows.Forms.Button();
             this.TopDock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picboxLogo)).BeginInit();
             this.tabControlRight.SuspendLayout();
@@ -74,6 +79,7 @@
             this.tab3Grid.SuspendLayout();
             this.tabControlLeft.SuspendLayout();
             this.tabPlaySettings.SuspendLayout();
+            this.tabLanConnectionPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelGameName
@@ -132,6 +138,7 @@
             this.btnLANMult.TabIndex = 3;
             this.btnLANMult.Text = "LAN Multiplayer (Under construction)";
             this.btnLANMult.UseVisualStyleBackColor = false;
+            this.btnLANMult.Click += new System.EventHandler(this.btnLANMult_Click);
             // 
             // buttonSettings
             // 
@@ -174,10 +181,11 @@
             // tabControlRight
             // 
             this.tabControlRight.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.tabControlRight.Controls.Add(this.tabStartPage);
             this.tabControlRight.Controls.Add(this.tabPlayerMode);
             this.tabControlRight.Controls.Add(this.tabCustomize);
             this.tabControlRight.Controls.Add(this.tab3Grid);
+            this.tabControlRight.Controls.Add(this.tabStartPage);
+            this.tabControlRight.Controls.Add(this.tabLanConnectionPage);
             this.tabControlRight.Location = new System.Drawing.Point(283, 130);
             this.tabControlRight.Margin = new System.Windows.Forms.Padding(4);
             this.tabControlRight.Name = "tabControlRight";
@@ -288,6 +296,17 @@
             this.tabCustomize.Size = new System.Drawing.Size(668, 471);
             this.tabCustomize.TabIndex = 2;
             this.tabCustomize.Text = "tabCustomize";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.Window;
+            this.label1.Location = new System.Drawing.Point(23, 185);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(136, 61);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Songs";
             // 
             // musicListBox
             // 
@@ -517,16 +536,67 @@
             this.tabScoreboard.TabIndex = 1;
             this.tabScoreboard.Text = "tabScoreboard";
             // 
-            // label1
+            // tabLanConnectionPage
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.Window;
-            this.label1.Location = new System.Drawing.Point(23, 185);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(136, 61);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Songs";
+            this.tabLanConnectionPage.BackColor = System.Drawing.SystemColors.WindowText;
+            this.tabLanConnectionPage.Controls.Add(this.btnJoin);
+            this.tabLanConnectionPage.Controls.Add(this.btnHost);
+            this.tabLanConnectionPage.Controls.Add(this.lbHosts);
+            this.tabLanConnectionPage.Controls.Add(this.txtUserName);
+            this.tabLanConnectionPage.Location = new System.Drawing.Point(4, 28);
+            this.tabLanConnectionPage.Name = "tabLanConnectionPage";
+            this.tabLanConnectionPage.Size = new System.Drawing.Size(668, 471);
+            this.tabLanConnectionPage.TabIndex = 4;
+            this.tabLanConnectionPage.Text = "tabPage1";
+            // 
+            // txtUserName
+            // 
+            this.txtUserName.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUserName.Location = new System.Drawing.Point(148, 13);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.Size = new System.Drawing.Size(384, 53);
+            this.txtUserName.TabIndex = 0;
+            this.txtUserName.TextChanged += new System.EventHandler(this.txtUserName_TextChanged);
+            // 
+            // lbHosts
+            // 
+            this.lbHosts.BackColor = System.Drawing.SystemColors.WindowText;
+            this.lbHosts.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHosts.ForeColor = System.Drawing.SystemColors.Window;
+            this.lbHosts.FormattingEnabled = true;
+            this.lbHosts.ItemHeight = 34;
+            this.lbHosts.Location = new System.Drawing.Point(52, 72);
+            this.lbHosts.Name = "lbHosts";
+            this.lbHosts.Size = new System.Drawing.Size(572, 276);
+            this.lbHosts.TabIndex = 1;
+            // 
+            // btnHost
+            // 
+            this.btnHost.BackColor = System.Drawing.SystemColors.Window;
+            this.btnHost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHost.Font = new System.Drawing.Font("Franklin Gothic Heavy", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHost.Location = new System.Drawing.Point(423, 371);
+            this.btnHost.Margin = new System.Windows.Forms.Padding(4);
+            this.btnHost.Name = "btnHost";
+            this.btnHost.Size = new System.Drawing.Size(201, 70);
+            this.btnHost.TabIndex = 4;
+            this.btnHost.Text = "HOST";
+            this.btnHost.UseVisualStyleBackColor = false;
+            this.btnHost.Click += new System.EventHandler(this.btnHost_Click);
+            // 
+            // btnJoin
+            // 
+            this.btnJoin.BackColor = System.Drawing.SystemColors.Window;
+            this.btnJoin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnJoin.Font = new System.Drawing.Font("Franklin Gothic Heavy", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnJoin.Location = new System.Drawing.Point(52, 371);
+            this.btnJoin.Margin = new System.Windows.Forms.Padding(4);
+            this.btnJoin.Name = "btnJoin";
+            this.btnJoin.Size = new System.Drawing.Size(201, 70);
+            this.btnJoin.TabIndex = 5;
+            this.btnJoin.Text = "JOIN";
+            this.btnJoin.UseVisualStyleBackColor = false;
+            this.btnJoin.Click += new System.EventHandler(this.btnJoin_Click);
             // 
             // MainScreen
             // 
@@ -555,6 +625,8 @@
             this.tab3Grid.ResumeLayout(false);
             this.tabControlLeft.ResumeLayout(false);
             this.tabPlaySettings.ResumeLayout(false);
+            this.tabLanConnectionPage.ResumeLayout(false);
+            this.tabLanConnectionPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -596,5 +668,10 @@
         private System.Windows.Forms.CheckBox musicCheckBox;
         private System.Windows.Forms.ListBox musicListBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabPage tabLanConnectionPage;
+        public System.Windows.Forms.Button btnJoin;
+        public System.Windows.Forms.Button btnHost;
+        private System.Windows.Forms.ListBox lbHosts;
+        private System.Windows.Forms.TextBox txtUserName;
     }
 }
