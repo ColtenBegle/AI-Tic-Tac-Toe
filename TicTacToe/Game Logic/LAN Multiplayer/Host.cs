@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Net;
 using System.ComponentModel;
+using System.Text;
 
 namespace TicTacToe.Game_Logic.LAN_Multiplayer
 {
@@ -14,13 +15,36 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
         private TcpListener server = null;
         private Socket _socket;
         private BackgroundWorker _messageReceiver = new BackgroundWorker();
+        private string boardSize;
 
 
-        public Host(string name, PlayerSymbols symbol, int port, bool isTurn) : base(name, symbol, isTurn)
+        public Host(string name, PlayerSymbols symbol, int port, bool isTurn, string _boardSize) : base(name, symbol, isTurn)
         {
             _port = port;
+            boardSize = _boardSize;
             //_messageReceiver.DoWork += MessageReceiver_DoWork;
-            ExecuteHost();
+            //ExecuteHost();
+            SendMessageToClients();
+        }
+
+        private void SendMessageToClients()
+        {
+            var Server = new UdpClient(8888);
+            var ResponseData = Encoding.ASCII.GetBytes(boardSize);
+            var ClientEp = new IPEndPoint(IPAddress.Any, 0);
+            var ClientRequestData = Server.Receive(ref ClientEp);
+            var ClientRequest = Encoding.ASCII.GetString(ClientRequestData);
+            if (ClientRequest.ToString() != boardSize)
+            {
+                ResponseData = Encoding.ASCII.GetBytes("400");
+                Server.Send(ResponseData, ResponseData.Length, ClientEp);
+            }
+            else
+            {
+                string data = String.Format("{0},{1}", boardSize, Name);
+                ResponseData = Encoding.ASCII.GetBytes(data);
+                Server.Send(ResponseData, ResponseData.Length, ClientEp);
+            }
         }
 
         private void ExecuteHost()

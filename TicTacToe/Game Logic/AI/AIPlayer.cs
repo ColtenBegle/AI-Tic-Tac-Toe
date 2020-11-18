@@ -66,9 +66,6 @@ namespace TicTacToe.Game_Logic.AI
                 if (isMaximizing == false)
                 {
                     score = (double)Scores.O;
-                    Console.WriteLine("WINNING BOARD");
-                    PrintBoard(cells, gridSize);
-                    Console.WriteLine("\n\n");
                     return score;
                 }
                 else
@@ -84,8 +81,6 @@ namespace TicTacToe.Game_Logic.AI
             }
             if (isMaximizing)
             {
-                
-                
                 double bestScore = double.NegativeInfinity;
                 for (int x = 0; x < gridSize; x++)
                 {
@@ -96,7 +91,6 @@ namespace TicTacToe.Game_Logic.AI
                             cells[x, y].Text = Symbol.ToString();
                             score = minimax(cells, gridSize, depth + 1, false, alpha, beta);
                             cells[x, y].Text = "";
-                            //bestScore = Math.Max(score, bestScore);
                             bestScore = Math.Max(score, bestScore);
                             alpha = Math.Max(alpha, bestScore);
                             if(beta<=alpha)
@@ -125,7 +119,6 @@ namespace TicTacToe.Game_Logic.AI
                             cells[x, y].Text = opponentSymbol.ToString();
                             score = minimax(cells, gridSize, depth + 1, true, alpha, beta);
                             cells[x, y].Text = "";
-                            //bestScore = Math.Min(score, bestScore);
                             bestScore = Math.Min(score, bestScore);
                             beta = Math.Min(beta, bestScore);
                             if (beta <= alpha)
@@ -139,6 +132,22 @@ namespace TicTacToe.Game_Logic.AI
                 return bestScore;
             }
         }
+
+        //private List<Button> emptyCells(Button[,] cells, int gridSize)
+        //{
+        //    List<Button> empty = new List<Button>();
+        //    for (int x = 0; x < gridSize; x++)
+        //    {
+        //        for (int y = 0; y < gridSize; y++)
+        //        {
+        //            if (cells[x, y].Text == "")
+        //            {
+        //                empty.Add(cells[x, y]);
+        //            }
+        //        }
+        //    }
+        //    return empty;
+        //}
 
         private void PrintBoard(Button[,] cells, int gridSize)
         {

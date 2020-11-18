@@ -10,14 +10,14 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
 {
     class HostSniffer
     {
-        private int boardSize;
+        private string boardSize;
         private int port;
         private UdpClient client;
         private IPEndPoint serverEp;
         private Dictionary<string, string> potentialHosts = new Dictionary<string, string>();
         public HostSniffer(string _boardSize, int _port)
         {
-            boardSize = boardSize;
+            boardSize = _boardSize;
             port = _port;
             potentialHosts = FindHosts();
         }
@@ -26,16 +26,15 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
         {
             Dictionary<string, string> hosts = new Dictionary<string, string>();
             client = new UdpClient();
-            string RequestData = Encoding.ASCII.GetBytes(boardSize);
+            var RequestData = Encoding.ASCII.GetBytes(boardSize);
             serverEp = new IPEndPoint(IPAddress.Any, 0);
             client.EnableBroadcast = true;
-            client.Send(RequestData, RequestData.Length, new IPEndPoint(IPAddress.Any, port));
-
+            client.Send(RequestData, RequestData.Length, new IPEndPoint(IPAddress.Broadcast, port));
             var ServerResponseData = client.Receive(ref serverEp);
             string[] ServerResponse = Encoding.ASCII.GetString(ServerResponseData).Split(',');
             if (ServerResponse[0] == boardSize.ToString())
             {
-                hosts.Add(ServerResponse[0], ServerResponse[1]);
+                hosts.Add(ServerResponse[1], serverEp.Address.ToString());
             }
             return hosts;
         }

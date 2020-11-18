@@ -38,8 +38,6 @@
             this.TopDock = new System.Windows.Forms.Panel();
             this.picboxLogo = new System.Windows.Forms.PictureBox();
             this.tabControlRight = new System.Windows.Forms.TabControl();
-            this.tabStartPage = new System.Windows.Forms.TabPage();
-            this.MainScreenPic = new System.Windows.Forms.PictureBox();
             this.tabPlayerMode = new System.Windows.Forms.TabPage();
             this.btn5x5 = new System.Windows.Forms.Button();
             this.btn4x4 = new System.Windows.Forms.Button();
@@ -59,27 +57,36 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.tabStartPage = new System.Windows.Forms.TabPage();
+            this.MainScreenPic = new System.Windows.Forms.PictureBox();
+            this.tabClientOrHost = new System.Windows.Forms.TabPage();
+            this.btnHost = new System.Windows.Forms.Button();
+            this.btnClient = new System.Windows.Forms.Button();
+            this.tabLanConnectionPage = new System.Windows.Forms.TabPage();
+            this.btnJoin = new System.Windows.Forms.Button();
+            this.lbHosts = new System.Windows.Forms.ListBox();
+            this.txtUserName = new System.Windows.Forms.TextBox();
             this.tabControlLeft = new System.Windows.Forms.TabControl();
             this.tabPlaySettings = new System.Windows.Forms.TabPage();
             this.button10 = new System.Windows.Forms.Button();
             this.buttonPlay = new System.Windows.Forms.Button();
             this.tabScoreboard = new System.Windows.Forms.TabPage();
-            this.tabLanConnectionPage = new System.Windows.Forms.TabPage();
-            this.txtUserName = new System.Windows.Forms.TextBox();
-            this.lbHosts = new System.Windows.Forms.ListBox();
-            this.btnHost = new System.Windows.Forms.Button();
-            this.btnJoin = new System.Windows.Forms.Button();
+            this.tabHostName = new System.Windows.Forms.TabPage();
+            this.txtHostName = new System.Windows.Forms.TextBox();
+            this.btnBeginHosting = new System.Windows.Forms.Button();
             this.TopDock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picboxLogo)).BeginInit();
             this.tabControlRight.SuspendLayout();
-            this.tabStartPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MainScreenPic)).BeginInit();
             this.tabPlayerMode.SuspendLayout();
             this.tabCustomize.SuspendLayout();
             this.tab3Grid.SuspendLayout();
+            this.tabStartPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MainScreenPic)).BeginInit();
+            this.tabClientOrHost.SuspendLayout();
+            this.tabLanConnectionPage.SuspendLayout();
             this.tabControlLeft.SuspendLayout();
             this.tabPlaySettings.SuspendLayout();
-            this.tabLanConnectionPage.SuspendLayout();
+            this.tabHostName.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelGameName
@@ -185,7 +192,9 @@
             this.tabControlRight.Controls.Add(this.tabCustomize);
             this.tabControlRight.Controls.Add(this.tab3Grid);
             this.tabControlRight.Controls.Add(this.tabStartPage);
+            this.tabControlRight.Controls.Add(this.tabClientOrHost);
             this.tabControlRight.Controls.Add(this.tabLanConnectionPage);
+            this.tabControlRight.Controls.Add(this.tabHostName);
             this.tabControlRight.Location = new System.Drawing.Point(283, 130);
             this.tabControlRight.Margin = new System.Windows.Forms.Padding(4);
             this.tabControlRight.Name = "tabControlRight";
@@ -194,31 +203,6 @@
             this.tabControlRight.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlRight.TabIndex = 4;
             this.tabControlRight.TabStop = false;
-            // 
-            // tabStartPage
-            // 
-            this.tabStartPage.BackColor = System.Drawing.SystemColors.WindowText;
-            this.tabStartPage.Controls.Add(this.MainScreenPic);
-            this.tabStartPage.Location = new System.Drawing.Point(4, 28);
-            this.tabStartPage.Margin = new System.Windows.Forms.Padding(4);
-            this.tabStartPage.Name = "tabStartPage";
-            this.tabStartPage.Padding = new System.Windows.Forms.Padding(4);
-            this.tabStartPage.Size = new System.Drawing.Size(668, 471);
-            this.tabStartPage.TabIndex = 0;
-            this.tabStartPage.Text = "tabStartPage";
-            // 
-            // MainScreenPic
-            // 
-            this.MainScreenPic.BackColor = System.Drawing.SystemColors.Window;
-            this.MainScreenPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.MainScreenPic.Image = ((System.Drawing.Image)(resources.GetObject("MainScreenPic.Image")));
-            this.MainScreenPic.Location = new System.Drawing.Point(76, 17);
-            this.MainScreenPic.Margin = new System.Windows.Forms.Padding(4);
-            this.MainScreenPic.Name = "MainScreenPic";
-            this.MainScreenPic.Size = new System.Drawing.Size(515, 443);
-            this.MainScreenPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.MainScreenPic.TabIndex = 8;
-            this.MainScreenPic.TabStop = false;
             // 
             // tabPlayerMode
             // 
@@ -470,6 +454,118 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // tabStartPage
+            // 
+            this.tabStartPage.BackColor = System.Drawing.SystemColors.WindowText;
+            this.tabStartPage.Controls.Add(this.MainScreenPic);
+            this.tabStartPage.Location = new System.Drawing.Point(4, 28);
+            this.tabStartPage.Margin = new System.Windows.Forms.Padding(4);
+            this.tabStartPage.Name = "tabStartPage";
+            this.tabStartPage.Padding = new System.Windows.Forms.Padding(4);
+            this.tabStartPage.Size = new System.Drawing.Size(668, 471);
+            this.tabStartPage.TabIndex = 0;
+            this.tabStartPage.Text = "tabStartPage";
+            // 
+            // MainScreenPic
+            // 
+            this.MainScreenPic.BackColor = System.Drawing.SystemColors.Window;
+            this.MainScreenPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MainScreenPic.Image = ((System.Drawing.Image)(resources.GetObject("MainScreenPic.Image")));
+            this.MainScreenPic.Location = new System.Drawing.Point(76, 17);
+            this.MainScreenPic.Margin = new System.Windows.Forms.Padding(4);
+            this.MainScreenPic.Name = "MainScreenPic";
+            this.MainScreenPic.Size = new System.Drawing.Size(515, 443);
+            this.MainScreenPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.MainScreenPic.TabIndex = 8;
+            this.MainScreenPic.TabStop = false;
+            // 
+            // tabClientOrHost
+            // 
+            this.tabClientOrHost.BackColor = System.Drawing.SystemColors.WindowText;
+            this.tabClientOrHost.Controls.Add(this.btnHost);
+            this.tabClientOrHost.Controls.Add(this.btnClient);
+            this.tabClientOrHost.ForeColor = System.Drawing.Color.Black;
+            this.tabClientOrHost.Location = new System.Drawing.Point(4, 28);
+            this.tabClientOrHost.Name = "tabClientOrHost";
+            this.tabClientOrHost.Size = new System.Drawing.Size(668, 471);
+            this.tabClientOrHost.TabIndex = 5;
+            this.tabClientOrHost.Text = "tabClientorHost";
+            // 
+            // btnHost
+            // 
+            this.btnHost.BackColor = System.Drawing.SystemColors.Window;
+            this.btnHost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHost.Font = new System.Drawing.Font("Franklin Gothic Heavy", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHost.Location = new System.Drawing.Point(135, 237);
+            this.btnHost.Margin = new System.Windows.Forms.Padding(4);
+            this.btnHost.Name = "btnHost";
+            this.btnHost.Size = new System.Drawing.Size(403, 145);
+            this.btnHost.TabIndex = 5;
+            this.btnHost.Text = "HOST";
+            this.btnHost.UseVisualStyleBackColor = false;
+            this.btnHost.Click += new System.EventHandler(this.btnHost_Click);
+            // 
+            // btnClient
+            // 
+            this.btnClient.BackColor = System.Drawing.SystemColors.Window;
+            this.btnClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClient.Font = new System.Drawing.Font("Franklin Gothic Heavy", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClient.Location = new System.Drawing.Point(135, 25);
+            this.btnClient.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClient.Name = "btnClient";
+            this.btnClient.Size = new System.Drawing.Size(403, 145);
+            this.btnClient.TabIndex = 4;
+            this.btnClient.Text = "CLIENT";
+            this.btnClient.UseVisualStyleBackColor = false;
+            this.btnClient.Click += new System.EventHandler(this.btnClient_Click);
+            // 
+            // tabLanConnectionPage
+            // 
+            this.tabLanConnectionPage.BackColor = System.Drawing.SystemColors.WindowText;
+            this.tabLanConnectionPage.Controls.Add(this.btnJoin);
+            this.tabLanConnectionPage.Controls.Add(this.lbHosts);
+            this.tabLanConnectionPage.Controls.Add(this.txtUserName);
+            this.tabLanConnectionPage.Location = new System.Drawing.Point(4, 28);
+            this.tabLanConnectionPage.Name = "tabLanConnectionPage";
+            this.tabLanConnectionPage.Size = new System.Drawing.Size(668, 471);
+            this.tabLanConnectionPage.TabIndex = 4;
+            this.tabLanConnectionPage.Text = "tabPage1";
+            // 
+            // btnJoin
+            // 
+            this.btnJoin.BackColor = System.Drawing.SystemColors.Window;
+            this.btnJoin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnJoin.Font = new System.Drawing.Font("Franklin Gothic Heavy", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnJoin.Location = new System.Drawing.Point(241, 371);
+            this.btnJoin.Margin = new System.Windows.Forms.Padding(4);
+            this.btnJoin.Name = "btnJoin";
+            this.btnJoin.Size = new System.Drawing.Size(201, 70);
+            this.btnJoin.TabIndex = 5;
+            this.btnJoin.Text = "JOIN";
+            this.btnJoin.UseVisualStyleBackColor = false;
+            this.btnJoin.Click += new System.EventHandler(this.btnJoin_Click);
+            // 
+            // lbHosts
+            // 
+            this.lbHosts.BackColor = System.Drawing.SystemColors.WindowText;
+            this.lbHosts.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHosts.ForeColor = System.Drawing.SystemColors.Window;
+            this.lbHosts.FormattingEnabled = true;
+            this.lbHosts.ItemHeight = 34;
+            this.lbHosts.Location = new System.Drawing.Point(52, 72);
+            this.lbHosts.Name = "lbHosts";
+            this.lbHosts.Size = new System.Drawing.Size(572, 276);
+            this.lbHosts.TabIndex = 1;
+            // 
+            // txtUserName
+            // 
+            this.txtUserName.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUserName.Location = new System.Drawing.Point(148, 13);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.Size = new System.Drawing.Size(384, 53);
+            this.txtUserName.TabIndex = 0;
+            this.txtUserName.TextChanged += new System.EventHandler(this.txtUserName_TextChanged);
+            // 
             // tabControlLeft
             // 
             this.tabControlLeft.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
@@ -536,67 +632,38 @@
             this.tabScoreboard.TabIndex = 1;
             this.tabScoreboard.Text = "tabScoreboard";
             // 
-            // tabLanConnectionPage
+            // tabHostName
             // 
-            this.tabLanConnectionPage.BackColor = System.Drawing.SystemColors.WindowText;
-            this.tabLanConnectionPage.Controls.Add(this.btnJoin);
-            this.tabLanConnectionPage.Controls.Add(this.btnHost);
-            this.tabLanConnectionPage.Controls.Add(this.lbHosts);
-            this.tabLanConnectionPage.Controls.Add(this.txtUserName);
-            this.tabLanConnectionPage.Location = new System.Drawing.Point(4, 28);
-            this.tabLanConnectionPage.Name = "tabLanConnectionPage";
-            this.tabLanConnectionPage.Size = new System.Drawing.Size(668, 471);
-            this.tabLanConnectionPage.TabIndex = 4;
-            this.tabLanConnectionPage.Text = "tabPage1";
+            this.tabHostName.BackColor = System.Drawing.SystemColors.WindowText;
+            this.tabHostName.Controls.Add(this.btnBeginHosting);
+            this.tabHostName.Controls.Add(this.txtHostName);
+            this.tabHostName.Location = new System.Drawing.Point(4, 28);
+            this.tabHostName.Name = "tabHostName";
+            this.tabHostName.Size = new System.Drawing.Size(668, 471);
+            this.tabHostName.TabIndex = 6;
+            this.tabHostName.Text = "hostNameTab";
             // 
-            // txtUserName
+            // txtHostName
             // 
-            this.txtUserName.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserName.Location = new System.Drawing.Point(148, 13);
-            this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(384, 53);
-            this.txtUserName.TabIndex = 0;
-            this.txtUserName.TextChanged += new System.EventHandler(this.txtUserName_TextChanged);
+            this.txtHostName.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHostName.Location = new System.Drawing.Point(146, 59);
+            this.txtHostName.Name = "txtHostName";
+            this.txtHostName.Size = new System.Drawing.Size(384, 53);
+            this.txtHostName.TabIndex = 1;
             // 
-            // lbHosts
+            // btnBeginHosting
             // 
-            this.lbHosts.BackColor = System.Drawing.SystemColors.WindowText;
-            this.lbHosts.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHosts.ForeColor = System.Drawing.SystemColors.Window;
-            this.lbHosts.FormattingEnabled = true;
-            this.lbHosts.ItemHeight = 34;
-            this.lbHosts.Location = new System.Drawing.Point(52, 72);
-            this.lbHosts.Name = "lbHosts";
-            this.lbHosts.Size = new System.Drawing.Size(572, 276);
-            this.lbHosts.TabIndex = 1;
-            // 
-            // btnHost
-            // 
-            this.btnHost.BackColor = System.Drawing.SystemColors.Window;
-            this.btnHost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHost.Font = new System.Drawing.Font("Franklin Gothic Heavy", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHost.Location = new System.Drawing.Point(423, 371);
-            this.btnHost.Margin = new System.Windows.Forms.Padding(4);
-            this.btnHost.Name = "btnHost";
-            this.btnHost.Size = new System.Drawing.Size(201, 70);
-            this.btnHost.TabIndex = 4;
-            this.btnHost.Text = "HOST";
-            this.btnHost.UseVisualStyleBackColor = false;
-            this.btnHost.Click += new System.EventHandler(this.btnHost_Click);
-            // 
-            // btnJoin
-            // 
-            this.btnJoin.BackColor = System.Drawing.SystemColors.Window;
-            this.btnJoin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnJoin.Font = new System.Drawing.Font("Franklin Gothic Heavy", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnJoin.Location = new System.Drawing.Point(52, 371);
-            this.btnJoin.Margin = new System.Windows.Forms.Padding(4);
-            this.btnJoin.Name = "btnJoin";
-            this.btnJoin.Size = new System.Drawing.Size(201, 70);
-            this.btnJoin.TabIndex = 5;
-            this.btnJoin.Text = "JOIN";
-            this.btnJoin.UseVisualStyleBackColor = false;
-            this.btnJoin.Click += new System.EventHandler(this.btnJoin_Click);
+            this.btnBeginHosting.BackColor = System.Drawing.SystemColors.Window;
+            this.btnBeginHosting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBeginHosting.Font = new System.Drawing.Font("Franklin Gothic Heavy", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBeginHosting.Location = new System.Drawing.Point(212, 188);
+            this.btnBeginHosting.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBeginHosting.Name = "btnBeginHosting";
+            this.btnBeginHosting.Size = new System.Drawing.Size(249, 118);
+            this.btnBeginHosting.TabIndex = 4;
+            this.btnBeginHosting.Text = "BEGIN HOSTING";
+            this.btnBeginHosting.UseVisualStyleBackColor = false;
+            this.btnBeginHosting.Click += new System.EventHandler(this.btnBeginHosting_Click);
             // 
             // MainScreen
             // 
@@ -617,16 +684,19 @@
             this.TopDock.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picboxLogo)).EndInit();
             this.tabControlRight.ResumeLayout(false);
-            this.tabStartPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.MainScreenPic)).EndInit();
             this.tabPlayerMode.ResumeLayout(false);
             this.tabCustomize.ResumeLayout(false);
             this.tabCustomize.PerformLayout();
             this.tab3Grid.ResumeLayout(false);
-            this.tabControlLeft.ResumeLayout(false);
-            this.tabPlaySettings.ResumeLayout(false);
+            this.tabStartPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MainScreenPic)).EndInit();
+            this.tabClientOrHost.ResumeLayout(false);
             this.tabLanConnectionPage.ResumeLayout(false);
             this.tabLanConnectionPage.PerformLayout();
+            this.tabControlLeft.ResumeLayout(false);
+            this.tabPlaySettings.ResumeLayout(false);
+            this.tabHostName.ResumeLayout(false);
+            this.tabHostName.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -670,8 +740,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabLanConnectionPage;
         public System.Windows.Forms.Button btnJoin;
-        public System.Windows.Forms.Button btnHost;
         private System.Windows.Forms.ListBox lbHosts;
         private System.Windows.Forms.TextBox txtUserName;
+        private System.Windows.Forms.TabPage tabClientOrHost;
+        public System.Windows.Forms.Button btnHost;
+        public System.Windows.Forms.Button btnClient;
+        private System.Windows.Forms.TabPage tabHostName;
+        public System.Windows.Forms.Button btnBeginHosting;
+        private System.Windows.Forms.TextBox txtHostName;
     }
 }

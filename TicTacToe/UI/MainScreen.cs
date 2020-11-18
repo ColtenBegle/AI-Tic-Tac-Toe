@@ -23,9 +23,12 @@ namespace TicTacToe.UI
         Bitmap XSymbol4 = new Bitmap(Properties.Resources.Symbol_X);
         Bitmap XSymbol5 = new Bitmap(Properties.Resources.Symbol_X);
         Bitmap CrownSymbol = new Bitmap(Properties.Resources.CrownSymbol);
+
         BackgroundMusic backgroundMusic = new BackgroundMusic();
         Sound sound;
+
         private int gridSize;
+        private Dictionary<string, string> hosts = new Dictionary<string, string>();
         
 
         public void ClickPlay()
@@ -74,13 +77,13 @@ namespace TicTacToe.UI
         public void buttonPlay_Click(object sender, EventArgs e)
         {
             //show Select Player Mode
-            tabControlRight.SelectedIndex = (1);
+            tabControlRight.SelectedTab = tabPlayerMode;
         }
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
             //show Customize tab
-            tabControlRight.SelectedIndex = (2);
+            tabControlRight.SelectedTab = tabCustomize;
         }
         private void btnLocalMult_Click(object sender, EventArgs e)
         {
@@ -178,18 +181,7 @@ namespace TicTacToe.UI
 
         private void btnLANMult_Click(object sender, EventArgs e)
         {
-            tabControlRight.SelectedTab = tabLanConnectionPage;
-            HostSniffer sniffer = new HostSniffer(gridSize.ToString(), 8888);
-            Dictionary<string, string> hosts = sniffer.PotentialHosts;
-            foreach (KeyValuePair keyValuePair in hosts)
-            {
-                
-            }
-        }
-
-        private void btnHost_Click(object sender, EventArgs e)
-        {
-           
+            tabControlRight.SelectedTab = tabClientOrHost;
         }
 
         private void btnJoin_Click(object sender, EventArgs e)
@@ -201,23 +193,50 @@ namespace TicTacToe.UI
         {
             if (String.IsNullOrEmpty(txtUserName.Text))
             {
-                btnHost.Enabled = false;
                 btnJoin.Enabled = false;
                 lbHosts.Enabled = false;
             }
             else if (txtUserName.Text.Length > 10)
             {
-                btnHost.Enabled = false;
                 btnJoin.Enabled = false;
                 lbHosts.Enabled = false;
             }
             else
             {
-                btnHost.Enabled = true;
                 btnJoin.Enabled = true;
                 lbHosts.Enabled = true;
             }
         }
+
+        private void btnClient_Click(object sender, EventArgs e)
+        {
+            tabControlRight.SelectedTab = tabLanConnectionPage;
+            HostSniffer sniffer = new HostSniffer(gridSize.ToString(), 8888);
+            hosts = sniffer.PotentialHosts;
+            if (hosts.Count > 0)
+            {
+                foreach (KeyValuePair<string, string> keyValuePair in hosts)
+                {
+                    lbHosts.Items.Add(keyValuePair.Key);
+                }
+                lbHosts.Enabled = true;
+            }
+            else
+            {
+                lbHosts.Items.Clear();
+                lbHosts.Items.Add("No compatible hosts found :(");
+                lbHosts.Enabled = false;
+            }
+        }
+
+        private void btnHost_Click(object sender, EventArgs e)
+        {
+            tabControlRight.SelectedTab = tabHostName;
+        }
+
+        private void btnBeginHosting_Click(object sender, EventArgs e)
+        {
+            Host host = new Host(txtHostName.Text, PlayerSymbols.X, 8888, true, gridSize.ToString());
+        }
     }
-       
 }

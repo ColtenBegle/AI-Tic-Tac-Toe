@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using TicTacToe.Game_Logic;
 using TicTacToe.Game_Logic.AI;
 using TicTacToe.UI;
-using TicTacToe.UI.LAN_Multiplayer;
 
 namespace TicTacToe
 {
