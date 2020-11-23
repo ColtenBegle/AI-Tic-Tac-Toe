@@ -29,6 +29,8 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             var RequestData = Encoding.ASCII.GetBytes(boardSize);
             serverEp = new IPEndPoint(IPAddress.Any, 0);
             client.EnableBroadcast = true;
+            client.Client.SendTimeout = 1000;
+            client.Client.ReceiveTimeout = 1000;
             client.Send(RequestData, RequestData.Length, new IPEndPoint(IPAddress.Broadcast, port));
             var ServerResponseData = client.Receive(ref serverEp);
             string[] ServerResponse = Encoding.ASCII.GetString(ServerResponseData).Split(',');

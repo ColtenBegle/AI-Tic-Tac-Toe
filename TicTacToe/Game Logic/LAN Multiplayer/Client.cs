@@ -1,7 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Net.Sockets;
+using System.Text;
 using System.Windows.Forms;
 
 namespace TicTacToe.Game_Logic.LAN_Multiplayer
@@ -10,6 +9,7 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
     {
         private int _port;
         private string _hostIP;
+        private string _hostUser;
         private Socket _socket;
         private TcpClient client;
 
@@ -28,6 +28,12 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             {
                 client = new TcpClient(_hostIP, _port);
                 _socket = client.Client;
+                byte[] hostUserName = new byte[10];
+                int bytesRecieved = _socket.Receive(hostUserName);
+                Array.Resize(ref hostUserName, bytesRecieved);
+                string user = Encoding.ASCII.GetString(hostUserName);
+                _hostUser = user;
+                _socket.Send(Encoding.ASCII.GetBytes(Name));
             }
             catch (Exception ex)
             {
@@ -37,7 +43,8 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
 
         public void KillClient()
         {
-            _socket.Close();
+            if (_socket != null)
+                _socket.Close();
         }
 
         public int Port
@@ -54,24 +61,44 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
 
         public void RecieveMove(Button[,] cells)
         {
-            //// Data buffer 
-            byte[] bytes = new byte[2];
-            int numByte = _socket.Receive(bytes);
-            int x = 0;
-            int y = 0;
-            if (numByte == 2)
+            try
             {
-                x = bytes[0];
-                y = bytes[1];
+                //// Data buffer 
+                byte[] bytes = new byte[2];
+                int numByte = _socket.Receive(bytes);
+                int x = 0;
+                int y = 0;
+                if (numByte == 2)
+                {
+                    x = bytes[0];
+                    y = bytes[1];
+                }
+                else
+                {
+                    MessageBox.Show("Did not recieve the sufficient number of bytes!");
+                }
+                if (Symbol == PlayerSymbols.X)
+                    cells[x, y].Text = PlayerSymbols.O.ToString();
+                else
+                    cells[x, y].Text = PlayerSymbols.X.ToString();
             }
-            else
+            // Manage of Socket's Exceptions 
+            catch (ArgumentNullException ane)
             {
-                MessageBox.Show("Did not recieve the sufficient number of bytes!");
+
+                MessageBox.Show("ArgumentNullException : {0}", ane.ToString());
             }
-            if (Symbol == PlayerSymbols.X)
-                cells[x, y].Text = PlayerSymbols.O.ToString();
-            else
-                cells[x, y].Text = PlayerSymbols.X.ToString();
+
+            catch (SocketException se)
+            {
+
+                MessageBox.Show("SocketException : {0}", se.ToString());
+            }
+
+            catch (Exception e)
+            {
+                MessageBox.Show("Unexpected exception : {0}", e.ToString());
+            }
         }
 
         public void SendMove(byte[] move)
@@ -97,6 +124,12 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             {
                 MessageBox.Show("Unexpected exception : {0}", e.ToString());
             }
+        }
+
+        public string HostUser
+        {
+            get { return _hostUser; }
+            set { _hostUser = value; }
         }
     }
 }

@@ -63,17 +63,18 @@
             this.btnHost = new System.Windows.Forms.Button();
             this.btnClient = new System.Windows.Forms.Button();
             this.tabLanConnectionPage = new System.Windows.Forms.TabPage();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.btnJoin = new System.Windows.Forms.Button();
             this.lbHosts = new System.Windows.Forms.ListBox();
             this.txtUserName = new System.Windows.Forms.TextBox();
+            this.tabHostName = new System.Windows.Forms.TabPage();
+            this.btnBeginHosting = new System.Windows.Forms.Button();
+            this.txtHostName = new System.Windows.Forms.TextBox();
             this.tabControlLeft = new System.Windows.Forms.TabControl();
             this.tabPlaySettings = new System.Windows.Forms.TabPage();
             this.button10 = new System.Windows.Forms.Button();
             this.buttonPlay = new System.Windows.Forms.Button();
             this.tabScoreboard = new System.Windows.Forms.TabPage();
-            this.tabHostName = new System.Windows.Forms.TabPage();
-            this.txtHostName = new System.Windows.Forms.TextBox();
-            this.btnBeginHosting = new System.Windows.Forms.Button();
             this.TopDock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picboxLogo)).BeginInit();
             this.tabControlRight.SuspendLayout();
@@ -84,9 +85,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.MainScreenPic)).BeginInit();
             this.tabClientOrHost.SuspendLayout();
             this.tabLanConnectionPage.SuspendLayout();
+            this.tabHostName.SuspendLayout();
             this.tabControlLeft.SuspendLayout();
             this.tabPlaySettings.SuspendLayout();
-            this.tabHostName.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelGameName
@@ -522,6 +523,7 @@
             // tabLanConnectionPage
             // 
             this.tabLanConnectionPage.BackColor = System.Drawing.SystemColors.WindowText;
+            this.tabLanConnectionPage.Controls.Add(this.btnRefresh);
             this.tabLanConnectionPage.Controls.Add(this.btnJoin);
             this.tabLanConnectionPage.Controls.Add(this.lbHosts);
             this.tabLanConnectionPage.Controls.Add(this.txtUserName);
@@ -531,9 +533,22 @@
             this.tabLanConnectionPage.TabIndex = 4;
             this.tabLanConnectionPage.Text = "tabPage1";
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.SystemColors.Window;
+            this.btnRefresh.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.Location = new System.Drawing.Point(538, 354);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(86, 37);
+            this.btnRefresh.TabIndex = 6;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // btnJoin
             // 
             this.btnJoin.BackColor = System.Drawing.SystemColors.Window;
+            this.btnJoin.Enabled = false;
             this.btnJoin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnJoin.Font = new System.Drawing.Font("Franklin Gothic Heavy", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnJoin.Location = new System.Drawing.Point(241, 371);
@@ -565,6 +580,41 @@
             this.txtUserName.Size = new System.Drawing.Size(384, 53);
             this.txtUserName.TabIndex = 0;
             this.txtUserName.TextChanged += new System.EventHandler(this.txtUserName_TextChanged);
+            // 
+            // tabHostName
+            // 
+            this.tabHostName.BackColor = System.Drawing.SystemColors.WindowText;
+            this.tabHostName.Controls.Add(this.btnBeginHosting);
+            this.tabHostName.Controls.Add(this.txtHostName);
+            this.tabHostName.Location = new System.Drawing.Point(4, 28);
+            this.tabHostName.Name = "tabHostName";
+            this.tabHostName.Size = new System.Drawing.Size(668, 471);
+            this.tabHostName.TabIndex = 6;
+            this.tabHostName.Text = "hostNameTab";
+            // 
+            // btnBeginHosting
+            // 
+            this.btnBeginHosting.BackColor = System.Drawing.SystemColors.Window;
+            this.btnBeginHosting.Enabled = false;
+            this.btnBeginHosting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBeginHosting.Font = new System.Drawing.Font("Franklin Gothic Heavy", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBeginHosting.Location = new System.Drawing.Point(212, 188);
+            this.btnBeginHosting.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBeginHosting.Name = "btnBeginHosting";
+            this.btnBeginHosting.Size = new System.Drawing.Size(249, 118);
+            this.btnBeginHosting.TabIndex = 4;
+            this.btnBeginHosting.Text = "BEGIN HOSTING";
+            this.btnBeginHosting.UseVisualStyleBackColor = false;
+            this.btnBeginHosting.Click += new System.EventHandler(this.btnBeginHosting_Click);
+            // 
+            // txtHostName
+            // 
+            this.txtHostName.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHostName.Location = new System.Drawing.Point(146, 59);
+            this.txtHostName.Name = "txtHostName";
+            this.txtHostName.Size = new System.Drawing.Size(384, 53);
+            this.txtHostName.TabIndex = 1;
+            this.txtHostName.TextChanged += new System.EventHandler(this.txtHostName_TextChanged);
             // 
             // tabControlLeft
             // 
@@ -632,39 +682,6 @@
             this.tabScoreboard.TabIndex = 1;
             this.tabScoreboard.Text = "tabScoreboard";
             // 
-            // tabHostName
-            // 
-            this.tabHostName.BackColor = System.Drawing.SystemColors.WindowText;
-            this.tabHostName.Controls.Add(this.btnBeginHosting);
-            this.tabHostName.Controls.Add(this.txtHostName);
-            this.tabHostName.Location = new System.Drawing.Point(4, 28);
-            this.tabHostName.Name = "tabHostName";
-            this.tabHostName.Size = new System.Drawing.Size(668, 471);
-            this.tabHostName.TabIndex = 6;
-            this.tabHostName.Text = "hostNameTab";
-            // 
-            // txtHostName
-            // 
-            this.txtHostName.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHostName.Location = new System.Drawing.Point(146, 59);
-            this.txtHostName.Name = "txtHostName";
-            this.txtHostName.Size = new System.Drawing.Size(384, 53);
-            this.txtHostName.TabIndex = 1;
-            // 
-            // btnBeginHosting
-            // 
-            this.btnBeginHosting.BackColor = System.Drawing.SystemColors.Window;
-            this.btnBeginHosting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBeginHosting.Font = new System.Drawing.Font("Franklin Gothic Heavy", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBeginHosting.Location = new System.Drawing.Point(212, 188);
-            this.btnBeginHosting.Margin = new System.Windows.Forms.Padding(4);
-            this.btnBeginHosting.Name = "btnBeginHosting";
-            this.btnBeginHosting.Size = new System.Drawing.Size(249, 118);
-            this.btnBeginHosting.TabIndex = 4;
-            this.btnBeginHosting.Text = "BEGIN HOSTING";
-            this.btnBeginHosting.UseVisualStyleBackColor = false;
-            this.btnBeginHosting.Click += new System.EventHandler(this.btnBeginHosting_Click);
-            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -693,10 +710,10 @@
             this.tabClientOrHost.ResumeLayout(false);
             this.tabLanConnectionPage.ResumeLayout(false);
             this.tabLanConnectionPage.PerformLayout();
-            this.tabControlLeft.ResumeLayout(false);
-            this.tabPlaySettings.ResumeLayout(false);
             this.tabHostName.ResumeLayout(false);
             this.tabHostName.PerformLayout();
+            this.tabControlLeft.ResumeLayout(false);
+            this.tabPlaySettings.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -748,5 +765,6 @@
         private System.Windows.Forms.TabPage tabHostName;
         public System.Windows.Forms.Button btnBeginHosting;
         private System.Windows.Forms.TextBox txtHostName;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

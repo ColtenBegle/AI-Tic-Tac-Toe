@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TicTacToe.Game_Logic;
 using TicTacToe.Game_Logic.AI;
@@ -88,6 +82,7 @@ namespace TicTacToe.UI
         private void btnLocalMult_Click(object sender, EventArgs e)
         {
             GameForm game = new GameForm(gridSize);
+            game.InitializePlayerNames("Player 1", "Player 2");
             if (!game.IsDisposed)
                 game.ShowDialog();
         }
@@ -116,6 +111,7 @@ namespace TicTacToe.UI
             GameForm game = new GameForm(gridSize);
             AIPlayer aIPlayer = new AIPlayer(PlayerSymbols.O, false, game.CheckState, game.IsFull);
             game.AI = aIPlayer;
+            game.InitializePlayerNames("Human", "AI");
             if (!game.IsDisposed)
                 game.ShowDialog();
         }
@@ -185,8 +181,15 @@ namespace TicTacToe.UI
         }
 
         private void btnJoin_Click(object sender, EventArgs e)
-        {
-
+        { 
+            Client client = new Client(txtUserName.Text, PlayerSymbols.O, false, hosts[lbHosts.SelectedItem.ToString()], 8888);
+            GameForm game = new GameForm(gridSize);
+            game.Client = client;
+            game.InitializePlayerNames(client.HostUser, txtUserName.Text);
+            if (game.IsDisposed == false)
+            {
+                game.ShowDialog();
+            }
         }
 
         private void txtUserName_TextChanged(object sender, EventArgs e)
@@ -210,23 +213,32 @@ namespace TicTacToe.UI
 
         private void btnClient_Click(object sender, EventArgs e)
         {
-            tabControlRight.SelectedTab = tabLanConnectionPage;
-            HostSniffer sniffer = new HostSniffer(gridSize.ToString(), 8888);
-            hosts = sniffer.PotentialHosts;
-            if (hosts.Count > 0)
+            try
             {
-                foreach (KeyValuePair<string, string> keyValuePair in hosts)
-                {
-                    lbHosts.Items.Add(keyValuePair.Key);
-                }
-                lbHosts.Enabled = true;
-            }
-            else
-            {
+                tabControlRight.SelectedTab = tabLanConnectionPage;
                 lbHosts.Items.Clear();
-                lbHosts.Items.Add("No compatible hosts found :(");
-                lbHosts.Enabled = false;
+                HostSniffer sniffer = new HostSniffer(gridSize.ToString(), 8888);
+                hosts = sniffer.PotentialHosts;
+                if (hosts.Count > 0)
+                {
+                    foreach (KeyValuePair<string, string> keyValuePair in hosts)
+                    {
+                        lbHosts.Items.Add(keyValuePair.Key);
+                    }
+                    lbHosts.Enabled = true;
+                }
+                else
+                {
+                    lbHosts.Items.Clear();
+                    lbHosts.Items.Add("No compatible hosts found :(");
+                    lbHosts.Enabled = false;
+                }
             }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            
         }
 
         private void btnHost_Click(object sender, EventArgs e)
@@ -237,6 +249,55 @@ namespace TicTacToe.UI
         private void btnBeginHosting_Click(object sender, EventArgs e)
         {
             Host host = new Host(txtHostName.Text, PlayerSymbols.X, 8888, true, gridSize.ToString());
+            GameForm game = new GameForm(gridSize);
+            game.Host = host;
+            game.InitializePlayerNames(txtHostName.Text, host.ClientUser);
+            if (game.IsDisposed == false && host.IsHosting)
+                game.ShowDialog();
+
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                HostSniffer sniffer = new HostSniffer(gridSize.ToString(), 8888);
+                hosts = sniffer.PotentialHosts;
+                if (hosts.Count > 0)
+                {
+                    foreach (KeyValuePair<string, string> keyValuePair in hosts)
+                    {
+                        lbHosts.Items.Add(keyValuePair.Key);
+                    }
+                    lbHosts.Enabled = true;
+                }
+                else
+                {
+                    lbHosts.Items.Clear();
+                    lbHosts.Items.Add("No compatible hosts found :(");
+                    lbHosts.Enabled = false;
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+        }
+
+        private void txtHostName_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtHostName.Text))
+            {
+                btnBeginHosting.Enabled = false;
+            }
+            else if (txtHostName.Text.Length > 10)
+            {
+                btnBeginHosting.Enabled = false;
+            }
+            else
+            {
+                btnBeginHosting.Enabled = true;
+            }
         }
     }
 }

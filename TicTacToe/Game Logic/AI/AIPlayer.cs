@@ -79,6 +79,16 @@ namespace TicTacToe.Game_Logic.AI
                 score = (double)Scores.tie;
                 return score;
             }
+            if (gridSize == 4)
+            {
+                if (depth > 3)
+                    return score;
+            }
+            else if (gridSize == 5)
+            {
+                if (depth > 3)
+                    return score;
+            }
             if (isMaximizing)
             {
                 double bestScore = double.NegativeInfinity;

@@ -370,6 +370,7 @@
             this.lblOutcome.Size = new System.Drawing.Size(135, 38);
             this.lblOutcome.TabIndex = 4;
             this.lblOutcome.Text = "Outcome";
+            this.lblOutcome.Visible = false;
             // 
             // lblPlayerTurn
             // 
