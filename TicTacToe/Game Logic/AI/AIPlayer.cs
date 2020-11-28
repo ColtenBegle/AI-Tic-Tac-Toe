@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using TicTacToe.UI;
 
 namespace TicTacToe.Game_Logic.AI
 {
@@ -42,7 +36,7 @@ namespace TicTacToe.Game_Logic.AI
                     if (cells[x, y].Text == "")
                     {
                         cells[x, y].Text = Symbol.ToString();
-                        double score = minimax(cells, gridSize, 0, false, alpha,beta);
+                        double score = minimax(cells, gridSize, 0, false, alpha, beta);
                         cells[x, y].Text = "";
                         if (score > bestScore)
                         {
@@ -103,7 +97,7 @@ namespace TicTacToe.Game_Logic.AI
                             cells[x, y].Text = "";
                             bestScore = Math.Max(score, bestScore);
                             alpha = Math.Max(alpha, bestScore);
-                            if(beta<=alpha)
+                            if (beta <= alpha)
                             {
                                 break;
                             }
@@ -137,7 +131,7 @@ namespace TicTacToe.Game_Logic.AI
                             }
                         }
                     }
-                    
+
                 }
                 return bestScore;
             }

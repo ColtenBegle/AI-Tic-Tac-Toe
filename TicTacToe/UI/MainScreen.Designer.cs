@@ -144,7 +144,7 @@
             this.btnLANMult.Name = "btnLANMult";
             this.btnLANMult.Size = new System.Drawing.Size(579, 116);
             this.btnLANMult.TabIndex = 3;
-            this.btnLANMult.Text = "LAN Multiplayer (Under construction)";
+            this.btnLANMult.Text = "LAN Multiplayer";
             this.btnLANMult.UseVisualStyleBackColor = false;
             this.btnLANMult.Click += new System.EventHandler(this.btnLANMult_Click);
             // 
@@ -196,11 +196,11 @@
             this.tabControlRight.Controls.Add(this.tabClientOrHost);
             this.tabControlRight.Controls.Add(this.tabLanConnectionPage);
             this.tabControlRight.Controls.Add(this.tabHostName);
-            this.tabControlRight.Location = new System.Drawing.Point(283, 130);
+            this.tabControlRight.Location = new System.Drawing.Point(283, 131);
             this.tabControlRight.Margin = new System.Windows.Forms.Padding(4);
             this.tabControlRight.Name = "tabControlRight";
             this.tabControlRight.SelectedIndex = 0;
-            this.tabControlRight.Size = new System.Drawing.Size(676, 503);
+            this.tabControlRight.Size = new System.Drawing.Size(676, 502);
             this.tabControlRight.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlRight.TabIndex = 4;
             this.tabControlRight.TabStop = false;
@@ -218,7 +218,7 @@
             this.tabPlayerMode.Margin = new System.Windows.Forms.Padding(4);
             this.tabPlayerMode.Name = "tabPlayerMode";
             this.tabPlayerMode.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPlayerMode.Size = new System.Drawing.Size(668, 471);
+            this.tabPlayerMode.Size = new System.Drawing.Size(668, 470);
             this.tabPlayerMode.TabIndex = 1;
             this.tabPlayerMode.Text = "tabPlayerMode";
             // 
@@ -350,7 +350,7 @@
             this.tab3Grid.Margin = new System.Windows.Forms.Padding(4);
             this.tab3Grid.Name = "tab3Grid";
             this.tab3Grid.Padding = new System.Windows.Forms.Padding(4);
-            this.tab3Grid.Size = new System.Drawing.Size(668, 471);
+            this.tab3Grid.Size = new System.Drawing.Size(668, 470);
             this.tab3Grid.TabIndex = 3;
             this.tab3Grid.Text = "tab3Grid";
             // 
@@ -463,7 +463,7 @@
             this.tabStartPage.Margin = new System.Windows.Forms.Padding(4);
             this.tabStartPage.Name = "tabStartPage";
             this.tabStartPage.Padding = new System.Windows.Forms.Padding(4);
-            this.tabStartPage.Size = new System.Drawing.Size(668, 471);
+            this.tabStartPage.Size = new System.Drawing.Size(668, 470);
             this.tabStartPage.TabIndex = 0;
             this.tabStartPage.Text = "tabStartPage";
             // 
@@ -488,7 +488,7 @@
             this.tabClientOrHost.ForeColor = System.Drawing.Color.Black;
             this.tabClientOrHost.Location = new System.Drawing.Point(4, 28);
             this.tabClientOrHost.Name = "tabClientOrHost";
-            this.tabClientOrHost.Size = new System.Drawing.Size(668, 471);
+            this.tabClientOrHost.Size = new System.Drawing.Size(668, 470);
             this.tabClientOrHost.TabIndex = 5;
             this.tabClientOrHost.Text = "tabClientorHost";
             // 

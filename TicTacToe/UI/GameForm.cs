@@ -36,41 +36,62 @@ namespace TicTacToe
 
         private void MessageReciever_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (CheckState())
+            try
             {
-                return;
-            }  
-            FreezeBoard();
-            if (_host != null)
-            {
-                _host.RecieveMove(grid.Cells);
                 if (CheckState())
                 {
-                    MessageBox.Show(string.Format("{0} wins!", _host.ClientUser));
-                    _host.Wins += 1;
-                    player1WinsCount.Text = _host.Wins.ToString();
-                    ResetCells();
+                    return;
                 }
-                else
+                
+                FreezeBoard();
+                if (_host != null)
                 {
-                    UnfreezeBoard();
+                    _host.RecieveMove(grid.Cells);
+                    if (IsFull())
+                    {
+                        MessageBox.Show("It's a draw!");
+                        ResetCells();
+                        return;
+                    }
+                    if (CheckState())
+                    {
+                        MessageBox.Show(string.Format("{0} wins!", _host.ClientUser));
+                        int player2Wins = int.Parse(player2WinsCount.Text);
+                        player2WinsCount.Text = String.Format("{0}", player2Wins + 1);
+                        ResetCells();
+                    }
+                    else
+                    {
+                        UnfreezeBoard();
+                    }
+                }
+                else if (_client != null)
+                {
+                    _client.RecieveMove(grid.Cells);
+                    if (IsFull())
+                    {
+                        MessageBox.Show("It's a draw!");
+                        ResetCells();
+                        return;
+                    }
+                    if (CheckState())
+                    {
+                        MessageBox.Show(string.Format("{0} wins!", _client.HostUser));
+                        int player1Wins = int.Parse(player1WinsCount.Text);
+                        player1WinsCount.Text = String.Format("{0}", player1Wins + 1);
+                        ResetCells();
+                    }
+                    else
+                    {
+                        UnfreezeBoard();
+                    }
                 }
             }
-            else if (_client != null)
+            catch (Exception exc)
             {
-                _client.RecieveMove(grid.Cells);
-                if (CheckState())
-                {
-                    MessageBox.Show(string.Format("{0} wins!", _client.HostUser));
-                    _client.Wins += 1;
-                    player1WinsCount.Text = _client.Wins.ToString();
-                    ResetCells();
-                }
-                else
-                {
-                    UnfreezeBoard();
-                }
+                MessageBox.Show(exc.Message);
             }
+            
         }
 
         //AI Game variables
@@ -78,7 +99,7 @@ namespace TicTacToe
         public AIPlayer AI
         {
             get { return _ai; }
-            set { _ai = value;}
+            set { _ai = value; }
         }
         private Player humanPlayer = new Player("Player 1", PlayerSymbols.X, true);
 
@@ -99,7 +120,7 @@ namespace TicTacToe
             lblPlayer2Wins.Text = string.Format("{0}:", player2Name);
         }
 
-        
+
 
         //Local multiplayer variables
         private Player player1 = new Player("Player 1", PlayerSymbols.X, true);
@@ -162,38 +183,6 @@ namespace TicTacToe
                     return true;
             }
             return false;
-        }
-
-        private void ShowWinMessage(string value)
-        {
-            if (_ai != null)
-            {
-                if (value == PlayerSymbols.X.ToString())
-                    MessageBox.Show(String.Format("{0} won!", player1.Name));
-                else
-                    MessageBox.Show(String.Format("{0} won!", _ai.Name));
-            }
-            else if (_client != null)
-            {
-                if (value == PlayerSymbols.X.ToString() && _client.Symbol == PlayerSymbols.X)
-                    MessageBox.Show(String.Format("{0} won!", _client.Name));
-                else if (value == PlayerSymbols.O.ToString() && _client.Symbol == PlayerSymbols.O)
-                    MessageBox.Show(String.Format("{0} won!", _client.Name));
-            }
-            else if (_host != null)
-            {
-                if (value == PlayerSymbols.X.ToString() && _host.Symbol == PlayerSymbols.X)
-                    MessageBox.Show(String.Format("{0} won!", _host.Name));
-                else if (value == PlayerSymbols.O.ToString() && _host.Symbol == PlayerSymbols.O)
-                    MessageBox.Show(String.Format("{0} won!", _host.Name));
-            }
-            else
-            {
-                if (value == PlayerSymbols.X.ToString())
-                    MessageBox.Show(String.Format("{0} won!", player1.Name));
-                else
-                    MessageBox.Show(String.Format("{0} won!", player2.Name));
-            }
         }
 
         public bool IsFull()
@@ -273,24 +262,34 @@ namespace TicTacToe
                         {
                             if (grid.Cells[x, y] == (Button)sender)
                             {
-                                byte[] bytes = { (byte)x, (byte)y };
-                                _client.SendMove(bytes);
-                                grid.Cells[x, y].Text = _client.Symbol.ToString();
+                                try
+                                {
+                                    byte[] bytes = { (byte)x, (byte)y };
+
+                                    _client.SendMove(bytes);
+                                    grid.Cells[x, y].Text = _client.Symbol.ToString();
+
+                                    bool state = CheckState();
+                                    if (state == true)
+                                    {
+                                        MessageBox.Show(string.Format("{0} wins!", _client.Name));
+                                        _client.Wins += 1;
+                                        player2WinsCount.Text = _client.Wins.ToString();
+                                        ResetCells();
+                                    }
+                                    else if (IsFull())
+                                    {
+                                        MessageBox.Show("It's a draw!");
+                                        ; ResetCells();
+                                    }
+                                    messageReciever.RunWorkerAsync();
+                                }
+                                catch (Exception exc)
+                                {
+                                    MessageBox.Show(exc.Message);
+                                    this.Close();
+                                }
                                 
-                                bool state = CheckState();
-                                if (state == true)
-                                {
-                                    MessageBox.Show(string.Format("{0} wins!", _client.Name));
-                                    _client.Wins += 1;
-                                    player2WinsCount.Text = _client.Wins.ToString();
-                                    ResetCells();
-                                }
-                                else if (IsFull())
-                                {
-                                    MessageBox.Show("It's a draw!");    
-;                                   ResetCells();
-                                }
-                                messageReciever.RunWorkerAsync();
                             }
                         }
                     }
@@ -303,25 +302,30 @@ namespace TicTacToe
                         {
                             if (grid.Cells[x, y] == (Button)sender)
                             {
-                                byte[] bytes = { (byte)x, (byte)y };
-                                _host.SendMove(bytes);
-                                grid.Cells[x, y].Text = _host.Symbol.ToString();
-                                bool state = CheckState();
-                                if (state == true)
+                                try
                                 {
-                                    MessageBox.Show(string.Format("{0} wins!", _host.Name));
-                                    _host.Wins += 1;
-                                    player1WinsCount.Text = _host.Wins.ToString();
-                                    ResetCells();
-                                }
-                                else if (IsFull())
-                                {
-                                    MessageBox.Show("It's a draw");
-                                    ResetCells();
-                                }
-                                else //TEsTING
-                                {
+                                    byte[] bytes = { (byte)x, (byte)y };
+                                    _host.SendMove(bytes);
+                                    grid.Cells[x, y].Text = _host.Symbol.ToString();
+                                    bool state = CheckState();
+                                    if (state == true)
+                                    {
+                                        MessageBox.Show(string.Format("{0} wins!", _host.Name));
+                                        _host.Wins += 1;
+                                        player1WinsCount.Text = _host.Wins.ToString();
+                                        ResetCells();
+                                    }
+                                    else if (IsFull())
+                                    {
+                                        MessageBox.Show("It's a draw");
+                                        ResetCells();
+                                    }
                                     messageReciever.RunWorkerAsync();
+                                } 
+                                catch (Exception exc)
+                                {
+                                    MessageBox.Show(exc.Message);
+                                    this.Close();
                                 }
                             }
                         }
@@ -417,7 +421,7 @@ namespace TicTacToe
                     if (grid.Cells[x, y].Text == "")
                         grid.Cells[x, y].Enabled = true;
                     else
-                        grid.Cells[x, y].Enabled = false;   
+                        grid.Cells[x, y].Enabled = false;
                 }
             }
         }

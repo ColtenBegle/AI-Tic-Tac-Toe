@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using TicTacToe.Game_Logic;
 using TicTacToe.Game_Logic.AI;
-using TicTacToe.Music;
 using TicTacToe.Game_Logic.LAN_Multiplayer;
+using TicTacToe.Music;
 
 namespace TicTacToe.UI
 {
@@ -23,7 +23,7 @@ namespace TicTacToe.UI
 
         private int gridSize;
         private Dictionary<string, string> hosts = new Dictionary<string, string>();
-        
+
 
         public void ClickPlay()
         {
@@ -37,9 +37,10 @@ namespace TicTacToe.UI
             InitializeComponent();
             InitializeSound();
             InitializeMusicSelection();
-            
+
             tabControlRight.ItemSize = new Size(0, 1);
             tabControlLeft.ItemSize = new Size(0, 1);
+            tabControlRight.SelectedTab = tabStartPage;
         }
 
         private void InitializeMusicSelection()
@@ -181,7 +182,7 @@ namespace TicTacToe.UI
         }
 
         private void btnJoin_Click(object sender, EventArgs e)
-        { 
+        {
             Client client = new Client(txtUserName.Text, PlayerSymbols.O, false, hosts[lbHosts.SelectedItem.ToString()], 8888);
             GameForm game = new GameForm(gridSize);
             game.Client = client;
@@ -238,7 +239,7 @@ namespace TicTacToe.UI
             {
                 MessageBox.Show(exc.Message);
             }
-            
+
         }
 
         private void btnHost_Click(object sender, EventArgs e)
@@ -259,6 +260,7 @@ namespace TicTacToe.UI
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            lbHosts.Items.Clear();
             try
             {
                 HostSniffer sniffer = new HostSniffer(gridSize.ToString(), 8888);
@@ -273,7 +275,6 @@ namespace TicTacToe.UI
                 }
                 else
                 {
-                    lbHosts.Items.Clear();
                     lbHosts.Items.Add("No compatible hosts found :(");
                     lbHosts.Enabled = false;
                 }

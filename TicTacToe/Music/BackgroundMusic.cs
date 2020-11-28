@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Resources;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TicTacToe.Properties;
-using System.Globalization;
 using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Resources;
+using TicTacToe.Properties;
 
 namespace TicTacToe.Music
 {
@@ -23,7 +21,7 @@ namespace TicTacToe.Music
         public List<Sound> Sounds
         {
             get { return sounds; }
-            set { sounds = value;}
+            set { sounds = value; }
         }
 
         public Sound GetSound(string soundName)

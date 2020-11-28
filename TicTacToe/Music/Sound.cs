@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TicTacToe.Music
 {
@@ -12,7 +7,7 @@ namespace TicTacToe.Music
     {
         private SoundPlayer soundPlayer = new SoundPlayer();
         private string soundName;
-        
+
         public Sound(UnmanagedMemoryStream resource, string name)
         {
             soundPlayer.Stream = resource;

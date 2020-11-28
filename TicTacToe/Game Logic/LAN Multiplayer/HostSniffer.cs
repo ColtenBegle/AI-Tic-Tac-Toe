@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;  
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
@@ -55,7 +55,7 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
 
             IPHostEntry iPHostEntry = Dns.GetHostEntry(strHostName);
             IPAddress[] addresses = iPHostEntry.AddressList;
-            
+
             return addresses[1];
         }
 

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Net.Sockets;
-using System.Windows.Forms;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
+using System.Windows.Forms;
 
 namespace TicTacToe.Game_Logic.LAN_Multiplayer
 {
@@ -76,7 +76,7 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
                 tcpListener.Stop();
                 _socket.Close();
             }
-            
+
         }
 
 
@@ -106,25 +106,26 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
                 }
                 else
                 {
-                    MessageBox.Show("Did not recieve the sufficient number of bytes!");
+                    throw new Exception("Did not recieve the sufficient number of bytes!");
                 }
             }
             // Manage of Socket's Exceptions 
             catch (ArgumentNullException ane)
             {
-
-                MessageBox.Show("ArgumentNullException : {0}", ane.ToString());
+                throw new Exception(string.Format("ArgumentNullException : {0}", ane.Message), ane);
+                //MessageBox.Show(string.Format("ArgumentNullException : {0}", ane.Message));
             }
 
             catch (SocketException se)
             {
-
-                MessageBox.Show("SocketException : {0}", se.ToString());
+                throw new Exception(string.Format("ArgumentNullException : {0}", se.Message), se);
+                //MessageBox.Show(string.Format("SocketException : {0}", se.Message));
             }
 
             catch (Exception e)
             {
-                MessageBox.Show("Unexpected exception : {0}", e.ToString());
+                throw new Exception(string.Format("ArgumentNullException : {0}", e.Message), e);
+                //MessageBox.Show(String.Format("Unexpected exception : {0}", e.Message));
             }
         }
 
@@ -137,19 +138,20 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
             // Manage of Socket's Exceptions 
             catch (ArgumentNullException ane)
             {
-
-                MessageBox.Show("ArgumentNullException : {0}", ane.ToString());
+                throw new Exception(string.Format("ArgumentNullException : {0}", ane.Message), ane);
+                //MessageBox.Show(string.Format("ArgumentNullException : {0}", ane.Message));
             }
 
             catch (SocketException se)
             {
-
-                MessageBox.Show("SocketException : {0}", se.ToString());
+                throw new Exception(string.Format("ArgumentNullException : {0}", se.Message), se);
+                //MessageBox.Show(string.Format("SocketException : {0}", se.Message));
             }
 
             catch (Exception e)
             {
-                MessageBox.Show("Unexpected exception : {0}", e.ToString());
+                throw new Exception(string.Format("ArgumentNullException : {0}", e.Message), e);
+                //MessageBox.Show(String.Format("Unexpected exception : {0}", e.Message));
             }
         }
 
