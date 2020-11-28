@@ -99,15 +99,15 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
                 {
                     x = bytes[0];
                     y = bytes[1];
+                    if (Symbol == PlayerSymbols.X)
+                        cells[x, y].Text = PlayerSymbols.O.ToString();
+                    else
+                        cells[x, y].Text = PlayerSymbols.X.ToString();
                 }
                 else
                 {
                     MessageBox.Show("Did not recieve the sufficient number of bytes!");
                 }
-                if (Symbol == PlayerSymbols.X)
-                    cells[x, y].Text = PlayerSymbols.O.ToString();
-                else
-                    cells[x, y].Text = PlayerSymbols.X.ToString();
             }
             // Manage of Socket's Exceptions 
             catch (ArgumentNullException ane)

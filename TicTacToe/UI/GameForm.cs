@@ -42,6 +42,7 @@ namespace TicTacToe
             if (_host != null)
             {
                 _host.RecieveMove(grid.Cells);
+                lblPlayerTurn.Text = string.Format("{0}'s turn", _host.Name);
                 if (CheckState())
                 {
                     lblOutcome.Text = string.Format("{0} wins!", _host.ClientUser);
@@ -56,9 +57,11 @@ namespace TicTacToe
             else if (_client != null)
             {
                 _client.RecieveMove(grid.Cells);
+                lblPlayerTurn.Text = string.Format("{0}'s turn", _client.Name);
                 if (CheckState())
                 {
-                    lblOutcome.Text = string.Format("{0} wins!", _client.HostUser);
+                    string outcome = string.Format("{0} wins!", _client.HostUser);
+                    lblOutcome.Text = outcome;
                     lblOutcome.Visible = true;
                     ResetCells();
                 }
@@ -225,152 +228,178 @@ namespace TicTacToe
 
         public void CellClicked(object sender, EventArgs e)
         {
-            if (_ai != null)
+            try
             {
-                Type type = sender.GetType();
-                PropertyInfo property = type.GetProperty("Text");
-                property.SetValue(sender, humanPlayer.Symbol.ToString());
-                property = type.GetProperty("Enabled");
-                property.SetValue(sender, false);
-                lblPlayerTurn.Text = "AI's turn!";
-                bool state = CheckState();
-                if (state == true)
-                {
-                    lblOutcome.Text = String.Format("{0} wins!", humanPlayer.Name);
-                    lblOutcome.Visible = true;
-                    ResetCells();
-                    humanPlayer.Wins += 1;
-                }
-                else
-                {
-                    FreezeBoard();
-                    _ai.MakeMove(_gridSize, grid.Cells);
-                    state = CheckState();
-                    if (state == true)
-                    {
-                        lblOutcome.Text = String.Format("{0} wins!", _ai.Name);
-                        lblOutcome.Visible = true;
-                        ResetCells();
-                        _ai.Wins += 1;
-                    }
-                    lblPlayerTurn.Text = String.Format("{0}'s turn!", lblPlayer1.Text);
-                    UnfreezeBoard();
-                }
-            }
-            else if (_client != null)
-            {
-                for (int x = 0; x < _gridSize; x++)
-                {
-                    for (int y = 0; y < _gridSize; y++)
-                    {
-                        if (grid.Cells[x, y] == (Button)sender)
-                        {
-                            byte[] bytes = { (byte)x, (byte)y };
-                            _client.SendMove(bytes);
-                            grid.Cells[x, y].Text = _client.Symbol.ToString();
-                            lblPlayerTurn.Text = String.Format("{0}'s turn!", lblPlayer1.Text);
-                            bool state = CheckState();
-                            if (state == true)
-                            {
-                                lblOutcome.Text = String.Format("{0} wins!", _client.Name);
-                                lblOutcome.Visible = true;
-                                ResetCells();
-                                _client.Wins += 1;
-                            }
-                            messageReciever.RunWorkerAsync();
-                        }
-                    }
-                }
-            }
-            else if (_host != null)
-            {
-                for (int x = 0; x < _gridSize; x++)
-                {
-                    for (int y = 0; y < _gridSize; y++)
-                    {
-                        if (grid.Cells[x, y] == (Button)sender)
-                        {
-                            byte[] bytes = { (byte)x, (byte)y };
-                            _host.SendMove(bytes);
-                            grid.Cells[x, y].Text = _host.Symbol.ToString();
-                            bool state = CheckState();
-                            lblPlayerTurn.Text = String.Format("{0}'s turn!", lblPlayer2.Text);
-                            if (state == true)
-                            {
-                                lblOutcome.Text = String.Format("{0} wins!", _host.Name);
-                                lblOutcome.Visible = true;
-                                ResetCells();
-                                _host.Wins += 1;
-                            }
-                            messageReciever.RunWorkerAsync();
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (player1.IsTurn == true)
+                if (_ai != null)
                 {
                     Type type = sender.GetType();
                     PropertyInfo property = type.GetProperty("Text");
-                    property.SetValue(sender, player1.Symbol.ToString());
+                    property.SetValue(sender, humanPlayer.Symbol.ToString());
                     property = type.GetProperty("Enabled");
                     property.SetValue(sender, false);
+                    lblPlayerTurn.Text = "AI's turn!";
                     bool state = CheckState();
                     if (state == true)
                     {
-                        lblOutcome.Text = String.Format("{0} wins!", player1.Name);
+                        lblOutcome.Text = String.Format("{0} wins!", humanPlayer.Name);
                         lblOutcome.Visible = true;
                         ResetCells();
-                        player1.Wins += 1;
+                        humanPlayer.Wins += 1;
                     }
                     else
                     {
-                        bool isFull = IsFull();
-                        if (isFull)
+                        FreezeBoard();
+                        _ai.MakeMove(_gridSize, grid.Cells);
+                        state = CheckState();
+                        if (state == true)
                         {
-                            lblOutcome.Text = String.Format("It's a draw!");
+                            lblOutcome.Text = String.Format("{0} wins!", _ai.Name);
                             lblOutcome.Visible = true;
                             ResetCells();
+                            _ai.Wins += 1;
                         }
-                        else
+                        else if (IsFull())
                         {
-                            player1.IsTurn = false;
-                            player2.IsTurn = true;
+                                lblOutcome.Text = String.Format("It's a draw!");
+                                lblOutcome.Visible = true;
+                                ResetCells();
+                        }
+                        lblPlayerTurn.Text = String.Format("{0}'s turn!", lblPlayer1.Text);
+                        UnfreezeBoard();
+                    }
+                }
+                else if (_client != null)
+                {
+                    for (int x = 0; x < _gridSize; x++)
+                    {
+                        for (int y = 0; y < _gridSize; y++)
+                        {
+                            if (grid.Cells[x, y] == (Button)sender)
+                            {
+                                byte[] bytes = { (byte)x, (byte)y };
+                                _client.SendMove(bytes);
+                                grid.Cells[x, y].Text = _client.Symbol.ToString();
+                                lblPlayerTurn.Text = String.Format("{0}'s turn!", lblPlayer1.Text);
+                                bool state = CheckState();
+                                if (state == true)
+                                {
+                                    lblOutcome.Text = String.Format("{0} wins!", _client.Name);
+                                    lblOutcome.Visible = true;
+                                    ResetCells();
+                                    _client.Wins += 1;
+                                }
+                                else if (IsFull())
+                                {
+                                    lblOutcome.Text = String.Format("It's a draw!");
+                                    lblOutcome.Visible = true;
+                                    ResetCells();
+                                }
+
+                                messageReciever.RunWorkerAsync();
+                            }
+                        }
+                    }
+                }
+                else if (_host != null)
+                {
+                    for (int x = 0; x < _gridSize; x++)
+                    {
+                        for (int y = 0; y < _gridSize; y++)
+                        {
+                            if (grid.Cells[x, y] == (Button)sender)
+                            {
+                                byte[] bytes = { (byte)x, (byte)y };
+                                _host.SendMove(bytes);
+                                grid.Cells[x, y].Text = _host.Symbol.ToString();
+                                bool state = CheckState();
+                                lblPlayerTurn.Text = String.Format("{0}'s turn!", lblPlayer2.Text);
+                                if (state == true)
+                                {
+                                    lblOutcome.Text = String.Format("{0} wins!", _host.Name);
+                                    lblOutcome.Visible = true;
+                                    ResetCells();
+                                    _host.Wins += 1;
+                                }
+                                else if (IsFull())
+                                {
+                                    lblOutcome.Text = String.Format("It's a draw!");
+                                    lblOutcome.Visible = true;
+                                    ResetCells();
+                                }
+                                messageReciever.RunWorkerAsync();
+                            }
                         }
                     }
                 }
                 else
                 {
-                    Type type = sender.GetType();
-                    PropertyInfo property = type.GetProperty("Text");
-                    property.SetValue(sender, player2.Symbol.ToString());
-                    property = type.GetProperty("Enabled");
-                    property.SetValue(sender, false);
-                    bool state = CheckState();
-                    if (state == true)
+                    if (player1.IsTurn == true)
                     {
-                        lblOutcome.Text = String.Format("{0} wins!", player2.Name);
-                        lblOutcome.Visible = true;
-                        ResetCells();
-                        player2.Wins += 1;
-                    }
-                    else
-                    {
-                        bool isFull = IsFull();
-                        if (isFull)
+                        Type type = sender.GetType();
+                        PropertyInfo property = type.GetProperty("Text");
+                        property.SetValue(sender, player1.Symbol.ToString());
+                        property = type.GetProperty("Enabled");
+                        property.SetValue(sender, false);
+                        bool state = CheckState();
+                        if (state == true)
                         {
-                            lblOutcome.Text = String.Format("It's a draw!");
+                            lblOutcome.Text = String.Format("{0} wins!", player1.Name);
                             lblOutcome.Visible = true;
                             ResetCells();
+                            player1.Wins += 1;
                         }
                         else
                         {
-                            player2.IsTurn = false;
-                            player1.IsTurn = true;
+                            bool isFull = IsFull();
+                            if (isFull)
+                            {
+                                lblOutcome.Text = String.Format("It's a draw!");
+                                lblOutcome.Visible = true;
+                                ResetCells();
+                            }
+                            else
+                            {
+                                player1.IsTurn = false;
+                                player2.IsTurn = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Type type = sender.GetType();
+                        PropertyInfo property = type.GetProperty("Text");
+                        property.SetValue(sender, player2.Symbol.ToString());
+                        property = type.GetProperty("Enabled");
+                        property.SetValue(sender, false);
+                        bool state = CheckState();
+                        if (state == true)
+                        {
+                            lblOutcome.Text = String.Format("{0} wins!", player2.Name);
+                            lblOutcome.Visible = true;
+                            ResetCells();
+                            player2.Wins += 1;
+                        }
+                        else
+                        {
+                            bool isFull = IsFull();
+                            if (isFull)
+                            {
+                                lblOutcome.Text = String.Format("It's a draw!");
+                                lblOutcome.Visible = true;
+                                ResetCells();
+                            }
+                            else
+                            {
+                                player2.IsTurn = false;
+                                player1.IsTurn = true;
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
             }
         }
 
