@@ -37,16 +37,18 @@ namespace TicTacToe
         private void MessageReciever_DoWork(object sender, DoWorkEventArgs e)
         {
             if (CheckState())
+            {
                 return;
+            }  
             FreezeBoard();
             if (_host != null)
             {
                 _host.RecieveMove(grid.Cells);
-                lblPlayerTurn.Text = string.Format("{0}'s turn", _host.Name);
                 if (CheckState())
                 {
-                    lblOutcome.Text = string.Format("{0} wins!", _host.ClientUser);
-                    lblOutcome.Visible = true;
+                    MessageBox.Show(string.Format("{0} wins!", _host.ClientUser));
+                    _host.Wins += 1;
+                    player1WinsCount.Text = _host.Wins.ToString();
                     ResetCells();
                 }
                 else
@@ -57,12 +59,11 @@ namespace TicTacToe
             else if (_client != null)
             {
                 _client.RecieveMove(grid.Cells);
-                lblPlayerTurn.Text = string.Format("{0}'s turn", _client.Name);
                 if (CheckState())
                 {
-                    string outcome = string.Format("{0} wins!", _client.HostUser);
-                    lblOutcome.Text = outcome;
-                    lblOutcome.Visible = true;
+                    MessageBox.Show(string.Format("{0} wins!", _client.HostUser));
+                    _client.Wins += 1;
+                    player1WinsCount.Text = _client.Wins.ToString();
                     ResetCells();
                 }
                 else
@@ -72,14 +73,12 @@ namespace TicTacToe
             }
         }
 
-        
-
         //AI Game variables
         private AIPlayer _ai;
         public AIPlayer AI
         {
             get { return _ai; }
-            set { _ai = value; }
+            set { _ai = value;}
         }
         private Player humanPlayer = new Player("Player 1", PlayerSymbols.X, true);
 
@@ -96,7 +95,8 @@ namespace TicTacToe
         {
             lblPlayer1.Text = player1Name;
             lblPlayer2.Text = player2Name;
-            lblPlayerTurn.Text = String.Format("{0}'s turn!", lblPlayer1.Text);
+            player1Wins.Text = string.Format("{0}:", player1Name);
+            lblPlayer2Wins.Text = string.Format("{0}:", player2Name);
         }
 
         
@@ -237,14 +237,13 @@ namespace TicTacToe
                     property.SetValue(sender, humanPlayer.Symbol.ToString());
                     property = type.GetProperty("Enabled");
                     property.SetValue(sender, false);
-                    lblPlayerTurn.Text = "AI's turn!";
                     bool state = CheckState();
                     if (state == true)
                     {
-                        lblOutcome.Text = String.Format("{0} wins!", humanPlayer.Name);
-                        lblOutcome.Visible = true;
-                        ResetCells();
+                        MessageBox.Show(String.Format("{0} wins!", humanPlayer.Name));
                         humanPlayer.Wins += 1;
+                        player1WinsCount.Text = humanPlayer.Wins.ToString();
+                        ResetCells();
                     }
                     else
                     {
@@ -253,18 +252,16 @@ namespace TicTacToe
                         state = CheckState();
                         if (state == true)
                         {
-                            lblOutcome.Text = String.Format("{0} wins!", _ai.Name);
-                            lblOutcome.Visible = true;
-                            ResetCells();
+                            MessageBox.Show(string.Format("{0} wins!", _ai.Name));
                             _ai.Wins += 1;
+                            player2WinsCount.Text = _ai.Wins.ToString();
+                            ResetCells();
                         }
                         else if (IsFull())
                         {
-                                lblOutcome.Text = String.Format("It's a draw!");
-                                lblOutcome.Visible = true;
-                                ResetCells();
+                            MessageBox.Show("It's a draw!");
+                            ResetCells();
                         }
-                        lblPlayerTurn.Text = String.Format("{0}'s turn!", lblPlayer1.Text);
                         UnfreezeBoard();
                     }
                 }
@@ -279,22 +276,20 @@ namespace TicTacToe
                                 byte[] bytes = { (byte)x, (byte)y };
                                 _client.SendMove(bytes);
                                 grid.Cells[x, y].Text = _client.Symbol.ToString();
-                                lblPlayerTurn.Text = String.Format("{0}'s turn!", lblPlayer1.Text);
+                                
                                 bool state = CheckState();
                                 if (state == true)
                                 {
-                                    lblOutcome.Text = String.Format("{0} wins!", _client.Name);
-                                    lblOutcome.Visible = true;
-                                    ResetCells();
+                                    MessageBox.Show(string.Format("{0} wins!", _client.Name));
                                     _client.Wins += 1;
+                                    player2WinsCount.Text = _client.Wins.ToString();
+                                    ResetCells();
                                 }
                                 else if (IsFull())
                                 {
-                                    lblOutcome.Text = String.Format("It's a draw!");
-                                    lblOutcome.Visible = true;
-                                    ResetCells();
+                                    MessageBox.Show("It's a draw!");    
+;                                   ResetCells();
                                 }
-
                                 messageReciever.RunWorkerAsync();
                             }
                         }
@@ -312,21 +307,22 @@ namespace TicTacToe
                                 _host.SendMove(bytes);
                                 grid.Cells[x, y].Text = _host.Symbol.ToString();
                                 bool state = CheckState();
-                                lblPlayerTurn.Text = String.Format("{0}'s turn!", lblPlayer2.Text);
                                 if (state == true)
                                 {
-                                    lblOutcome.Text = String.Format("{0} wins!", _host.Name);
-                                    lblOutcome.Visible = true;
-                                    ResetCells();
+                                    MessageBox.Show(string.Format("{0} wins!", _host.Name));
                                     _host.Wins += 1;
+                                    player1WinsCount.Text = _host.Wins.ToString();
+                                    ResetCells();
                                 }
                                 else if (IsFull())
                                 {
-                                    lblOutcome.Text = String.Format("It's a draw!");
-                                    lblOutcome.Visible = true;
+                                    MessageBox.Show("It's a draw");
                                     ResetCells();
                                 }
-                                messageReciever.RunWorkerAsync();
+                                else //TEsTING
+                                {
+                                    messageReciever.RunWorkerAsync();
+                                }
                             }
                         }
                     }
@@ -343,18 +339,17 @@ namespace TicTacToe
                         bool state = CheckState();
                         if (state == true)
                         {
-                            lblOutcome.Text = String.Format("{0} wins!", player1.Name);
-                            lblOutcome.Visible = true;
-                            ResetCells();
+                            MessageBox.Show(string.Format("{0} wins!", player1.Name));
                             player1.Wins += 1;
+                            player1WinsCount.Text = player1.Wins.ToString();
+                            ResetCells();
                         }
                         else
                         {
                             bool isFull = IsFull();
                             if (isFull)
                             {
-                                lblOutcome.Text = String.Format("It's a draw!");
-                                lblOutcome.Visible = true;
+                                MessageBox.Show("It's a draw!");
                                 ResetCells();
                             }
                             else
@@ -374,18 +369,17 @@ namespace TicTacToe
                         bool state = CheckState();
                         if (state == true)
                         {
-                            lblOutcome.Text = String.Format("{0} wins!", player2.Name);
-                            lblOutcome.Visible = true;
-                            ResetCells();
+                            MessageBox.Show(string.Format("{0} wins!", player2.Name));
                             player2.Wins += 1;
+                            player2WinsCount.Text = player2.Wins.ToString();
+                            ResetCells();
                         }
                         else
                         {
                             bool isFull = IsFull();
                             if (isFull)
                             {
-                                lblOutcome.Text = String.Format("It's a draw!");
-                                lblOutcome.Visible = true;
+                                MessageBox.Show("It's a draw!");
                                 ResetCells();
                             }
                             else

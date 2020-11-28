@@ -63,9 +63,11 @@
             this.btnPoint24 = new System.Windows.Forms.Button();
             this.btnPoint25 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblOutcome = new System.Windows.Forms.Label();
-            this.lblPlayerTurn = new System.Windows.Forms.Label();
             this.exitButton = new System.Windows.Forms.Button();
+            this.player1Wins = new System.Windows.Forms.Label();
+            this.lblPlayer2Wins = new System.Windows.Forms.Label();
+            this.player1WinsCount = new System.Windows.Forms.Label();
+            this.player2WinsCount = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -349,41 +351,16 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.WindowText;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.lblOutcome);
-            this.panel2.Controls.Add(this.lblPlayerTurn);
+            this.panel2.Controls.Add(this.player2WinsCount);
+            this.panel2.Controls.Add(this.player1WinsCount);
+            this.panel2.Controls.Add(this.lblPlayer2Wins);
+            this.panel2.Controls.Add(this.player1Wins);
             this.panel2.Controls.Add(this.exitButton);
             this.panel2.Location = new System.Drawing.Point(12, 609);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(643, 129);
             this.panel2.TabIndex = 1;
-            // 
-            // lblOutcome
-            // 
-            this.lblOutcome.AutoSize = true;
-            this.lblOutcome.BackColor = System.Drawing.SystemColors.Window;
-            this.lblOutcome.Font = new System.Drawing.Font("Franklin Gothic Demi", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOutcome.ForeColor = System.Drawing.Color.Black;
-            this.lblOutcome.Location = new System.Drawing.Point(283, 10);
-            this.lblOutcome.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblOutcome.Name = "lblOutcome";
-            this.lblOutcome.Size = new System.Drawing.Size(135, 38);
-            this.lblOutcome.TabIndex = 4;
-            this.lblOutcome.Text = "Outcome";
-            this.lblOutcome.Visible = false;
-            // 
-            // lblPlayerTurn
-            // 
-            this.lblPlayerTurn.AutoSize = true;
-            this.lblPlayerTurn.BackColor = System.Drawing.SystemColors.Window;
-            this.lblPlayerTurn.Font = new System.Drawing.Font("Franklin Gothic Demi", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerTurn.ForeColor = System.Drawing.Color.Black;
-            this.lblPlayerTurn.Location = new System.Drawing.Point(10, 10);
-            this.lblPlayerTurn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPlayerTurn.Name = "lblPlayerTurn";
-            this.lblPlayerTurn.Size = new System.Drawing.Size(99, 38);
-            this.lblPlayerTurn.TabIndex = 3;
-            this.lblPlayerTurn.Text = "label1";
             // 
             // exitButton
             // 
@@ -397,6 +374,50 @@
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
+            // player1Wins
+            // 
+            this.player1Wins.AutoSize = true;
+            this.player1Wins.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.player1Wins.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.player1Wins.Location = new System.Drawing.Point(3, 1);
+            this.player1Wins.Name = "player1Wins";
+            this.player1Wins.Size = new System.Drawing.Size(91, 36);
+            this.player1Wins.TabIndex = 4;
+            this.player1Wins.Text = "player1";
+            // 
+            // lblPlayer2Wins
+            // 
+            this.lblPlayer2Wins.AutoSize = true;
+            this.lblPlayer2Wins.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayer2Wins.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.lblPlayer2Wins.Location = new System.Drawing.Point(509, 1);
+            this.lblPlayer2Wins.Name = "lblPlayer2Wins";
+            this.lblPlayer2Wins.Size = new System.Drawing.Size(91, 36);
+            this.lblPlayer2Wins.TabIndex = 6;
+            this.lblPlayer2Wins.Text = "player2";
+            // 
+            // player1WinsCount
+            // 
+            this.player1WinsCount.AutoSize = true;
+            this.player1WinsCount.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.player1WinsCount.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.player1WinsCount.Location = new System.Drawing.Point(100, 1);
+            this.player1WinsCount.Name = "player1WinsCount";
+            this.player1WinsCount.Size = new System.Drawing.Size(29, 36);
+            this.player1WinsCount.TabIndex = 7;
+            this.player1WinsCount.Text = "0";
+            // 
+            // player2WinsCount
+            // 
+            this.player2WinsCount.AutoSize = true;
+            this.player2WinsCount.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.player2WinsCount.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.player2WinsCount.Location = new System.Drawing.Point(606, 1);
+            this.player2WinsCount.Name = "player2WinsCount";
+            this.player2WinsCount.Size = new System.Drawing.Size(29, 36);
+            this.player2WinsCount.TabIndex = 8;
+            this.player2WinsCount.Text = "0";
             // 
             // GameForm
             // 
@@ -1217,7 +1238,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button exitButton;
-        private System.Windows.Forms.Label lblPlayerTurn;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblPlayer1;
         private System.Windows.Forms.Label lblPlayingAgainst;
@@ -1247,11 +1267,14 @@
         private System.Windows.Forms.Button btnPoint23;
         private System.Windows.Forms.Button btnPoint24;
         private System.Windows.Forms.Button btnPoint25;
-        private System.Windows.Forms.Label lblOutcome;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label labelGameName;
         private System.Windows.Forms.Label lblPlayer2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label player2WinsCount;
+        private System.Windows.Forms.Label player1WinsCount;
+        private System.Windows.Forms.Label lblPlayer2Wins;
+        private System.Windows.Forms.Label player1Wins;
     }
 }
 
