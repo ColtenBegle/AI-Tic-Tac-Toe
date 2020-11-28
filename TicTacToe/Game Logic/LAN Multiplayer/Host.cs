@@ -27,7 +27,7 @@ namespace TicTacToe.Game_Logic.LAN_Multiplayer
         private void SendMessageToClients()
         {
             var ResponseData = Encoding.ASCII.GetBytes(boardSize);
-            var ClientEp = new IPEndPoint(IPAddress.Any, 0);
+            var ClientEp = new IPEndPoint(IPAddress.Any, 8888);
             var ClientRequestData = udpClient.Receive(ref ClientEp);
             var ClientRequest = Encoding.ASCII.GetString(ClientRequestData);
             string[] requestArr = ClientRequest.Split(',');
