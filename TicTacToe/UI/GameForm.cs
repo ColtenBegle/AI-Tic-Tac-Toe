@@ -362,10 +362,23 @@ namespace TicTacToe
                     if (player1.IsTurn == true)
                     {
                         Type type = sender.GetType();
-                        PropertyInfo property = type.GetProperty("Text");
-                        property.SetValue(sender, player1.Symbol.ToString());
-                        property = type.GetProperty("Enabled");
-                        property.SetValue(sender, false);
+                        //PropertyInfo property = type.GetProperty("Text");
+                        //property.SetValue(sender, player1.Symbol.ToString());
+                        //property = type.GetProperty("Enabled");
+                        //property.SetValue(sender, false);
+                        for (int x = 0; x < _gridSize; x++)
+                        {
+                            for (int y = 0; y < _gridSize; y++)
+                            {
+                                if (grid.Cells[x, y] == (Button)sender)
+                                {
+                                    grid.Cells[x, y].Text = player1.Symbol.ToString();
+
+                                    grid.Cells[x, y].Image = XSymbol;
+
+                                }
+                            }
+                        }
                         bool state = CheckState();
                         if (state == true)
                         {
@@ -392,10 +405,23 @@ namespace TicTacToe
                     else
                     {
                         Type type = sender.GetType();
-                        PropertyInfo property = type.GetProperty("Text");
-                        property.SetValue(sender, player2.Symbol.ToString());
-                        property = type.GetProperty("Enabled");
-                        property.SetValue(sender, false);
+                        //PropertyInfo property = type.GetProperty("Text");
+                        //property.SetValue(sender, player2.Symbol.ToString());
+                        //property = type.GetProperty("Enabled");
+                        //property.SetValue(sender, false);
+                        for (int x = 0; x < _gridSize; x++)
+                        {
+                            for (int y = 0; y < _gridSize; y++)
+                            {
+                                if (grid.Cells[x, y] == (Button)sender)
+                                {
+                                    grid.Cells[x, y].Text = player2.Symbol.ToString();
+
+                                    grid.Cells[x, y].Image = OSymbol;
+
+                                }
+                            }
+                        }
                         bool state = CheckState();
                         if (state == true)
                         {

@@ -125,9 +125,6 @@
     <None Include="Resources\Symbol_X.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Symbol O.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\CrownSymbol.png" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +133,7 @@
     <Content Include="Images\O.jpg" />
     <Content Include="Images\O.png" />
     <Content Include="Images\X.jpg" />
+    <None Include="Resources\Symbol O.png" />
     <None Include="Resources\AtDoomsGate.wav" />
     <None Include="Resources\BombSymbol.png" />
     <Content Include="Resources\POL-nuts-and-bolts-short.wav" />
