@@ -137,6 +137,7 @@
     <Content Include="Images\O.png" />
     <Content Include="Images\X.jpg" />
     <None Include="Resources\AtDoomsGate.wav" />
+    <None Include="Resources\BombSymbol.png" />
     <Content Include="Resources\POL-nuts-and-bolts-short.wav" />
     <None Include="Resources\POL-the-foyer-short.wav" />
     <Content Include="Resources\POL-chamber-of-secrets-short.wav" />

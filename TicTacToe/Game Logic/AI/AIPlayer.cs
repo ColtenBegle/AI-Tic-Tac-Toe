@@ -1,10 +1,17 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TicTacToe.Game_Logic.AI
 {
     public class AIPlayer : Player
     {
+        Bitmap OSymbol = new Bitmap(Properties.Resources.Symbol_O);
+        Bitmap CrownSymbol = new Bitmap(Properties.Resources.CrownSymbol);
+        Bitmap BombSymbol = new Bitmap(Properties.Resources.BombSymbol);
+
+        
+
         private enum Scores
         {
             X = -10,
@@ -48,6 +55,7 @@ namespace TicTacToe.Game_Logic.AI
             }
             if (bestMove.Item1 != -1 && bestMove.Item2 != -1)
                 cells[bestMove.Item1, bestMove.Item2].Text = Symbol.ToString();
+                cells[bestMove.Item1, bestMove.Item2].Image = OSymbol;
         }
 
         private double minimax(Button[,] cells, int gridSize, int depth, bool isMaximizing, double alpha, double beta)
@@ -93,6 +101,7 @@ namespace TicTacToe.Game_Logic.AI
                         if (cells[x, y].Text == "")
                         {
                             cells[x, y].Text = Symbol.ToString();
+                    
                             score = minimax(cells, gridSize, depth + 1, false, alpha, beta);
                             cells[x, y].Text = "";
                             bestScore = Math.Max(score, bestScore);

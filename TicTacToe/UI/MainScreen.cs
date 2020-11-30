@@ -7,16 +7,12 @@ using TicTacToe.Game_Logic.AI;
 using TicTacToe.Game_Logic.LAN_Multiplayer;
 using TicTacToe.Music;
 
+
 namespace TicTacToe.UI
 {
     public partial class MainScreen : Form
     {
-        Bitmap XSymbol1 = new Bitmap(Properties.Resources.Symbol_X);
-        Bitmap XSymbol2 = new Bitmap(Properties.Resources.Symbol_X);
-        Bitmap XSymbol3 = new Bitmap(Properties.Resources.Symbol_X);
-        Bitmap XSymbol4 = new Bitmap(Properties.Resources.Symbol_X);
-        Bitmap XSymbol5 = new Bitmap(Properties.Resources.Symbol_X);
-        Bitmap CrownSymbol = new Bitmap(Properties.Resources.CrownSymbol);
+        
 
         BackgroundMusic backgroundMusic = new BackgroundMusic();
         Sound sound;
@@ -25,15 +21,22 @@ namespace TicTacToe.UI
         private Dictionary<string, string> hosts = new Dictionary<string, string>();
 
 
+        
+
         public void ClickPlay()
         {
             buttonPlay.PerformClick();
         }
-
+        public void ClickTraditional()
+        {
+            radioButton1.Checked = true;
+            radioButton4.Checked = true;
+        }
         public static bool aiGame = false;
 
         public MainScreen()
         {
+            
             InitializeComponent();
             InitializeSound();
             InitializeMusicSelection();
@@ -42,6 +45,8 @@ namespace TicTacToe.UI
             tabControlLeft.ItemSize = new Size(0, 1);
             tabControlRight.SelectedTab = tabStartPage;
         }
+
+        
 
         private void InitializeMusicSelection()
         {
@@ -88,17 +93,6 @@ namespace TicTacToe.UI
                 game.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //Testing
-            button1.BackgroundImage = CrownSymbol;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //Testing
-            button2.BackgroundImage = XSymbol2;
-        }
 
         private void buttonGameForm_Click(object sender, EventArgs e)
         {
@@ -115,6 +109,8 @@ namespace TicTacToe.UI
             game.InitializePlayerNames("Human", "AI");
             if (!game.IsDisposed)
                 game.ShowDialog();
+
+         
         }
 
         public void button10_Click(object sender, EventArgs e)
@@ -299,6 +295,11 @@ namespace TicTacToe.UI
             {
                 btnBeginHosting.Enabled = true;
             }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

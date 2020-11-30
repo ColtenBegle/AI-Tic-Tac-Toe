@@ -12,7 +12,7 @@ namespace AutomatedUITesting
     {
         
         private const string WindowsApplicationDriverUrl = "http://127.0.0.1:4723";
-        private const string TicTacToeAppID = @"C:\Users\Colten Begle\source\repos\AI-Tic-Tac-Toe\TicTacToe\bin\Debug\TicTacToe.exe";
+        private const string TicTacToeAppID = @"C:\Users\darkw\source\repos\AI-Tic-Tac-Toe\TicTacToe\bin\Debug\TicTacToe.exe";
 
         [TestMethod]
         public void AIPlayTest()

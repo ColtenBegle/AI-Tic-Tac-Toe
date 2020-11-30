@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using TicTacToe.Game_Logic;
@@ -13,6 +14,16 @@ namespace TicTacToe
     {
         private int _gridSize;
         private Grid grid;
+
+        //Symbols
+        Bitmap XSymbol = new Bitmap(Properties.Resources.Symbol_X);
+        Bitmap OSymbol = new Bitmap(Properties.Resources.Symbol_O);
+        Bitmap CrownSymbol = new Bitmap(Properties.Resources.CrownSymbol);
+        Bitmap BombSymbol = new Bitmap(Properties.Resources.BombSymbol);
+
+         
+        
+
         public Grid Grid
         {
             get { return grid; }
@@ -222,10 +233,23 @@ namespace TicTacToe
                 if (_ai != null)
                 {
                     Type type = sender.GetType();
-                    PropertyInfo property = type.GetProperty("Text");
-                    property.SetValue(sender, humanPlayer.Symbol.ToString());
-                    property = type.GetProperty("Enabled");
-                    property.SetValue(sender, false);
+                    //PropertyInfo property = type.GetProperty("Text");
+                    //property.SetValue(sender, humanPlayer.Symbol.ToString());
+                    //property = type.GetProperty("Enabled");
+                    //property.SetValue(sender, false);
+                    for (int x = 0; x < _gridSize; x++)
+                    {
+                        for (int y = 0; y < _gridSize; y++)
+                        {
+                            if (grid.Cells[x, y] == (Button)sender)
+                            {
+                                grid.Cells[x, y].Text = humanPlayer.Symbol.ToString();
+                                
+                                grid.Cells[x, y].Image = XSymbol;
+                                
+                            }
+                        }
+                    }
                     bool state = CheckState();
                     if (state == true)
                     {
@@ -268,6 +292,7 @@ namespace TicTacToe
 
                                     _client.SendMove(bytes);
                                     grid.Cells[x, y].Text = _client.Symbol.ToString();
+                                    grid.Cells[x, y].Image = XSymbol;
 
                                     bool state = CheckState();
                                     if (state == true)
@@ -307,6 +332,7 @@ namespace TicTacToe
                                     byte[] bytes = { (byte)x, (byte)y };
                                     _host.SendMove(bytes);
                                     grid.Cells[x, y].Text = _host.Symbol.ToString();
+                                    grid.Cells[x, y].Image = XSymbol;
                                     bool state = CheckState();
                                     if (state == true)
                                     {
@@ -408,6 +434,7 @@ namespace TicTacToe
                 for (int y = 0; y < _gridSize; y++)
                 {
                     grid.Cells[x, y].Enabled = false;
+                    
                 }
             }
         }
@@ -433,6 +460,7 @@ namespace TicTacToe
                 for (int y = 0; y < _gridSize; y++)
                 {
                     grid.Cells[x, y].Text = "";
+                    grid.Cells[x, y].Image = null;
                     grid.Cells[x, y].Enabled = true;
                 }
             }
